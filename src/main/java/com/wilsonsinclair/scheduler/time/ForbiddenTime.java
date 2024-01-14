@@ -25,6 +25,7 @@ public class ForbiddenTime {
 
     public ForbiddenTime(LocalDate date) {
         this.date = date;
+        this.dayOfWeek = date.getDayOfWeek();
     }
 
     public ForbiddenTime(LocalDate date, LocalTime startTime, LocalTime endTime) {

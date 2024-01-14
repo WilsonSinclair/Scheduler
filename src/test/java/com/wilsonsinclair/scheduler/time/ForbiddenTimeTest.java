@@ -3,7 +3,9 @@ package com.wilsonsinclair.scheduler.time;
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +20,16 @@ class ForbiddenTimeTest {
     }
 
     @Test
+    void dateWithStartAndEndTimeTest() {
+        ForbiddenTime time = new ForbiddenTime(LocalDate.now(), LocalTime.of(8, 0), LocalTime.of(9, 0));
+        assertTrue(time.getDate().isPresent());
+        assertTrue(time.getStartTime().isPresent());
+        assertTrue(time.getEndTime().isPresent());
+
+        assertTrue(time.getDate().get().isAfter(LocalDate.ofYearDay(2023, 1)));
+    }
+
+    @Test
     void getNonRepeatingDayOfWeekTest() {
         ForbiddenTime time = new ForbiddenTime(DayOfWeek.WEDNESDAY, false);
         assertTrue(time.getDayOfWeek().isPresent());
@@ -27,18 +39,30 @@ class ForbiddenTimeTest {
 
     @Test
     void getDateTest() {
+        ForbiddenTime time = new ForbiddenTime(LocalDate.of(2024, 1, 13));
+        assertTrue(time.getDate().isPresent());
+        assertTrue(time.getDayOfWeek().isPresent());
 
+        assertEquals(time.getDayOfWeek().get(), DayOfWeek.SATURDAY);
+        assertEquals(time.getDate().get().getMonth(), Month.JANUARY);
     }
 
     @Test
     void getStartTime() {
+        ForbiddenTime time = new ForbiddenTime(LocalTime.of(7, 0), LocalTime.of(8, 0));
+        assertTrue(time.getStartTime().isPresent());
+        assertTrue(time.getStartTime().get().isBefore(LocalTime.of(9, 0)));
     }
 
     @Test
     void getEndTime() {
+        ForbiddenTime time = new ForbiddenTime(LocalTime.of(7, 0), LocalTime.of(8, 0));
+        assertTrue(time.getEndTime().isPresent());
+        assertTrue(time.getEndTime().get().isBefore(LocalTime.of(13, 0)));
     }
 
     @Test
     void isRepeating() {
+
     }
 }
