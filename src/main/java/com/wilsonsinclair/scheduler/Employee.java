@@ -10,17 +10,29 @@ import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 public class Employee {
 
     private final String name;
+    private boolean isOpener;
+    private boolean isCloser;
 
     // A list of all the times an employee cannot work
     private final ArrayList<ForbiddenTime> forbiddenTimes;
 
-    public Employee(String name) {
+    public Employee(String name, boolean isOpener, boolean isCloser) {
         this.name = name;
+        this.isCloser = isCloser;
+        this.isOpener = isOpener;
         forbiddenTimes = new ArrayList<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean canClose() {
+        return isCloser;
+    }
+
+    public boolean canOpen() {
+        return isOpener;
     }
 
     public ArrayList<ForbiddenTime> getForbiddenTimes() {

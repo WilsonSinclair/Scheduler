@@ -30,6 +30,19 @@ class ForbiddenTimeTest {
     }
 
     @Test
+    void repeatingDayOfWeekWithStartAndEndTimeTest() {
+        ForbiddenTime time = new ForbiddenTime(DayOfWeek.SUNDAY, LocalTime.of(8, 0), LocalTime.of(10, 0), true);
+        assertTrue(time.getDayOfWeek().isPresent());
+        assertTrue(time.getStartTime().isPresent());
+        assertTrue(time.getEndTime().isPresent());
+
+        assertTrue(time.isRepeating());
+        assertEquals(time.getDayOfWeek().get(), DayOfWeek.SUNDAY);
+        assertTrue(time.getStartTime().get().isAfter(LocalTime.of(7, 0)));
+        assertTrue(time.getStartTime().get().isBefore(LocalTime.of(11, 0)));
+    }
+
+    @Test
     void getNonRepeatingDayOfWeekTest() {
         ForbiddenTime time = new ForbiddenTime(DayOfWeek.WEDNESDAY, false);
         assertTrue(time.getDayOfWeek().isPresent());
