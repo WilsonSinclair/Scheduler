@@ -100,4 +100,32 @@ public class ForbiddenTime {
     public boolean isRepeating() {
         return isRepeating;
     }
+
+    public boolean isOn(DayOfWeek dayOfWeek) {
+        if (getDayOfWeek().isEmpty()) {
+            return false;
+        }
+        return getDayOfWeek().get().equals(dayOfWeek);
+    }
+
+    public boolean isOn(LocalDate date) {
+        if (getDate().isEmpty()) {
+            return false;
+        }
+        return getDate().get().equals(date);
+    }
+
+    public boolean isBefore(LocalTime time) {
+        if (getStartTime().isEmpty()) {
+            return false;
+        }
+        return getStartTime().get().isBefore(time);
+    }
+
+    public boolean isAfter(LocalTime time) {
+        if (getStartTime().isEmpty()) {
+            return false;
+        }
+        return getStartTime().get().isAfter(time);
+    }
 }

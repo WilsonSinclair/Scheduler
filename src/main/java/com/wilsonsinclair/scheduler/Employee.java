@@ -1,5 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 
@@ -37,5 +39,27 @@ public class Employee {
 
     public ArrayList<ForbiddenTime> getForbiddenTimes() {
         return forbiddenTimes;
+    }
+
+    public void addForbiddenTime(ForbiddenTime time) {
+        forbiddenTimes.add(time);
+    }
+
+    public boolean canWork(LocalDate date) {
+        for (ForbiddenTime forbiddenTime : forbiddenTimes) {
+            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canWork(DayOfWeek dayOfWeek) {
+        for (ForbiddenTime forbiddenTime : forbiddenTimes) {
+            if (forbiddenTime.getDayOfWeek().isPresent() && forbiddenTime.isOn(dayOfWeek)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
