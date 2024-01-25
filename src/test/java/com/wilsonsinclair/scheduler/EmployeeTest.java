@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,6 +83,15 @@ class EmployeeTest {
         LocalDate christmas = LocalDate.of(2024, 12, 25);
         wilson.addForbiddenTime(new ForbiddenTime(christmas));
         assertTrue(wilson.canWork(birthday));
+    }
 
+    @Test
+    void cannotWorkSpecifiedTimeOnDate() {
+        Employee wilson = new Employee("Wilson", true, true);
+        LocalDate shiftDate = LocalDate.of(2024, 12, 18);
+        LocalTime shiftStart = LocalTime.of(9, 0);
+        LocalTime shiftEnd = LocalTime.of(11, 0);
+        wilson.addForbiddenTime(new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0)));
+        assertFalse(wilson.canWork(shiftDate, shiftStart, shiftEnd));
     }
 }

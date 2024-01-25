@@ -105,27 +105,48 @@ public class ForbiddenTime {
         if (getDayOfWeek().isEmpty()) {
             return false;
         }
-        return getDayOfWeek().get().equals(dayOfWeek);
+        return this.dayOfWeek.equals(dayOfWeek);
     }
 
-    public boolean isOn(LocalDate date) {
+    public boolean isOn(LocalDate targetDate) {
         if (getDate().isEmpty()) {
             return false;
         }
-        return getDate().get().equals(date);
+        return date.equals(targetDate);
     }
 
-    public boolean isBefore(LocalTime time) {
+    public boolean startsBeforeOrAt(LocalTime time) {
         if (getStartTime().isEmpty()) {
             return false;
         }
-        return getStartTime().get().isBefore(time);
+        return startTime.isBefore(time) || startTime.equals(time);
     }
 
-    public boolean isAfter(LocalTime time) {
+    public boolean startsAfterOrAt(LocalTime time) {
         if (getStartTime().isEmpty()) {
             return false;
         }
-        return getStartTime().get().isAfter(time);
+        return startTime.isAfter(time) || startTime.equals(time);
+    }
+
+    public boolean endsBeforeOrAt(LocalTime time) {
+        if (getEndTime().isEmpty()) {
+            return false;
+        }
+        return endTime.isBefore(time) || endTime.equals(time);
+    }
+
+    public boolean endsAfterOrAt(LocalTime time) {
+        if (getEndTime().isEmpty()) {
+            return false;
+        }
+        return endTime.isAfter(time) || endTime.equals(time);
+    }
+
+    public boolean intersects(LocalTime shiftStart, LocalTime shiftEnd) {
+        if (startsAfterOrAt(shiftStart) || startsBeforeOrAt(shiftEnd)) {
+            return true;
+        }
+        else return endsAfterOrAt(shiftStart) || endsBeforeOrAt(shiftEnd);
     }
 }

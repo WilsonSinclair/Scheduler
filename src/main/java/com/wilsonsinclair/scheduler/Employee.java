@@ -2,6 +2,7 @@ package com.wilsonsinclair.scheduler;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 
@@ -49,6 +50,17 @@ public class Employee {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
             if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
                 return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canWork(LocalDate date, LocalTime shiftStart, LocalTime shiftEnd) {
+        for (ForbiddenTime forbiddenTime : forbiddenTimes) {
+            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
+                if (forbiddenTime.intersects(shiftStart, shiftEnd)) {
+                    return false;
+                }
             }
         }
         return true;

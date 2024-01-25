@@ -75,6 +75,65 @@ class ForbiddenTimeTest {
     }
 
     @Test
+    void startsBeforeTest() {
+        LocalDate birthday = LocalDate.of(2024, 12, 18);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(birthday, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(9, 0);
+        assertTrue(forbiddenTime.startsBeforeOrAt(shiftStart));
+    }
+
+    @Test
+    void startsAfterTest() {
+        LocalDate birthday = LocalDate.of(2024, 12, 18);
+        ForbiddenTime time = new ForbiddenTime(birthday, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(9, 0);
+        assertFalse(time.startsAfterOrAt(shiftStart));
+    }
+
+    @Test
+    void endsBeforeTest() {
+        LocalDate birthday = LocalDate.of(2024, 12, 18);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(birthday, LocalTime.of(8, 0), LocalTime.of(10, 0));
+        LocalTime shiftEnd = LocalTime.of(11, 0);
+        assertTrue(forbiddenTime.endsBeforeOrAt(shiftEnd));
+    }
+
+    @Test
+    void endsAfterTest() {
+        LocalDate birthday = LocalDate.of(2024, 12, 18);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(birthday, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftEnd = LocalTime.of(11, 0);
+        assertTrue(forbiddenTime.endsAfterOrAt(shiftEnd));
+    }
+
+    @Test
+    void doesIntersectTest_1() {
+        LocalDate shiftDate = LocalDate.of(2024, 1, 24);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(10, 0);
+        LocalTime shiftEnd = LocalTime.of(13, 0);
+        assertTrue(forbiddenTime.intersects(shiftStart, shiftEnd));
+    }
+
+    @Test
+    void doesIntersectTest_2() {
+        LocalDate shiftDate = LocalDate.of(2024, 1, 24);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(7, 0);
+        LocalTime shiftEnd = LocalTime.of(10, 0);
+        assertTrue(forbiddenTime.intersects(shiftStart, shiftEnd));
+    }
+
+    @Test
+    void doesIntersectTest_3() {
+        LocalDate shiftDate = LocalDate.of(2024, 1, 24);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(9, 0);
+        LocalTime shiftEnd = LocalTime.of(11, 0);
+        assertTrue(forbiddenTime.intersects(shiftStart, shiftEnd));
+    }
+
+    @Test
     void isRepeating() {
 
     }
