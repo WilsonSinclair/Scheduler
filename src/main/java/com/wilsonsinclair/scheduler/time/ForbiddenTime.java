@@ -144,9 +144,12 @@ public class ForbiddenTime {
     }
 
     public boolean intersects(LocalTime shiftStart, LocalTime shiftEnd) {
-        if (startsAfterOrAt(shiftStart) || startsBeforeOrAt(shiftEnd)) {
+        if (startsAfterOrAt(shiftStart) && startsBeforeOrAt(shiftEnd)) {
             return true;
         }
-        else return endsAfterOrAt(shiftStart) || endsBeforeOrAt(shiftEnd);
+        else if (startsBeforeOrAt(shiftStart) && endsAfterOrAt(shiftEnd)) {
+            return true;
+        }
+        else return endsAfterOrAt(shiftStart) && endsBeforeOrAt(shiftEnd);
     }
 }

@@ -134,6 +134,15 @@ class ForbiddenTimeTest {
     }
 
     @Test
+    void doesNotIntersectTest_1() {
+        LocalDate shiftDate = LocalDate.of(2024, 1, 24);
+        ForbiddenTime forbiddenTime = new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0));
+        LocalTime shiftStart = LocalTime.of(13, 0);
+        LocalTime shiftEnd = LocalTime.of(14, 0);
+        assertFalse(forbiddenTime.intersects(shiftStart, shiftEnd));
+    }
+
+    @Test
     void isRepeating() {
 
     }
