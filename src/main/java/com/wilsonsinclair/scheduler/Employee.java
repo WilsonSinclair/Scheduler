@@ -1,5 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +12,10 @@ import com.wilsonsinclair.scheduler.time.ForbiddenTime;
     A class to represent an Employee that has shifts on the generated schedule.
     An employee may have specific days and/or times that they cannot work.
  */
-public class Employee {
+public class Employee implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private final String name;
     private boolean isOpener;
@@ -73,5 +78,23 @@ public class Employee {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ");
+        sb.append(name);
+        sb.append("\nCan Open: ");
+        sb.append(isOpener);
+        sb.append("\nCan Close: ");
+        sb.append(isCloser);
+
+        sb.append("\nCannot Work: ");
+        for (ForbiddenTime time : forbiddenTimes) {
+            sb.append(time.toString());
+            sb.append(", ");
+        }
+        return sb.toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.wilsonsinclair.scheduler.time;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,7 +11,10 @@ import java.util.Optional;
     A class to represent a time that a shift can not occur.
     This time can span the entire day, a portion of it, or the same time for every day of the week.
  */
-public class ForbiddenTime {
+public class ForbiddenTime implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private boolean isRepeating = false;
     private LocalDate date;
@@ -151,5 +156,24 @@ public class ForbiddenTime {
             return true;
         }
         else return endsAfterOrAt(shiftStart) && endsBeforeOrAt(shiftEnd);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (getDayOfWeek().isPresent()) {
+            sb.append(dayOfWeek.toString()).append(" ");
+        }
+        if (getDate().isPresent()) {
+            sb.append(date.toString());
+        }
+        if (getStartTime().isPresent() && getEndTime().isPresent()) {
+            sb.append("From ");
+            sb.append(startTime.toString());
+            sb.append(" To ");
+            sb.append(endTime.toString());
+        }
+        return sb.toString();
     }
 }
