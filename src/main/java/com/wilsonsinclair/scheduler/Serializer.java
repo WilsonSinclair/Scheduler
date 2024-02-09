@@ -8,7 +8,7 @@ public class Serializer {
     private static final String employeeFile = "employees.ser";
 
     /*
-        Serialize employees to a file for use later. We pass in a list of employees
+        Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
         to only have to open 2 streams instead of 2 * number of employees.
      */
     public static void saveEmployees(ArrayList<Employee> employees) {
