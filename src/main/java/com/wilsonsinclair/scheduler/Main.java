@@ -1,6 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.time.Schedule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,8 +25,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
-        for (Employee e :  Serializer.loadEmployees()) {
-            System.out.println(e.toString());
-        }
+        ArrayList<Employee> employees = Serializer.loadEmployees();
+        Schedule schedule = new Schedule(LocalDate.now(), employees);
+        System.out.println(schedule);
     }
 }
