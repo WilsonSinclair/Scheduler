@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -24,9 +27,15 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <ListView fx:id="employeeListView" layoutX="91.0" layoutY="425.0" prefHeight="1049.0" prefWidth="381.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ListView fx:id="employeeListView" layoutX="91.0" layoutY="425.0" onMouseClicked="#loadEmployee" prefHeight="1049.0" prefWidth="381.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children></AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" AnchorPane.leftAnchor="100.0" />
+                                    <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
+                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" text="Opener" AnchorPane.topAnchor="18.0" />
+                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="1175.0" layoutY="18.0" mnemonicParsing="false" text="Closer" />
+                                 </children></AnchorPane>
                           </items>
                         </SplitPane>
                      </children>

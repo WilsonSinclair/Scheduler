@@ -4,9 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -19,6 +18,25 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private Tab employeeTab;
+
+    @FXML
+    private TextField employeeName;
+
+    @FXML
+    private RadioButton isOpenerButton, isCloserButton;
+
+    @FXML
+    public void loadEmployee(MouseEvent event) {
+        Employee employee = employeeListView.getSelectionModel().getSelectedItem();
+
+        employeeName.setDisable(false);
+        isOpenerButton.setDisable(false);
+        isCloserButton.setDisable(false);
+
+        employeeName.setText(employee.getName());
+        isOpenerButton.setSelected(employee.canOpen());
+        isCloserButton.setSelected(employee.canClose());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,7 +59,6 @@ public class EmployeeController implements Initializable {
                 };
             }
         });
-
         ObservableList<Employee> employees = FXCollections.observableArrayList(Serializer.loadEmployees());
         employeeListView.setItems(employees);
     }
