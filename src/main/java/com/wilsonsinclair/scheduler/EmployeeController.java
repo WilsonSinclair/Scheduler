@@ -26,7 +26,7 @@ public class EmployeeController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton;
 
     @FXML
-    public void loadEmployee(MouseEvent event) {
+    public void loadEmployee() {
         Employee employee = employeeListView.getSelectionModel().getSelectedItem();
 
         employeeName.setDisable(false);
