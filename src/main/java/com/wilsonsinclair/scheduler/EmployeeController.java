@@ -1,5 +1,6 @@
 package com.wilsonsinclair.scheduler;
 
+import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,9 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private ListView<Employee> employeeListView;
+
+    @FXML
+    private ListView<ForbiddenTime> forbiddenTimesListView;
 
     @FXML
     private Tab employeeTab;
@@ -33,9 +37,13 @@ public class EmployeeController implements Initializable {
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
 
+
         employeeName.setText(employee.getName());
         isOpenerButton.setSelected(employee.canOpen());
         isCloserButton.setSelected(employee.canClose());
+
+        ObservableList<ForbiddenTime> forbiddenTimes = FXCollections.observableArrayList(employee.getForbiddenTimes());
+        forbiddenTimesListView.setItems(forbiddenTimes);
     }
 
     @Override
