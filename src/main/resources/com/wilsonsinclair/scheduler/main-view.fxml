@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
@@ -42,6 +43,11 @@
                                           <Font size="26.0" />
                                        </font>
                                     </Label>
+                                    <Button fx:id="saveEmployeeButton" layoutX="718.0" layoutY="921.0" mnemonicParsing="false" onMouseClicked="#saveEmployee" prefHeight="25.0" prefWidth="95.0" text="Save" AnchorPane.bottomAnchor="97.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>

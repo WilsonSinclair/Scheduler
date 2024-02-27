@@ -6,6 +6,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 
 /*
@@ -17,12 +19,12 @@ public class Employee implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private final String name;
+    private String name;
     private boolean isOpener;
     private boolean isCloser;
 
     // A list of all the times an employee cannot work
-    private final ArrayList<ForbiddenTime> forbiddenTimes;
+    private ArrayList<ForbiddenTime> forbiddenTimes;
 
     public Employee(String name, boolean isOpener, boolean isCloser) {
         this.name = name;
@@ -35,6 +37,22 @@ public class Employee implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOpener(boolean isOpener) {
+        this.isOpener = isOpener;
+    }
+
+    public void setCloser(boolean isCloser) {
+        this.isCloser = isCloser;
+    }
+
+    public void setForbiddenTimes(ArrayList<ForbiddenTime> forbiddenTimes) {
+        this.forbiddenTimes = forbiddenTimes;
+    }
+
     public boolean canClose() {
         return isCloser;
     }
@@ -43,7 +61,7 @@ public class Employee implements Serializable {
         return isOpener;
     }
 
-    public ArrayList<ForbiddenTime> getForbiddenTimes() {
+    public List<ForbiddenTime> getForbiddenTimes() {
         return forbiddenTimes;
     }
 

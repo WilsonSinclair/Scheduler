@@ -6,10 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
@@ -30,6 +30,9 @@ public class EmployeeController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton;
 
     @FXML
+    private Button saveEmployeeButton;
+
+    @FXML
     public void loadEmployee() {
         Employee employee = employeeListView.getSelectionModel().getSelectedItem();
 
@@ -44,6 +47,15 @@ public class EmployeeController implements Initializable {
 
         ObservableList<ForbiddenTime> forbiddenTimes = FXCollections.observableArrayList(employee.getForbiddenTimes());
         forbiddenTimesListView.setItems(forbiddenTimes);
+    }
+
+    @FXML
+    public void saveEmployee() {
+        employeeListView.getSelectionModel().getSelectedItem().setName(employeeName.getText());
+        employeeListView.getSelectionModel().getSelectedItem().setOpener(isOpenerButton.isSelected());
+        employeeListView.getSelectionModel().getSelectedItem().setCloser(isCloserButton.isSelected());
+        employeeListView.getSelectionModel().getSelectedItem().setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
+        Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
     }
 
     @Override
@@ -67,8 +79,8 @@ public class EmployeeController implements Initializable {
                 };
             }
         });
-        ObservableList<Employee> employees = FXCollections.observableArrayList(Serializer.loadEmployees());
-        employeeListView.setItems(employees);
+        ArrayList<Employee> employees = Serializer.loadEmployees();
+        employeeListView.setItems(FXCollections.observableArrayList(employees));
     }
 }
 
