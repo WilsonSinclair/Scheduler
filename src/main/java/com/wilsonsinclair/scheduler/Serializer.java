@@ -11,6 +11,9 @@ public class Serializer {
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
         to only have to open 2 streams instead of 2 * number of employees.
+
+        The use of the SerializableObservableList class allows the serialization of an ObservableList, which is what
+        the ListView class uses to hold its list data.
      */
     public static void saveEmployees(SerializableObservableList<Employee> employees) {
         try {

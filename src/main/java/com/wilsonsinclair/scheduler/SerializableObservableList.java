@@ -6,7 +6,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 
 public class SerializableObservableList<E> extends ObservableListBase<E> implements Externalizable {
