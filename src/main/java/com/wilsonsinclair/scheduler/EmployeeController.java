@@ -30,7 +30,7 @@ public class EmployeeController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton;
 
     @FXML
-    private Button saveEmployeeButton;
+    private Button saveEmployeeButton, addEmployeeButton, deleteEmployeeButton;
 
     @FXML
     public void loadEmployee() {
@@ -50,12 +50,33 @@ public class EmployeeController implements Initializable {
     }
 
     @FXML
-    public void saveEmployee() {
+    public void saveEmployees() {
         employeeListView.getSelectionModel().getSelectedItem().setName(employeeName.getText());
         employeeListView.getSelectionModel().getSelectedItem().setOpener(isOpenerButton.isSelected());
         employeeListView.getSelectionModel().getSelectedItem().setCloser(isCloserButton.isSelected());
         employeeListView.getSelectionModel().getSelectedItem().setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
+    }
+
+    @FXML
+    public void addEmployee() {
+        employeeListView.getItems().add(new Employee("Employee", false, false));
+        employeeListView.getSelectionModel().selectLast();
+        clearFields();
+    }
+
+    @FXML
+    public void deleteEmployee() {
+        employeeListView.getItems().remove(employeeListView.getSelectionModel().getSelectedIndex());
+        clearFields();
+        saveEmployees();
+    }
+
+    private void clearFields() {
+        employeeName.clear();
+        isOpenerButton.setSelected(false);
+        isCloserButton.setSelected(false);
+        forbiddenTimesListView.setItems(FXCollections.emptyObservableList());
     }
 
     @Override
