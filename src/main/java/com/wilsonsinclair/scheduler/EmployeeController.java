@@ -2,6 +2,7 @@ package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,6 +57,7 @@ public class EmployeeController implements Initializable {
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
         e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
+        employeeListView.refresh();
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
     }
 
@@ -63,13 +65,11 @@ public class EmployeeController implements Initializable {
     public void addEmployee() {
         employeeListView.getItems().add(new Employee("Employee", false, false));
         employeeListView.getSelectionModel().selectLast();
-        clearFields();
+        loadEmployee();
     }
 
     @FXML
     public void deleteEmployee() {
-
-        final int index = employeeListView.getSelectionModel().getSelectedIndex();
         final int index = employeeListView.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
             employeeListView.getItems().remove(index);
