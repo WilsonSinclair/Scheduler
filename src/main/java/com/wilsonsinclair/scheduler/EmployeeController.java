@@ -51,10 +51,11 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void saveEmployees() {
-        employeeListView.getSelectionModel().getSelectedItem().setName(employeeName.getText());
-        employeeListView.getSelectionModel().getSelectedItem().setOpener(isOpenerButton.isSelected());
-        employeeListView.getSelectionModel().getSelectedItem().setCloser(isCloserButton.isSelected());
-        employeeListView.getSelectionModel().getSelectedItem().setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
+        Employee e = employeeListView.getSelectionModel().getSelectedItem();
+        e.setName(employeeName.getText());
+        e.setOpener(isOpenerButton.isSelected());
+        e.setCloser(isCloserButton.isSelected());
+        e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
     }
 
@@ -67,8 +68,13 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void deleteEmployee() {
-        employeeListView.getItems().remove(employeeListView.getSelectionModel().getSelectedIndex());
-        clearFields();
+
+        final int index = employeeListView.getSelectionModel().getSelectedIndex();
+        final int index = employeeListView.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            employeeListView.getItems().remove(index);
+        }
+        loadEmployee();
         saveEmployees();
     }
 
