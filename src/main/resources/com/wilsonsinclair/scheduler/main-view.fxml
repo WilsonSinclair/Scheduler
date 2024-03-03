@@ -34,17 +34,17 @@
                                  </children></AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" AnchorPane.leftAnchor="100.0" />
+                                    <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" onKeyTyped="#enableSaveButton" AnchorPane.leftAnchor="100.0" />
                                     <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" text="Opener" />
-                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="1175.0" layoutY="18.0" mnemonicParsing="false" text="Closer" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="18.0" />
+                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" />
+                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="1175.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="18.0" />
                                     <ListView fx:id="forbiddenTimesListView" layoutX="120.0" layoutY="208.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="208.0" />
                                     <Label fx:id="forbiddenTimesListViewLabel" layoutX="119.0" layoutY="173.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true">
                                        <font>
                                           <Font size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="saveEmployeeButton" layoutX="120.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#saveEmployees" prefHeight="25.0" prefWidth="95.0" text="Save" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="120.0">
+                                    <Button fx:id="saveEmployeeButton" disable="true" layoutX="120.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#saveEmployees" prefHeight="25.0" prefWidth="95.0" text="Save" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

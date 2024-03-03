@@ -2,7 +2,6 @@ package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,6 +40,7 @@ public class EmployeeController implements Initializable {
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
 
+        saveEmployeeButton.setDisable(true);
 
         employeeName.setText(employee.getName());
         isOpenerButton.setSelected(employee.canOpen());
@@ -76,6 +76,13 @@ public class EmployeeController implements Initializable {
         }
         loadEmployee();
         saveEmployees();
+    }
+
+    @FXML
+    public void enableSaveButton() {
+        if (saveEmployeeButton.isDisabled()) {
+            saveEmployeeButton.setDisable(false);
+        }
     }
 
     private void clearFields() {
