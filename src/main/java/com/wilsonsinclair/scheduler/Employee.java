@@ -1,7 +1,6 @@
 package com.wilsonsinclair.scheduler;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import javafx.beans.Observable;
+import javafx.beans.property.*;
+import javafx.util.Callback;
 
 /*
     A class to represent an Employee that has shifts on the generated schedule.
@@ -19,34 +21,55 @@ public class Employee implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private boolean isOpener;
-    private boolean isCloser;
+    private transient StringProperty name;
+    private transient BooleanProperty isOpener;
+    private transient BooleanProperty isCloser;
 
     // A list of all the times an employee cannot work
     private ArrayList<ForbiddenTime> forbiddenTimes;
 
     public Employee(String name, boolean isOpener, boolean isCloser) {
-        this.name = name;
-        this.isCloser = isCloser;
-        this.isOpener = isOpener;
+        setName(name);
+        setCloser(isCloser);
+        setOpener(isOpener);
         forbiddenTimes = new ArrayList<>();
     }
 
-    public String getName() {
+    public final StringProperty nameProperty() {
+        if (name == null) {
+            name = new SimpleStringProperty();
+        }
         return name;
     }
 
+    public final BooleanProperty openerProperty() {
+        if (isOpener == null) {
+            isOpener = new SimpleBooleanProperty();
+        }
+        return isOpener;
+    }
+
+    public final BooleanProperty closerProperty() {
+        if (isCloser == null) {
+            isCloser = new SimpleBooleanProperty();
+        }
+        return isCloser;
+    }
+
+    public String getName() {
+        return nameProperty().get();
+    }
+
     public void setName(String name) {
-        this.name = name;
+        nameProperty().set(name);
     }
 
     public void setOpener(boolean isOpener) {
-        this.isOpener = isOpener;
+        openerProperty().set(isOpener);
     }
 
     public void setCloser(boolean isCloser) {
-        this.isCloser = isCloser;
+        closerProperty().set(isCloser);
     }
 
     public void setForbiddenTimes(ArrayList<ForbiddenTime> forbiddenTimes) {
@@ -54,11 +77,11 @@ public class Employee implements Serializable {
     }
 
     public boolean canClose() {
-        return isCloser;
+        return closerProperty().get();
     }
 
     public boolean canOpen() {
-        return isOpener;
+        return openerProperty().get();
     }
 
     public List<ForbiddenTime> getForbiddenTimes() {
@@ -96,6 +119,25 @@ public class Employee implements Serializable {
             }
         }
         return true;
+    }
+
+    public static Callback<Employee, Observable[]> extractor() {
+        return (Employee e) -> new Observable[]{e.nameProperty(), e.openerProperty(), e.closerProperty()};
+    }
+
+    @Serial
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeUTF(getName());
+        out.writeBoolean(canOpen());
+        out.writeBoolean(canClose());
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        nameProperty().set(s.readUTF());
+        openerProperty().set(s.readBoolean());
+        closerProperty().set(s.readBoolean());
+        forbiddenTimes = new ArrayList<>();
     }
 
     @Override

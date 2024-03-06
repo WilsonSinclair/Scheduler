@@ -57,7 +57,6 @@ public class EmployeeController implements Initializable {
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
         e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
-        employeeListView.refresh();
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
     }
 
@@ -113,8 +112,10 @@ public class EmployeeController implements Initializable {
                 };
             }
         });
+        ObservableList<Employee> observableList = FXCollections.observableArrayList(Employee.extractor());
         ArrayList<Employee> employees = Serializer.loadEmployees();
-        employeeListView.setItems(FXCollections.observableArrayList(employees));
+        observableList.addAll(employees);
+        employeeListView.setItems(observableList);
     }
 }
 

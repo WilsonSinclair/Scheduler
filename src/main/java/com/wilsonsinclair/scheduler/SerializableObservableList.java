@@ -36,8 +36,6 @@ public class SerializableObservableList<E> extends ObservableListBase<E> impleme
         data.add(index, element);
     }
 
-    // Implement other ObservableList methods (size, get, etc.)
-
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         data = (List<E>) in.readObject();
