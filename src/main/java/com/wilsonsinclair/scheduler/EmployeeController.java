@@ -58,6 +58,7 @@ public class EmployeeController implements Initializable {
         e.setCloser(isCloserButton.isSelected());
         e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
+        saveEmployeeButton.setDisable(true);
     }
 
     @FXML
