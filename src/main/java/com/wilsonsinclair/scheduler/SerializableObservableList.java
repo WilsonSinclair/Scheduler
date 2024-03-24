@@ -17,7 +17,7 @@ public class SerializableObservableList<E> extends ObservableListBase<E> impleme
 
     @Override
     public int size() {
-        return 0;
+        return getData().size();
     }
 
     @Override
