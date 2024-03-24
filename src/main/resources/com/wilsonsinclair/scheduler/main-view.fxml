@@ -49,7 +49,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="deleteEmloyeeButton" layoutX="1278.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#deleteEmployee" prefHeight="31.0" prefWidth="133.0" text="Delete Employee" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="120.0">
+                                    <Button fx:id="deleteEmloyeeButton" layoutX="1278.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#confirmEmployeeDeletion" prefHeight="31.0" prefWidth="133.0" text="Delete Employee" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

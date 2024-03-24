@@ -58,6 +58,7 @@ public class EmployeeController implements Initializable {
         e.setCloser(isCloserButton.isSelected());
         e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
+        new Alert(Alert.AlertType.INFORMATION, "Employee data saved", ButtonType.OK).showAndWait();
         saveEmployeeButton.setDisable(true);
     }
 
@@ -66,6 +67,25 @@ public class EmployeeController implements Initializable {
         employeeListView.getItems().add(new Employee("Employee", false, false));
         employeeListView.getSelectionModel().selectLast();
         loadEmployee();
+    }
+
+    /*
+        Displays a confirmation popup to ensure that the user wishes to delete the selected Employee.
+        If they select 'OK', the deletion is done and vice versa.
+     */
+    @FXML
+    public void confirmEmployeeDeletion() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Delete selected Employee?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                deleteEmployee();
+            }
+        });
+        // Now we change the Alert to inform the user that the deletion has taken place.
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Employee Deleted");
+        alert.show();
     }
 
     @FXML
