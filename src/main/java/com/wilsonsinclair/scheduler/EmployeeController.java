@@ -84,13 +84,6 @@ public class EmployeeController implements Initializable {
         }
     }
 
-    private void clearFields() {
-        employeeName.clear();
-        isOpenerButton.setSelected(false);
-        isCloserButton.setSelected(false);
-        forbiddenTimesListView.setItems(FXCollections.emptyObservableList());
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
