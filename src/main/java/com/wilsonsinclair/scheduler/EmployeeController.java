@@ -80,12 +80,13 @@ public class EmployeeController implements Initializable {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 deleteEmployee();
+
+                // Now we change the Alert to inform the user that the deletion has taken place.
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Employee Deleted");
+                alert.show();
             }
         });
-        // Now we change the Alert to inform the user that the deletion has taken place.
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Employee Deleted");
-        alert.show();
     }
 
     @FXML
