@@ -96,7 +96,9 @@ public class EmployeeController implements Initializable {
             employeeListView.getItems().remove(index);
         }
         loadEmployee();
-        saveEmployees();
+
+        // We save the employee data here now that the selected employee has been deleted.
+        Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
     }
 
     @FXML
