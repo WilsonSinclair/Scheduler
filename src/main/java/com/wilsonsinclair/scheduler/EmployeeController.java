@@ -36,6 +36,9 @@ public class EmployeeController implements Initializable {
     public void loadEmployee() {
         Employee employee = employeeListView.getSelectionModel().getSelectedItem();
 
+        //In case an empty cell is selected, this should avoid any Null Pointer exceptions.
+        if (employee == null) { return; }
+
         employeeName.setDisable(false);
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
