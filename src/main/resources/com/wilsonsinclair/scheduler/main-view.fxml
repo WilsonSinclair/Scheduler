@@ -39,8 +39,8 @@
                                     <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
                                     <RadioButton fx:id="isOpenerButton" disable="true" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" />
                                     <RadioButton fx:id="isCloserButton" disable="true" layoutX="1175.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="18.0" />
-                                    <ListView fx:id="forbiddenTimesListView" layoutX="120.0" layoutY="208.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="208.0" />
-                                    <Label fx:id="forbiddenTimesListViewLabel" layoutX="119.0" layoutY="173.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true">
+                                    <ListView fx:id="forbiddenTimesListView" layoutX="100.0" layoutY="211.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="211.0" />
+                                    <Label fx:id="forbiddenTimesListViewLabel" alignment="CENTER" layoutX="664.0" layoutY="173.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="664.0" AnchorPane.rightAnchor="704.0">
                                        <font>
                                           <Font size="26.0" />
                                        </font>
@@ -56,6 +56,7 @@
                                        </font>
                                     </Button>
                                     <Separator layoutX="1.0" layoutY="85.0" prefHeight="0.0" prefWidth="1529.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button layoutX="698.0" layoutY="612.0" mnemonicParsing="false" text="Add New Time" AnchorPane.leftAnchor="698.0" AnchorPane.rightAnchor="738.0" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>

@@ -79,6 +79,7 @@ public class EmployeeController implements Initializable {
     @FXML
     public void confirmEmployeeDeletion() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING");
         alert.setHeaderText("Delete selected Employee?");
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
@@ -86,6 +87,7 @@ public class EmployeeController implements Initializable {
 
                 // Now we change the Alert to inform the user that the deletion has taken place.
                 alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
                 alert.setHeaderText("Employee Deleted");
                 alert.show();
             }
