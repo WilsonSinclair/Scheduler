@@ -1,15 +1,20 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.time.ForbiddenTimeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
@@ -30,7 +35,7 @@ public class EmployeeController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton;
 
     @FXML
-    private Button saveEmployeeButton, addEmployeeButton, deleteEmployeeButton;
+    private Button saveEmployeeButton, addEmployeeButton, deleteEmployeeButton, addForbiddenTImeButton;
 
     @FXML
     public void loadEmployee() {
@@ -42,6 +47,7 @@ public class EmployeeController implements Initializable {
         employeeName.setDisable(false);
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
+        addForbiddenTImeButton.setDisable(false);
 
         saveEmployeeButton.setDisable(true);
 
@@ -113,6 +119,41 @@ public class EmployeeController implements Initializable {
         }
     }
 
+    /*
+        Method that handles the opening of the DialogPane used to add a
+        forbidden time to an Employee.
+     */
+    @FXML
+    private void handleAddForbiddenTimeButton(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("fobiddentime_view.fxml"));
+            DialogPane pane = loader.load();
+            ForbiddenTimeController forbiddenTimeController = loader.getController();
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(pane);
+            dialog.setTitle("Forbidden Time");
+
+            Optional<ButtonType> response = dialog.showAndWait();
+
+            if (response.isPresent()) {
+                if (response.get() == ButtonType.OK) {
+                    getSelectedEmployee().addForbiddenTime(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
+                }
+                else {
+                    //TODO
+                }
+            }
+
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -138,6 +179,10 @@ public class EmployeeController implements Initializable {
         ArrayList<Employee> employees = Serializer.loadEmployees();
         observableList.addAll(employees);
         employeeListView.setItems(observableList);
+    }
+
+    private Employee getSelectedEmployee() {
+        return employeeListView.getSelectionModel().getSelectedItem();
     }
 }
 

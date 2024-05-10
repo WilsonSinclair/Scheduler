@@ -56,7 +56,7 @@
                                        </font>
                                     </Button>
                                     <Separator layoutX="1.0" layoutY="85.0" prefHeight="0.0" prefWidth="1529.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                    <Button layoutX="698.0" layoutY="612.0" mnemonicParsing="false" text="Add New Time" AnchorPane.leftAnchor="698.0" AnchorPane.rightAnchor="738.0" />
+                                    <Button fx:id="addForbiddenTImeButton" disable="true" layoutX="698.0" layoutY="612.0" mnemonicParsing="false" onAction="#handleAddForbiddenTimeButton" text="Add New Time" AnchorPane.leftAnchor="698.0" AnchorPane.rightAnchor="738.0" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
