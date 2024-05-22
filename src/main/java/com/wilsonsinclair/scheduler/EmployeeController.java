@@ -142,9 +142,6 @@ public class EmployeeController implements Initializable {
                 if (response.get() == ButtonType.OK) {
                     getSelectedEmployee().addForbiddenTime(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
                 }
-                else {
-                    //TODO
-                }
             }
 
         }
