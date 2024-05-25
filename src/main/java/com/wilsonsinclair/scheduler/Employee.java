@@ -26,13 +26,14 @@ public class Employee implements Serializable {
     private transient BooleanProperty isCloser;
 
     // A list of all the times an employee cannot work
-    private ArrayList<ForbiddenTime> forbiddenTimes;
+    private SerializableObservableList<ForbiddenTime> forbiddenTimes;
+    //private ArrayList<ForbiddenTime> forbiddenTimes;
 
     public Employee(String name, boolean isOpener, boolean isCloser) {
         setName(name);
         setCloser(isCloser);
         setOpener(isOpener);
-        forbiddenTimes = new ArrayList<>();
+        forbiddenTimes = new SerializableObservableList<>();
     }
 
     public final StringProperty nameProperty() {
@@ -72,20 +73,12 @@ public class Employee implements Serializable {
         closerProperty().set(isCloser);
     }
 
-    public void setForbiddenTimes(ArrayList<ForbiddenTime> forbiddenTimes) {
-        this.forbiddenTimes = forbiddenTimes;
-    }
-
     public boolean canClose() {
         return closerProperty().get();
     }
 
     public boolean canOpen() {
         return openerProperty().get();
-    }
-
-    public List<ForbiddenTime> getForbiddenTimes() {
-        return forbiddenTimes;
     }
 
     public void addForbiddenTime(ForbiddenTime time) {
@@ -130,6 +123,7 @@ public class Employee implements Serializable {
         out.writeUTF(getName());
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
+        out.writeObject(forbiddenTimes);
     }
 
     @Serial
@@ -137,7 +131,8 @@ public class Employee implements Serializable {
         nameProperty().set(s.readUTF());
         openerProperty().set(s.readBoolean());
         closerProperty().set(s.readBoolean());
-        forbiddenTimes = new ArrayList<>();
+        forbiddenTimes = new SerializableObservableList<>();
+
     }
 
     @Override
@@ -156,5 +151,13 @@ public class Employee implements Serializable {
             sb.append(", ");
         }
         return sb.toString();
+    }
+
+    public void setForbiddenTimes(ArrayList<ForbiddenTime> forbiddenTimes) {
+        this.forbiddenTimes = new SerializableObservableList<>(forbiddenTimes);
+    }
+
+    public List<ForbiddenTime> getForbiddenTimes() {
+        return forbiddenTimes;
     }
 }

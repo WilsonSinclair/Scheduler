@@ -39,7 +39,7 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void loadEmployee() {
-        Employee employee = employeeListView.getSelectionModel().getSelectedItem();
+        Employee employee = getSelectedEmployee();
 
         //In case an empty cell is selected, this should avoid any Null Pointer exceptions.
         if (employee == null) { return; }
@@ -146,7 +146,7 @@ public class EmployeeController implements Initializable {
 
         }
         catch (IOException exception) {
-            exception.printStackTrace();
+            System.err.println("Error loading the ForbiddenTimeView FXML file.");
         }
 
     }
@@ -172,10 +172,10 @@ public class EmployeeController implements Initializable {
                 };
             }
         });
-        ObservableList<Employee> observableList = FXCollections.observableArrayList(Employee.extractor());
+        ObservableList<Employee> employeeList = FXCollections.observableArrayList(Employee.extractor());
         ArrayList<Employee> employees = Serializer.loadEmployees();
-        observableList.addAll(employees);
-        employeeListView.setItems(observableList);
+        employeeList.addAll(employees);
+        employeeListView.setItems(employeeList);
     }
 
     private Employee getSelectedEmployee() {
