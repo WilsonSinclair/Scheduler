@@ -65,7 +65,7 @@ public class EmployeeController implements Initializable {
         e.setName(employeeName.getText());
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
-        e.setForbiddenTimes(new ArrayList<>(forbiddenTimesListView.getItems()));
+        e.setForbiddenTimes(forbiddenTimesListView.getItems());
         Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
         new Alert(Alert.AlertType.INFORMATION, "Employee data saved", ButtonType.OK).showAndWait();
         saveEmployeeButton.setDisable(true);
@@ -138,10 +138,9 @@ public class EmployeeController implements Initializable {
 
             Optional<ButtonType> response = dialog.showAndWait();
 
-            if (response.isPresent()) {
-                if (response.get() == ButtonType.OK) {
-                    getSelectedEmployee().addForbiddenTime(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
-                }
+            if (response.isPresent() && response.get() == ButtonType.OK) {
+                forbiddenTimesListView.getItems().add(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
+                saveEmployees();
             }
 
         }

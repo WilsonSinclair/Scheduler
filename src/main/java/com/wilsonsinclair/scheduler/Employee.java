@@ -10,6 +10,8 @@ import java.util.List;
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.Callback;
 
 /*
@@ -26,14 +28,15 @@ public class Employee implements Serializable {
     private transient BooleanProperty isCloser;
 
     // A list of all the times an employee cannot work
-    private SerializableObservableList<ForbiddenTime> forbiddenTimes;
+    //private SerializableObservableList<ForbiddenTime> forbiddenTimes;
     //private ArrayList<ForbiddenTime> forbiddenTimes;
+    private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
     public Employee(String name, boolean isOpener, boolean isCloser) {
         setName(name);
         setCloser(isCloser);
         setOpener(isOpener);
-        forbiddenTimes = new SerializableObservableList<>();
+        forbiddenTimes = new ArrayList<>();
     }
 
     public final StringProperty nameProperty() {
@@ -55,6 +58,15 @@ public class Employee implements Serializable {
             isCloser = new SimpleBooleanProperty();
         }
         return isCloser;
+    }
+
+
+    public void setForbiddenTimes(List<ForbiddenTime> times) {
+        forbiddenTimes = new ArrayList<>(times);
+    }
+
+    public ArrayList<ForbiddenTime> getForbiddenTimes() {
+        return forbiddenTimes;
     }
 
     public String getName() {
@@ -123,7 +135,7 @@ public class Employee implements Serializable {
         out.writeUTF(getName());
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
-        out.writeObject(forbiddenTimes);
+        out.writeObject(getForbiddenTimes());
     }
 
     @Serial
@@ -131,8 +143,7 @@ public class Employee implements Serializable {
         nameProperty().set(s.readUTF());
         openerProperty().set(s.readBoolean());
         closerProperty().set(s.readBoolean());
-        forbiddenTimes = new SerializableObservableList<>();
-
+        forbiddenTimes = (ArrayList<ForbiddenTime>) s.readObject();
     }
 
     @Override
@@ -151,13 +162,5 @@ public class Employee implements Serializable {
             sb.append(", ");
         }
         return sb.toString();
-    }
-
-    public void setForbiddenTimes(ArrayList<ForbiddenTime> forbiddenTimes) {
-        this.forbiddenTimes = new SerializableObservableList<>(forbiddenTimes);
-    }
-
-    public List<ForbiddenTime> getForbiddenTimes() {
-        return forbiddenTimes;
     }
 }
