@@ -10,8 +10,6 @@ import java.util.List;
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.util.Callback;
 
 /*
@@ -28,8 +26,6 @@ public class Employee implements Serializable {
     private transient BooleanProperty isCloser;
 
     // A list of all the times an employee cannot work
-    //private SerializableObservableList<ForbiddenTime> forbiddenTimes;
-    //private ArrayList<ForbiddenTime> forbiddenTimes;
     private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
     public Employee(String name, boolean isOpener, boolean isCloser) {
