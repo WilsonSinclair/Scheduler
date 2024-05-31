@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Serializer {
 
-    private static final String employeeFile = "employees.ser";
+    private static final String EMPLOYEE_FILE = "employees.ser";
 
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
@@ -19,7 +19,7 @@ public class Serializer {
         try {
 
             // write object to file
-            FileOutputStream fos = new FileOutputStream(employeeFile);
+            FileOutputStream fos = new FileOutputStream(EMPLOYEE_FILE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(employees);
             oos.close();
@@ -32,7 +32,7 @@ public class Serializer {
 
     public static ArrayList<Employee> loadEmployees() {
         try {
-            FileInputStream in = new FileInputStream(employeeFile);
+            FileInputStream in = new FileInputStream(EMPLOYEE_FILE);
             ObjectInputStream ois = new ObjectInputStream(in);
             SerializableObservableList<Employee> loadedEmployees = (SerializableObservableList<Employee>) ois.readObject();
             return new ArrayList<>(loadedEmployees.getData());
@@ -40,6 +40,6 @@ public class Serializer {
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<Employee>();
+        return new ArrayList<>();
     }
 }

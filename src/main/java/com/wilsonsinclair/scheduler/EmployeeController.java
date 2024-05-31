@@ -20,13 +20,13 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
+    public ContextMenu employeeListViewContextMenu, forbiddenTimesListViewContextMenu;
+
+    @FXML
     private ListView<Employee> employeeListView;
 
     @FXML
     private ListView<ForbiddenTime> forbiddenTimesListView;
-
-    @FXML
-    private Tab employeeTab;
 
     @FXML
     private TextField employeeName;
@@ -35,7 +35,7 @@ public class EmployeeController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton;
 
     @FXML
-    private Button saveEmployeeButton, addEmployeeButton, deleteEmployeeButton, addForbiddenTImeButton;
+    private Button saveEmployeeButton, addForbiddenTImeButton;
 
     @FXML
     public void loadEmployee() {
@@ -109,7 +109,7 @@ public class EmployeeController implements Initializable {
         loadEmployee();
 
         // We save the employee data here now that the selected employee has been deleted.
-        Serializer.saveEmployees(new SerializableObservableList<>(employeeListView.getItems()));
+        saveEmployees();
     }
 
     @FXML
@@ -148,6 +148,15 @@ public class EmployeeController implements Initializable {
             System.err.println("Error loading the ForbiddenTimeView FXML file.");
         }
 
+    }
+
+    @FXML
+    private void deleteForbiddenTime() {
+        final int index = forbiddenTimesListView.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            forbiddenTimesListView.getItems().remove(index);
+        }
+        saveEmployees();
     }
 
     @Override
