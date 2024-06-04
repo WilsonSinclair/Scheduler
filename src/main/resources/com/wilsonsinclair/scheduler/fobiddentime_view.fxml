@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -12,7 +14,9 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <DatePicker fx:id="datePicker" layoutX="203.0" layoutY="79.0" promptText="Select Date" />
+                  <DatePicker fx:id="datePicker" layoutX="204.0" layoutY="100.0" promptText="Select Date" />
+                  <ChoiceBox fx:id="choiceBox" layoutX="215.0" layoutY="14.0" prefWidth="150.0" />
+                  <Separator layoutX="-1.0" layoutY="71.0" prefHeight="4.0" prefWidth="583.0" />
                </children>
             </AnchorPane>
          </children></VBox>

@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
-    public ContextMenu employeeListViewContextMenu, forbiddenTimesListViewContextMenu;
+    private ContextMenu employeeListViewContextMenu, forbiddenTimesListViewContextMenu;
 
     @FXML
     private ListView<Employee> employeeListView;
@@ -142,7 +142,6 @@ public class EmployeeController implements Initializable {
                 forbiddenTimesListView.getItems().add(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
                 saveEmployees();
             }
-
         }
         catch (IOException exception) {
             System.err.println("Error loading the ForbiddenTimeView FXML file.");
