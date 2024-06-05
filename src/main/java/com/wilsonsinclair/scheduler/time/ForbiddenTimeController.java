@@ -10,7 +10,7 @@ import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ForbiddenTimeController implements Initializable {
@@ -29,18 +29,28 @@ public class ForbiddenTimeController implements Initializable {
         this.forbiddenTime = forbiddenTime;
     }
 
-    public LocalDate getDateFromDatePicker() {
-        return datePicker.getValue();
+    public Optional<LocalDate> getDateFromDatePicker() {
+        return Optional.ofNullable(datePicker.getValue());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(FXCollections.observableArrayList(CHOICE_BOX_VALUES));
 
+        //Listen for changes to this choice box
         choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number value, Number newValue) {
-                System.out.println(CHOICE_BOX_VALUES[newValue.intValue()]);
+                switch (CHOICE_BOX_VALUES[newValue.intValue()]) {
+                    case "Certain Date":
+                        datePicker.setDisable(false);
+                        break;
+                    case "Certain Time", "Day of Week":
+                        datePicker.setDisable(true);
+                        break;
+                    default:
+                        //TODO
+                }
             }
         });
     }

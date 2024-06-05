@@ -13,6 +13,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -139,8 +140,11 @@ public class EmployeeController implements Initializable {
             Optional<ButtonType> response = dialog.showAndWait();
 
             if (response.isPresent() && response.get() == ButtonType.OK) {
-                forbiddenTimesListView.getItems().add(new ForbiddenTime(forbiddenTimeController.getDateFromDatePicker()));
-                saveEmployees();
+                Optional<LocalDate> datePickerDate = forbiddenTimeController.getDateFromDatePicker();
+                if (datePickerDate.isPresent()) {
+                    forbiddenTimesListView.getItems().add(new ForbiddenTime(datePickerDate.get()));
+                    saveEmployees();
+                }
             }
         }
         catch (IOException exception) {
