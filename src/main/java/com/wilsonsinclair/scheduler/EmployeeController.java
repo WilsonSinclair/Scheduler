@@ -140,9 +140,9 @@ public class EmployeeController implements Initializable {
             Optional<ButtonType> response = dialog.showAndWait();
 
             if (response.isPresent() && response.get() == ButtonType.OK) {
-                Optional<LocalDate> datePickerDate = forbiddenTimeController.getDateFromDatePicker();
-                if (datePickerDate.isPresent()) {
-                    forbiddenTimesListView.getItems().add(new ForbiddenTime(datePickerDate.get()));
+                ForbiddenTime forbiddenTime = forbiddenTimeController.getForbiddenTime();
+                if (forbiddenTime != null) {
+                    forbiddenTimesListView.getItems().add(forbiddenTime);
                     saveEmployees();
                 }
             }

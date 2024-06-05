@@ -71,12 +71,21 @@ public class ForbiddenTime implements Serializable {
     }
 
     /*
+        Constructor for an Empty Forbidden Time that is to be built out over time
+     */
+    public ForbiddenTime() {
+
+    }
+
+    /*
         Get the date of the forbidden time.
         It may or may not be present.
      */
     public Optional<LocalDate> getDate() {
         return Optional.ofNullable(date);
     }
+
+    public void setDate(LocalDate date) { this.date = date; }
 
     /*
         Get the starting time of the forbidden time.
@@ -101,6 +110,8 @@ public class ForbiddenTime implements Serializable {
     public Optional<DayOfWeek> getDayOfWeek() {
         return Optional.ofNullable(dayOfWeek);
     }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
     public boolean isRepeating() {
         return isRepeating;

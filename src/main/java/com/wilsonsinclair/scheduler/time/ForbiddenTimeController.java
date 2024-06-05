@@ -3,14 +3,16 @@ package com.wilsonsinclair.scheduler.time;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.Optional;
+import java.time.DayOfWeek;
 import java.util.ResourceBundle;
 
 public class ForbiddenTimeController implements Initializable {
@@ -21,21 +23,50 @@ public class ForbiddenTimeController implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBox;
 
+    @FXML
+    private ComboBox<DayOfWeek> dayOFWeekComboBox;
+
     private ForbiddenTime forbiddenTime;
 
     private final String[] CHOICE_BOX_VALUES = {"Certain Date", "Certain Time", "Day of Week"};
 
-    public void setForbiddenTime(ForbiddenTime forbiddenTime) {
-        this.forbiddenTime = forbiddenTime;
-    }
+    public ForbiddenTime getForbiddenTime() { return forbiddenTime; }
 
-    public Optional<LocalDate> getDateFromDatePicker() {
-        return Optional.ofNullable(datePicker.getValue());
-    }
+    /*
+        Handles changes to the Day of Week combo box. If the forbiddenTime field has yet to be initialized, this
+        initializes it and sets the day of the week to the chosen day.
+     */
+    private final EventHandler<ActionEvent> comboBoxEvent = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            if (forbiddenTime == null) {
+                forbiddenTime = new ForbiddenTime();
+            }
+            forbiddenTime.setDayOfWeek(dayOFWeekComboBox.getValue());
+        }
+    };
+
+    /*
+        Handles changes to the DatePicker. If the forbiddenTime field has yet to be initialized, this
+        initializes it and sets the date to the chosen date.
+     */
+    private final EventHandler<ActionEvent> datePickerEvent = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            if (forbiddenTime == null) {
+                forbiddenTime = new ForbiddenTime();
+            }
+            forbiddenTime.setDate(datePicker.getValue());
+        }
+    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(FXCollections.observableArrayList(CHOICE_BOX_VALUES));
+        dayOFWeekComboBox.setItems(FXCollections.observableArrayList(DayOfWeek.values()));
+
+        dayOFWeekComboBox.setOnAction(comboBoxEvent);
+        datePicker.setOnAction(datePickerEvent);
 
         //Listen for changes to this choice box
         choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -45,8 +76,11 @@ public class ForbiddenTimeController implements Initializable {
                     case "Certain Date":
                         datePicker.setDisable(false);
                         break;
-                    case "Certain Time", "Day of Week":
+                    case "Certain Time":
                         datePicker.setDisable(true);
+                        break;
+                    case "Day of Week":
+                        dayOFWeekComboBox.setDisable(false);
                         break;
                     default:
                         //TODO
