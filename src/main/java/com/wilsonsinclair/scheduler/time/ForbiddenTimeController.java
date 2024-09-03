@@ -1,7 +1,5 @@
 package com.wilsonsinclair.scheduler.time;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,6 +23,9 @@ public class ForbiddenTimeController implements Initializable {
 
     @FXML
     private ComboBox<DayOfWeek> dayOFWeekComboBox;
+
+    @FXML
+    private ComboBox<Integer> startTimeComboBox, endTimeComboBox;
 
     private ForbiddenTime forbiddenTime;
 
@@ -69,22 +70,22 @@ public class ForbiddenTimeController implements Initializable {
         datePicker.setOnAction(datePickerEvent);
 
         //Listen for changes to this choice box
-        choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number value, Number newValue) {
-                switch (CHOICE_BOX_VALUES[newValue.intValue()]) {
-                    case "Certain Date":
-                        datePicker.setDisable(false);
-                        break;
-                    case "Certain Time":
-                        datePicker.setDisable(true);
-                        break;
-                    case "Day of Week":
-                        dayOFWeekComboBox.setDisable(false);
-                        break;
-                    default:
-                        //TODO
-                }
+        choiceBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
+            switch (CHOICE_BOX_VALUES[newValue.intValue()]) {
+                case "Certain Date":
+                    datePicker.setDisable(false);
+                    dayOFWeekComboBox.setDisable(true);
+                    break;
+                case "Certain Time":
+                    datePicker.setDisable(true);
+                    dayOFWeekComboBox.setDisable(true);
+                    break;
+                case "Day of Week":
+                    dayOFWeekComboBox.setDisable(false);
+                    datePicker.setDisable(true);
+                    break;
+                default:
+                    //TODO
             }
         });
     }

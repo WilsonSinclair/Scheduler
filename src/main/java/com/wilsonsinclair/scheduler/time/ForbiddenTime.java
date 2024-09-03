@@ -2,6 +2,8 @@ package com.wilsonsinclair.scheduler.time;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +23,8 @@ public class ForbiddenTime implements Serializable {
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
     private LocalTime endTime;
+
+    private final DateFormat dateFormat = new SimpleDateFormat("h:mm a");
 
     /*
         A day of the week when an employee cannot work at all.
@@ -71,11 +75,9 @@ public class ForbiddenTime implements Serializable {
     }
 
     /*
-        Constructor for an Empty Forbidden Time that is to be built out over time
+        Default constructor for an empty Forbidden Time that is to be built out over time
      */
-    public ForbiddenTime() {
-
-    }
+    public ForbiddenTime() {}
 
     /*
         Get the date of the forbidden time.
@@ -181,9 +183,9 @@ public class ForbiddenTime implements Serializable {
         }
         if (getStartTime().isPresent() && getEndTime().isPresent()) {
             sb.append("From ");
-            sb.append(startTime.toString());
+            sb.append(dateFormat.format(startTime.toString()));
             sb.append(" To ");
-            sb.append(endTime.toString());
+            sb.append(dateFormat.format(endTime.toString()));
         }
         return sb.toString();
     }
