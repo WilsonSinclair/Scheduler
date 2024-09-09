@@ -106,6 +106,9 @@ public class EmployeeController implements Initializable {
         if (index >= 0) {
             employeeListView.getItems().remove(index);
         }
+
+        // We must now refresh the UI to reflect the now currently selected Employee
+        // because the last selected one is now deleted from the ListView.
         loadEmployee();
 
         // We save the employee data here now that the selected employee has been deleted.
