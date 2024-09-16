@@ -74,10 +74,10 @@ public class ForbiddenTimeController implements Initializable {
             startMinute = startMinuteComboBox.getValue() != null ? startMinuteComboBox.getValue() : 0;
             endMinute = endMinuteComboBox.getValue() != null ? endMinuteComboBox.getValue() : 0;
 
-            if (startTimeAmPmToggleSwitch.isSelected()) {
+            if (startTimeAmPmToggleSwitch.isSelected() && startHour < 12) {
                 startHour += 12;
             }
-            if (endTimeAmPmToggleSwitch.isSelected()) {
+            if (endTimeAmPmToggleSwitch.isSelected() && endHour < 12) {
                 endHour += 12;
             }
 
