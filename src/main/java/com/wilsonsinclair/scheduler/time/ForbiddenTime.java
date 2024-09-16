@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /*
@@ -24,7 +25,7 @@ public class ForbiddenTime implements Serializable {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    private final DateFormat dateFormat = new SimpleDateFormat("h:mm a");
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
     /*
         A day of the week when an employee cannot work at all.
@@ -96,6 +97,10 @@ public class ForbiddenTime implements Serializable {
     public Optional<LocalTime> getStartTime() {
         return Optional.ofNullable(startTime);
     }
+
+    public void setStartTime(int startHour, int startMinute) { this.startTime = LocalTime.of(startHour, startMinute); }
+
+    public void setEndTime(int endHour, int endMinute) { this.endTime = LocalTime.of(endHour, endMinute); }
 
     /*
         Get the ending time of the forbidden time.
@@ -183,9 +188,9 @@ public class ForbiddenTime implements Serializable {
         }
         if (getStartTime().isPresent() && getEndTime().isPresent()) {
             sb.append("From ");
-            sb.append(dateFormat.format(startTime.toString()));
+            sb.append(startTime.format(timeFormatter));
             sb.append(" To ");
-            sb.append(dateFormat.format(endTime.toString()));
+            sb.append(endTime.format(timeFormatter));
         }
         return sb.toString();
     }

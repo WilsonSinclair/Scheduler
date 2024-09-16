@@ -5,9 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -28,6 +28,12 @@ public class ForbiddenTimeController implements Initializable {
     @FXML
     private ComboBox<Integer> startTimeComboBox, endTimeComboBox, startMinuteComboBox, endMinuteComboBox;
 
+    @FXML
+    private ToggleSwitch startTimeAmPmToggleSwitch, endTimeAmPmToggleSwitch;
+
+    @FXML
+    private DialogPane pane;
+
     private ForbiddenTime forbiddenTime;
 
     private final String[] CHOICE_BOX_VALUES = {"Certain Date", "Certain Time", "Day of Week"};
@@ -41,13 +47,42 @@ public class ForbiddenTimeController implements Initializable {
         Handles changes to the Day of Week combo box. If the forbiddenTime field has yet to be initialized, this
         initializes it and sets the day of the week to the chosen day.
      */
-    private final EventHandler<ActionEvent> comboBoxEvent = new EventHandler<>() {
+    private final EventHandler<ActionEvent> dayOfWeekComboBoxEvent = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            if (forbiddenTime == null) {
+                forbiddenTime = new ForbiddenTime();
+            }
+            forbiddenTime.setDayOfWeek(dayOFWeekComboBox.getValue());
+        }
+    };
+
+    // Handles changes to the starting and ending hour and/or minute combo boxes when the user
+    // is adding a forbidden time of the specific time variety.
+    private final EventHandler<ActionEvent> timeEvent = new EventHandler<>() {
         @Override
         public void handle(ActionEvent actionEvent) {
             if (forbiddenTime == null) {
                 forbiddenTime = new ForbiddenTime();
             }
-            forbiddenTime.setDayOfWeek(dayOFWeekComboBox.getValue());
+            int startHour, endHour, startMinute, endMinute;
+
+            // initialize the above variables, assigning default values if the user has not yet
+            // selected a value for one or more of them.
+            startHour = startTimeComboBox.getValue() != null ? startTimeComboBox.getValue() : 1;
+            endHour = endTimeComboBox.getValue() != null ? endTimeComboBox.getValue() : 1;
+            startMinute = startMinuteComboBox.getValue() != null ? startMinuteComboBox.getValue() : 0;
+            endMinute = endMinuteComboBox.getValue() != null ? endMinuteComboBox.getValue() : 0;
+
+            if (startTimeAmPmToggleSwitch.isSelected()) {
+                startHour += 12;
+            }
+            if (endTimeAmPmToggleSwitch.isSelected()) {
+                endHour += 12;
+            }
+
+            forbiddenTime.setStartTime(startHour, startMinute);
+            forbiddenTime.setEndTime(endHour, endMinute);
         }
     };
 
@@ -57,7 +92,7 @@ public class ForbiddenTimeController implements Initializable {
      */
     private final EventHandler<ActionEvent> datePickerEvent = new EventHandler<>() {
         @Override
-        public void handle(ActionEvent actionEvent) {
+        public void handle(ActionEvent event) {
             if (forbiddenTime == null) {
                 forbiddenTime = new ForbiddenTime();
             }
@@ -65,14 +100,25 @@ public class ForbiddenTimeController implements Initializable {
         }
     };
 
+    private final EventHandler<MouseEvent> amPMToggleSwitchEvent = mouseEvent -> {
+        ToggleSwitch toggleSwitch = (ToggleSwitch) mouseEvent.getSource();
+        toggleSwitch.setText(toggleSwitch.getText().equals("AM") ? "PM" : "AM");
+    };
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // The OK button at the bottom right of the dialog window
+        Button okButton = (Button) pane.lookupButton(ButtonType.OK);
+
         choiceBox.setItems(FXCollections.observableArrayList(CHOICE_BOX_VALUES));
         dayOFWeekComboBox.setItems(FXCollections.observableArrayList(DayOfWeek.values()));
 
-        dayOFWeekComboBox.setOnAction(comboBoxEvent);
-        datePicker.setOnAction(datePickerEvent);
+        // Attaching handlers
+        startTimeAmPmToggleSwitch.setOnMouseClicked(amPMToggleSwitchEvent);
+        endTimeAmPmToggleSwitch.setOnMouseClicked(amPMToggleSwitchEvent);
 
+        // Populating hour values for the start and end time combo boxes
         startTimeComboBox.setItems(FXCollections.observableArrayList(HOURS));
         endTimeComboBox.setItems(FXCollections.observableArrayList(HOURS));
 
@@ -85,18 +131,26 @@ public class ForbiddenTimeController implements Initializable {
         choiceBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
             switch (CHOICE_BOX_VALUES[newValue.intValue()]) {
                 case "Certain Date":
+                    forbiddenTime = new ForbiddenTime();
+                    okButton.setOnAction(datePickerEvent);
                     datePicker.setDisable(false);
                     dayOFWeekComboBox.setDisable(true);
                     break;
                 case "Certain Time":
+                    forbiddenTime = new ForbiddenTime();
+                    okButton.setOnAction(timeEvent);
                     datePicker.setDisable(true);
                     dayOFWeekComboBox.setDisable(true);
                     startTimeComboBox.setDisable(false);
                     endTimeComboBox.setDisable(false);
                     startMinuteComboBox.setDisable(false);
                     endMinuteComboBox.setDisable(false);
+                    startTimeAmPmToggleSwitch.setDisable(false);
+                    endTimeAmPmToggleSwitch.setDisable(false);
                     break;
                 case "Day of Week":
+                    forbiddenTime = new ForbiddenTime();
+                    okButton.setOnAction(dayOfWeekComboBoxEvent);
                     dayOFWeekComboBox.setDisable(false);
                     datePicker.setDisable(true);
                     break;
