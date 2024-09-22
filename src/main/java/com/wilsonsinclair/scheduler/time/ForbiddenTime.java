@@ -184,7 +184,7 @@ public class ForbiddenTime implements Serializable {
             sb.append(dayOfWeek.toString()).append(" ");
         }
         if (getDate().isPresent()) {
-            sb.append(date.toString());
+            sb.append(date.toString()).append(" ");
         }
         if (getStartTime().isPresent() && getEndTime().isPresent()) {
             sb.append("From ");

@@ -60,26 +60,33 @@ public class ForbiddenTimeController implements Initializable {
         @Override
         public void handle(ActionEvent actionEvent) {
 
-            int startHour, endHour, startMinute, endMinute;
-
-            // initialize the above variables, assigning default values if the user has not yet
-            // selected a value for one or more of them.
-            startHour = startTimeComboBox.getValue() != null ? startTimeComboBox.getValue() : 1;
-            endHour = endTimeComboBox.getValue() != null ? endTimeComboBox.getValue() : 1;
-            startMinute = startMinuteComboBox.getValue() != null ? startMinuteComboBox.getValue() : 0;
-            endMinute = endMinuteComboBox.getValue() != null ? endMinuteComboBox.getValue() : 0;
-
-            if (startTimeAmPmToggleSwitch.isSelected() && startHour < 12) {
-                startHour += 12;
-            }
-            if (endTimeAmPmToggleSwitch.isSelected() && endHour < 12) {
-                endHour += 12;
-            }
-
-            forbiddenTime.setStartTime(startHour, startMinute);
-            forbiddenTime.setEndTime(endHour, endMinute);
+            addForbiddenTime();
         }
     };
+
+    // Helper method that is used to create a forbidden time from the combo boxes and add
+    // that to the ForbiddenTime field in this class. This is used in the timeEvent handler and
+    // optionally in the datePickerEvent handler if that specific date has a time associated with it.
+    private void addForbiddenTime() {
+        int startHour, endHour, startMinute, endMinute;
+
+        // initialize the above variables, assigning default values if the user has not yet
+        // selected a value for one or more of them.
+        startHour = startTimeComboBox.getValue() != null ? startTimeComboBox.getValue() : 1;
+        endHour = endTimeComboBox.getValue() != null ? endTimeComboBox.getValue() : 1;
+        startMinute = startMinuteComboBox.getValue() != null ? startMinuteComboBox.getValue() : 0;
+        endMinute = endMinuteComboBox.getValue() != null ? endMinuteComboBox.getValue() : 0;
+
+        if (startTimeAmPmToggleSwitch.isSelected() && startHour < 12) {
+            startHour += 12;
+        }
+        if (endTimeAmPmToggleSwitch.isSelected() && endHour < 12) {
+            endHour += 12;
+        }
+
+        forbiddenTime.setStartTime(startHour, startMinute);
+        forbiddenTime.setEndTime(endHour, endMinute);
+    }
 
     /*
         Handles changes to the DatePicker.
@@ -88,6 +95,10 @@ public class ForbiddenTimeController implements Initializable {
         @Override
         public void handle(ActionEvent event) {
             forbiddenTime.setDate(datePicker.getValue());
+
+            if (startTimeComboBox.getSelectionModel().getSelectedItem() != null && endTimeComboBox.getSelectionModel().getSelectedItem() != null) {
+                addForbiddenTime();
+            }
         }
     };
 
@@ -124,12 +135,12 @@ public class ForbiddenTimeController implements Initializable {
                 case "Certain Date" -> {
                     forbiddenTime = new ForbiddenTime();
                     okButton.setOnAction(datePickerEvent);
-                    startTimeComboBox.setDisable(true);
-                    endTimeComboBox.setDisable(true);
-                    startMinuteComboBox.setDisable(true);
-                    endMinuteComboBox.setDisable(true);
-                    startTimeAmPmToggleSwitch.setDisable(true);
-                    endTimeAmPmToggleSwitch.setDisable(true);
+                    startTimeComboBox.setDisable(false);
+                    endTimeComboBox.setDisable(false);
+                    startMinuteComboBox.setDisable(false);
+                    endMinuteComboBox.setDisable(false);
+                    startTimeAmPmToggleSwitch.setDisable(false);
+                    endTimeAmPmToggleSwitch.setDisable(false);
                     datePicker.setDisable(false);
                     dayOFWeekComboBox.setDisable(true);
                 }
