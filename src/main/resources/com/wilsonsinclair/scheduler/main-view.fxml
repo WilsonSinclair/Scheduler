@@ -50,8 +50,8 @@
                                  <children>
                                     <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" onKeyTyped="#enableSaveButton" AnchorPane.leftAnchor="100.0" />
                                     <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" />
-                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="1175.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="18.0" />
+                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="327.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" AnchorPane.topAnchor="18.0" />
+                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="482.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.leftAnchor="482.0" />
                                     <ListView fx:id="forbiddenTimesListView" layoutX="100.0" layoutY="211.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="211.0">
                                        <contextMenu>
                                           <ContextMenu fx:id="forbiddenTimesListViewContextMenu">
@@ -60,7 +60,7 @@
                                             </items>
                                           </ContextMenu>
                                        </contextMenu></ListView>
-                                    <Label fx:id="forbiddenTimesListViewLabel" alignment="CENTER" layoutX="664.0" layoutY="173.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="664.0" AnchorPane.rightAnchor="704.0">
+                                    <Label fx:id="forbiddenTimesListViewLabel" alignment="CENTER" layoutX="100.0" layoutY="164.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="100.0">
                                        <font>
                                           <Font size="26.0" />
                                        </font>

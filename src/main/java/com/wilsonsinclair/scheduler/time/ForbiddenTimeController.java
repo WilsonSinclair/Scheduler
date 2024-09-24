@@ -112,7 +112,7 @@ public class ForbiddenTimeController implements Initializable {
 
         // The OK button at the bottom right of the dialog window
         Button okButton = (Button) pane.lookupButton(ButtonType.OK);
-
+        
         choiceBox.setItems(FXCollections.observableArrayList(CHOICE_BOX_VALUES));
         dayOFWeekComboBox.setItems(FXCollections.observableArrayList(DayOfWeek.values()));
 
@@ -143,6 +143,8 @@ public class ForbiddenTimeController implements Initializable {
                     endTimeAmPmToggleSwitch.setDisable(false);
                     datePicker.setDisable(false);
                     dayOFWeekComboBox.setDisable(true);
+
+                    okButton.disableProperty().bind(datePicker.valueProperty().isNull());
                 }
                 case "Certain Time" -> {
                     forbiddenTime = new ForbiddenTime();
@@ -155,6 +157,11 @@ public class ForbiddenTimeController implements Initializable {
                     endMinuteComboBox.setDisable(false);
                     startTimeAmPmToggleSwitch.setDisable(false);
                     endTimeAmPmToggleSwitch.setDisable(false);
+
+                    okButton.disableProperty().bind(startTimeComboBox.getSelectionModel().selectedItemProperty().isNull());
+                    okButton.disableProperty().bind(startMinuteComboBox.getSelectionModel().selectedItemProperty().isNull());
+                    okButton.disableProperty().bind(endTimeComboBox.getSelectionModel().selectedItemProperty().isNull());
+                    okButton.disableProperty().bind(endMinuteComboBox.getSelectionModel().selectedItemProperty().isNull());
                 }
                 case "Day of Week" -> {
                     forbiddenTime = new ForbiddenTime();
@@ -167,6 +174,8 @@ public class ForbiddenTimeController implements Initializable {
                     endTimeAmPmToggleSwitch.setDisable(true);
                     dayOFWeekComboBox.setDisable(false);
                     datePicker.setDisable(true);
+
+                    okButton.disableProperty().bind(dayOFWeekComboBox.valueProperty().isNull());
                 }
                 default -> {
                 }
