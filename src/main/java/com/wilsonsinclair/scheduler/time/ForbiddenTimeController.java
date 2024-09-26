@@ -56,13 +56,7 @@ public class ForbiddenTimeController implements Initializable {
 
     // Called when the user is adding a specific time and the OK button is clicked to finally
     // create and add this time.
-    private final EventHandler<ActionEvent> timeEvent = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-
-            addForbiddenTime();
-        }
-    };
+    private final EventHandler<ActionEvent> timeEvent = actionEvent -> addForbiddenTime();
 
     // Helper method that is used to create a forbidden time from the combo boxes and add
     // that to the ForbiddenTime field in this class. This is used in the timeEvent handler and
