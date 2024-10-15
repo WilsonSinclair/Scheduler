@@ -9,67 +9,67 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmployeeTest {
+public class EmployeeTest {
 
     @Test
-    void getName() {
+    void getNameTest() {
         Employee employee = new Employee("Wilson", true, true);
         assertEquals(employee.getName(), "Wilson");
     }
 
     @Test
-    void canClose() {
+    void canCloseTest() {
         Employee employee = new Employee("Wilson", true, true);
         assertTrue(employee.canClose());
     }
 
     @Test
-    void cannotClose() {
+    void cannotCloseTest() {
         Employee employee = new Employee("Wilson", true, false);
         assertFalse(employee.canClose());
     }
 
     @Test
-    void canOpen() {
+    void canOpenTest() {
         Employee employee = new Employee("Wilson", true, true);
         assertTrue(employee.canOpen());
     }
 
     @Test
-    void cannotOpen() {
+    void cannotOpenTest() {
         Employee employee = new Employee("Wilson", false, false);
         assertFalse(employee.canOpen());
     }
 
     @Test
-    void getEmptyForbiddenTimes() {
+    void getEmptyForbiddenTimesTest() {
         Employee wilson = new Employee("Wilson", true, true);
         assertTrue(wilson.getForbiddenTimes().isEmpty());
     }
 
     @Test
-    void getNonEmptyForbiddenTimes() {
+    void getNonEmptyForbiddenTimesTest() {
         Employee wilson = new Employee("Wilson", true, true);
         wilson.addForbiddenTime(new ForbiddenTime(DayOfWeek.SUNDAY, true));
         assertEquals(wilson.getForbiddenTimes().size(), 1);
     }
 
     @Test
-    void cannotWorkOnDayOfWeek() {
+    void cannotWorkOnDayOfWeekTest() {
         Employee wilson = new Employee("Wilson", true, true);
         wilson.addForbiddenTime(new ForbiddenTime(DayOfWeek.SUNDAY, true));
         assertFalse(wilson.canWork(DayOfWeek.SUNDAY));
     }
 
     @Test
-    void canWorkOnDayOfWeek() {
+    void canWorkOnDayOfWeekTest() {
         Employee wilson = new Employee("Wilson", true, true);
         wilson.addForbiddenTime(new ForbiddenTime(DayOfWeek.SUNDAY, true));
         assertTrue(wilson.canWork(DayOfWeek.MONDAY));
     }
 
     @Test
-    void cannotWorkOnDate() {
+    void cannotWorkOnDateTest() {
         Employee wilson = new Employee("Wilson", true, true);
         LocalDate christmas = LocalDate.of(2024, 12, 25);
         wilson.addForbiddenTime(new ForbiddenTime(christmas));
@@ -77,7 +77,7 @@ class EmployeeTest {
     }
 
     @Test
-    void canWorkOnDate() {
+    void canWorkOnDateTest() {
         Employee wilson = new Employee("Wilson", true, true);
         LocalDate birthday = LocalDate.of(2024, 12, 18);
         LocalDate christmas = LocalDate.of(2024, 12, 25);
@@ -86,7 +86,7 @@ class EmployeeTest {
     }
 
     @Test
-    void cannotWorkSpecifiedTimeOnDate() {
+    void cannotWorkSpecifiedTimeOnDateTest() {
         Employee wilson = new Employee("Wilson", true, true);
         LocalDate shiftDate = LocalDate.of(2024, 12, 18);
         LocalTime shiftStart = LocalTime.of(9, 0);
