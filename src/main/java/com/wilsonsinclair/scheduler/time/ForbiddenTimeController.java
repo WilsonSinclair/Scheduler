@@ -51,6 +51,7 @@ public class ForbiddenTimeController implements Initializable {
         @Override
         public void handle(ActionEvent event) {
             forbiddenTime.setDayOfWeek(dayOFWeekComboBox.getValue());
+            addForbiddenTime();
         }
     };
 
@@ -60,7 +61,7 @@ public class ForbiddenTimeController implements Initializable {
 
     // Helper method that is used to create a forbidden time from the combo boxes and add
     // that to the ForbiddenTime field in this class. This is used in the timeEvent handler and
-    // optionally in the datePickerEvent handler if that specific date has a time associated with it.
+    // optionally in the datePickerEvent amd dayOfWeek handler if that specific date has a time associated with it.
     private void addForbiddenTime() {
         int startHour, endHour, startMinute, endMinute;
 
@@ -160,12 +161,12 @@ public class ForbiddenTimeController implements Initializable {
                 case "Day of Week" -> {
                     forbiddenTime = new ForbiddenTime();
                     okButton.setOnAction(dayOfWeekComboBoxEvent);
-                    startTimeComboBox.setDisable(true);
-                    endTimeComboBox.setDisable(true);
-                    startMinuteComboBox.setDisable(true);
-                    endMinuteComboBox.setDisable(true);
-                    startTimeAmPmToggleSwitch.setDisable(true);
-                    endTimeAmPmToggleSwitch.setDisable(true);
+                    startTimeComboBox.setDisable(false);
+                    endTimeComboBox.setDisable(false);
+                    startMinuteComboBox.setDisable(false);
+                    endMinuteComboBox.setDisable(false);
+                    startTimeAmPmToggleSwitch.setDisable(false);
+                    endTimeAmPmToggleSwitch.setDisable(false);
                     dayOFWeekComboBox.setDisable(false);
                     datePicker.setDisable(true);
 
