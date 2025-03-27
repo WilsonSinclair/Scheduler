@@ -33,7 +33,6 @@ public class Schedule {
         StringBuilder sb = new StringBuilder();
         sb.append("Start Date: ").append(startDate.toString());
         sb.append("\nEnd Date: ").append(endDate.toString()).append("\n");
-        sb.append(scheduleTable.toString());
         return sb.toString();
     }
 }
