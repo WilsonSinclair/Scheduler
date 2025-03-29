@@ -61,7 +61,7 @@ public class ForbiddenTimeController implements Initializable {
 
     // Helper method that is used to create a forbidden time from the combo boxes and add
     // that to the ForbiddenTime field in this class. This is used in the timeEvent handler and
-    // optionally in the datePickerEvent amd dayOfWeek handler if that specific date has a time associated with it.
+    // optionally in the datePickerEvent and dayOfWeek handler if that specific date has a time associated with it.
     private void addForbiddenTime() {
         int startHour, endHour, startMinute, endMinute;
 
