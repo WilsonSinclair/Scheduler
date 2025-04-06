@@ -10,7 +10,7 @@ public class Shift {
     private final LocalTime startTime, endTime;
 
     //The employee that is assigned to this shift
-    private final Employee employee;
+    private Employee employee;
 
     public Shift(Employee employee, LocalTime startTime, LocalTime endTime) {
         this.startTime = startTime;
@@ -21,6 +21,7 @@ public class Shift {
     public LocalTime getStartTime() { return startTime; }
     public LocalTime getEndTime() { return endTime; }
     public Employee getEmployee() { return employee; }
+    public void setEmployee(Employee e) { employee = e; }
 
     @Override
     public String toString() {
