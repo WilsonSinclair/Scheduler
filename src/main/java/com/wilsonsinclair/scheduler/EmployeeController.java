@@ -127,7 +127,7 @@ public class EmployeeController implements Initializable {
         forbidden time to an Employee.
      */
     @FXML
-    private void handleAddForbiddenTimeButton(ActionEvent event) {
+    private void handleAddForbiddenTimeButton() {
         try {
 
             FXMLLoader loader = new FXMLLoader();
