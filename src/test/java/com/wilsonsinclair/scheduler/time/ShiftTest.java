@@ -24,6 +24,4 @@ public class ShiftTest {
         Shift shift = new Shift(e, LocalTime.of(9, 0), LocalTime.of(12, 0));
         assertEquals(shift.toString(), e.getName() + "\nIn: 09:00\nOut: 12:00");
     }
-
-
 }

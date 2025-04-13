@@ -2,22 +2,25 @@ package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import com.wilsonsinclair.scheduler.time.ForbiddenTimeController;
+import com.wilsonsinclair.scheduler.time.Schedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class EmployeeController implements Initializable {
+public class MainViewController implements Initializable {
 
     @FXML
     private ContextMenu employeeListViewContextMenu, forbiddenTimesListViewContextMenu;
@@ -36,6 +39,11 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private Button saveEmployeeButton, addForbiddenTImeButton;
+
+    @FXML
+    private TableView<Schedule> scheduleTable;
+
+    private static List<Schedule> schedules;
 
     @FXML
     public void loadEmployee() {
@@ -166,6 +174,15 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Simply consumes any sort events, as we don't want the user to be able to sort columns on this table.
+        scheduleTable.setOnSort(Event::consume);
+
+        schedules = Serializer.loadSchedules();
+
+        scheduleTable.getColumns().getFirst().setCellValueFactory(new PropertyValueFactory<>("Days"));
+
+        scheduleTable.getItems().add(schedules.getFirst());
 
         // Sets the Cell Factory for the items in this list view. We do this so that this list view does not use
         // the toString() implementation for Employee as this would provide unnecessary information.

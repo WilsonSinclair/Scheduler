@@ -33,10 +33,15 @@ public class ForbiddenTimeController implements Initializable {
 
     @FXML
     private DialogPane pane;
+
     private ForbiddenTime forbiddenTime;
+
     private final String[] CHOICE_BOX_VALUES = {"Certain Date", "Certain Time", "Day of Week"};
+
     private final Integer[] HOURS = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
     private final int[] MINUTES = IntStream.rangeClosed(0, 59).toArray();
+
     public ForbiddenTime getForbiddenTime() { return forbiddenTime; }
 
     /*

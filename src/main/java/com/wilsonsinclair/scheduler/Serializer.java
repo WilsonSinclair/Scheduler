@@ -1,12 +1,16 @@
 package com.wilsonsinclair.scheduler;
 
+import com.wilsonsinclair.scheduler.time.Schedule;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Serializer {
 
     private static final String EMPLOYEE_FILE = "employees.ser";
+    private static final String SCHEDULE_FILE = "schedules.ser";
 
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
@@ -30,6 +34,20 @@ public class Serializer {
         }
     }
 
+    public static void saveSchedules(List<Schedule> schedules) {
+        try {
+            FileOutputStream fos = new FileOutputStream(SCHEDULE_FILE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(schedules);
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<Employee> loadEmployees() {
         try {
             FileInputStream in = new FileInputStream(EMPLOYEE_FILE);
@@ -38,6 +56,17 @@ public class Serializer {
             return new ArrayList<>(loadedEmployees.getData());
 
         } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public static List<Schedule> loadSchedules() {
+        try {
+            FileInputStream in = new FileInputStream(SCHEDULE_FILE);
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return (List<Schedule>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();

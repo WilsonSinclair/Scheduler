@@ -2,9 +2,10 @@ package com.wilsonsinclair.scheduler.time;
 
 import com.wilsonsinclair.scheduler.Employee;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Shift {
+public class Shift implements Serializable {
 
     //The starting and ending times of this shift
     private final LocalTime startTime, endTime;
@@ -25,6 +26,6 @@ public class Shift {
 
     @Override
     public String toString() {
-        return employee.getName() + "\nIn: " + startTime.toString() + "\nOut: " + endTime.toString();
+        return employee.getName() + "\nIn: " + startTime.toString() + "\nOut: " + endTime.toString() + "\n";
     }
 }
