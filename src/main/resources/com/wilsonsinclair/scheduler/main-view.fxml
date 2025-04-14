@@ -28,7 +28,7 @@
                      <children>
                         <TableView fx:id="scheduleTable" layoutX="34.0" layoutY="31.0" prefHeight="634.0" prefWidth="602.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Employee" />
+                            <TableColumn fx:id="employeeNameColumn" prefWidth="75.0" text="Employee" />
                             <TableColumn prefWidth="75.0" text="Monday" />
                               <TableColumn prefWidth="75.0" text="Tuesday" />
                               <TableColumn prefWidth="75.0" text="Wednesday" />

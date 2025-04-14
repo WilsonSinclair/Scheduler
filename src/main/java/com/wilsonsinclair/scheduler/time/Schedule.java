@@ -1,7 +1,11 @@
 package com.wilsonsinclair.scheduler.time;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.*;
 import java.util.List;
 
 /*
@@ -10,22 +14,50 @@ import java.util.List;
  */
 public class Schedule implements Serializable {
 
-    private List<Day> days;
+    private transient ListProperty<Day> daysProperty;
 
     public Schedule() {
-        days = new ArrayList<>(7);
+        ObservableList<Day> list = FXCollections.observableArrayList();
+        daysProperty = new SimpleListProperty<>(list);
     }
 
-    public List<Day> getDays() {
-        return days;
+    public List<Day> getDaysProperty() {
+        return daysProperty().get();
     }
 
+    public ListProperty<Day> daysProperty() {
+        if (daysProperty == null) daysProperty = new SimpleListProperty<>();
+        return daysProperty;
+    }
 
+    @Serial
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        if (daysProperty == null || daysProperty.getValue() == null) {
+            // Write the size of the List as 0.
+            out.writeInt(0);
+        }
+        else {
+            out.writeInt(daysProperty.size());
+            // write the size of the list
+            for (Object o : daysProperty.getValue()) {
+                out.writeObject(o);
+            }
+        }
+    }
 
-    @Override
+    @Serial
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        daysProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+        int size = in.readInt(); // the size of our list
+        for (int i = 0; i < size; i++) { // we read until the end of the list
+            daysProperty.add((Day) in.readObject());
+        }
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Day day : days) {
+        for (Day day : getDaysProperty()) {
             sb.append(day);
         }
         return sb.toString();

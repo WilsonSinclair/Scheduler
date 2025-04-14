@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class ScheduleTest {
 
     private static final List<Employee> employees = Serializer.loadEmployees();
@@ -24,7 +22,8 @@ public class ScheduleTest {
         day.getShifts().addAll(Arrays.asList(s1, s2, s3));
 
         Schedule schedule = new Schedule();
-        schedule.getDays().add(day);
+        schedule.getDaysProperty().add(day);
+        Serializer.saveSchedules(List.of(schedule));
         System.out.println(schedule);
     }
 }
