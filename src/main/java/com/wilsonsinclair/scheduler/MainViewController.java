@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -204,6 +203,8 @@ public class MainViewController implements Initializable {
 
         // Simply consumes any sort events, as we don't want the user to be able to sort columns on this table.
         scheduleTable.setOnSort(Event::consume);
+
+        employeeNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().toString()));
 
         schedules = Serializer.loadSchedules();
         scheduleTable.getItems().add(schedules.getFirst());
