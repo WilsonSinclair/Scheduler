@@ -1,6 +1,5 @@
 package com.wilsonsinclair.scheduler.time;
 
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -63,9 +62,5 @@ public class ScheduleTable {
 
     public Shift getShift() {
         return shiftProperty().get();
-    }
-
-    public String getShiftEmployeeName() {
-        return getShift().employeeProperty().getName();
     }
 }
