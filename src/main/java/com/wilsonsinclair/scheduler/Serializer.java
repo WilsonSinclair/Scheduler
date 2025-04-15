@@ -30,6 +30,7 @@ public class Serializer {
             fos.close();
 
         } catch (IOException e) {
+            System.err.println("Error saving employees to a file.");
             e.printStackTrace();
         }
     }
@@ -41,8 +42,6 @@ public class Serializer {
             oos.writeObject(schedules);
             oos.close();
             fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

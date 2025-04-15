@@ -21,7 +21,7 @@ public class Schedule implements Serializable {
         daysProperty = new SimpleListProperty<>(list);
     }
 
-    public List<Day> getDaysProperty() {
+    public List<Day> getDays() {
         return daysProperty().get();
     }
 
@@ -57,7 +57,7 @@ public class Schedule implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Day day : getDaysProperty()) {
+        for (Day day : getDays()) {
             sb.append(day);
         }
         return sb.toString();

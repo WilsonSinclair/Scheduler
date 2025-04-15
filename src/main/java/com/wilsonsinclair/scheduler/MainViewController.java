@@ -3,6 +3,7 @@ package com.wilsonsinclair.scheduler;
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
 import com.wilsonsinclair.scheduler.time.ForbiddenTimeController;
 import com.wilsonsinclair.scheduler.time.Schedule;
+import com.wilsonsinclair.scheduler.time.ScheduleTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,12 +42,14 @@ public class MainViewController implements Initializable {
     private Button saveEmployeeButton, addForbiddenTImeButton;
 
     @FXML
-    private TableView<Schedule> scheduleTable;
+    private TableView<ScheduleTable> scheduleTable;
 
     @FXML
-    private TableColumn<Schedule, String> employeeNameColumn;
+    private TableColumn<ScheduleTable, String> employeeNameColumn;
 
     private static List<Schedule> schedules;
+
+    private static ScheduleTable scheduleTableWrapper;
 
     @FXML
     public void loadEmployee() {
@@ -204,10 +207,12 @@ public class MainViewController implements Initializable {
         // Simply consumes any sort events, as we don't want the user to be able to sort columns on this table.
         scheduleTable.setOnSort(Event::consume);
 
-        employeeNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().toString()));
+        employeeNameColumn.setCellValueFactory(data -> data.getValue().getShift().getEmployee().nameProperty());
 
         schedules = Serializer.loadSchedules();
-        scheduleTable.getItems().add(schedules.getFirst());
+
+        scheduleTableWrapper = new ScheduleTable(schedules.getFirst());
+        scheduleTable.getItems().add(scheduleTableWrapper);
     }
 
     private Employee getSelectedEmployee() {

@@ -22,7 +22,7 @@ public class ScheduleTest {
         day.getShifts().addAll(Arrays.asList(s1, s2, s3));
 
         Schedule schedule = new Schedule();
-        schedule.getDaysProperty().add(day);
+        schedule.getDays().add(day);
         Serializer.saveSchedules(List.of(schedule));
         System.out.println(schedule);
     }
