@@ -1,7 +1,15 @@
 package com.wilsonsinclair.scheduler.time;
 
+import com.wilsonsinclair.scheduler.Employee;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /*
     The purpose of this class is to provide a wrapper for the Schedule, Day and Shift classes, so that their data
@@ -10,13 +18,26 @@ import javafx.beans.property.SimpleObjectProperty;
 public class ScheduleTable {
 
     private ObjectProperty<Schedule> schedule;
-    private ObjectProperty<Day> day;
-    private ObjectProperty<Shift> shift;
+    private ListProperty<Day> days;
+    private ListProperty<Shift> shifts;
+    private static ListProperty<Employee> employees;
 
-    public ScheduleTable(Schedule s) {
+
+    // Map each Employee to a list of shifts that belong to them.
+    private Map<Employee, List<Shift>> employeeShiftMap;
+
+    public ScheduleTable(Schedule s, List<Employee> e) {
+        setEmployees(e);
         setSchedule(s);
-        setDay(s.getDays().getFirst());
-        setShift(getDay().getShifts().getFirst());
+        setDays(s.getDays());
+        setShifts(this.getDays().stream().flatMap(day -> day.getShifts().stream()).collect(Collectors.toList()));
+    }
+
+    public ListProperty<Employee> employeeProperty() {
+        if (employees == null || employees.getValue() == null) {
+            employees = new SimpleListProperty<>();
+        }
+        return employees;
     }
 
     public ObjectProperty<Schedule> scheduleProperty() {
@@ -26,41 +47,46 @@ public class ScheduleTable {
         return schedule;
     }
 
-    public ObjectProperty<Day> dayProperty() {
-        if (day == null || day.getValue() == null) {
-            day = new SimpleObjectProperty<>();
+    public ListProperty<Day> daysProperty() {
+        if (days == null || days.getValue() == null) {
+            days = new SimpleListProperty<>();
         }
-        return day;
+        return days;
     }
 
-    public ObjectProperty<Shift> shiftProperty() {
-        if (shift == null || shift.getValue() == null) {
-            shift = new SimpleObjectProperty<>();
+    public ListProperty<Shift> shiftProperty() {
+        if (shifts == null || shifts.getValue() == null) {
+            shifts = new SimpleListProperty<>();
         }
-        return shift;
+        return shifts;
     }
 
     public void setSchedule(Schedule s) {
         scheduleProperty().set(s);
     }
 
-    public void setDay(Day d){
-        dayProperty().set(d);
+    public void setDays(List<Day> d){
+        daysProperty().set(FXCollections.observableArrayList(d));
     }
 
-    public void setShift(Shift s) {
-        shiftProperty().set(s);
+    public void setShifts(List<Shift> s) {
+        shiftProperty().set(FXCollections.observableArrayList(s));
+        getShifts().forEach(System.out::println);
+    }
+
+    public void setEmployees(List<Employee> e) {
+        employeeProperty().set(FXCollections.observableArrayList(e));
     }
 
     public Schedule getSchedule() {
         return scheduleProperty().get();
     }
 
-    public Day getDay() {
-        return dayProperty().get();
+    public List<Day> getDays() {
+        return daysProperty().get();
     }
 
-    public Shift getShift() {
+    public List<Shift> getShifts() {
         return shiftProperty().get();
     }
 }

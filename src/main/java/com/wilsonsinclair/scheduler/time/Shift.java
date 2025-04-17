@@ -69,6 +69,6 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
-        return employee.getName() + "\nIn: " + startTime.toString() + "\nOut: " + endTime.toString() + "\n";
+        return getEmployee().getName() + "\nIn: " + getStartTime().toString() + "\nOut: " + getEndTime().toString() + "\n";
     }
 }
