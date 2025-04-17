@@ -22,7 +22,6 @@ public class ScheduleTable {
     private ListProperty<Shift> shifts;
     private static ListProperty<Employee> employees;
 
-
     // Map each Employee to a list of shifts that belong to them.
     private Map<Employee, List<Shift>> employeeShiftMap;
 
@@ -71,7 +70,6 @@ public class ScheduleTable {
 
     public void setShifts(List<Shift> s) {
         shiftProperty().set(FXCollections.observableArrayList(s));
-        getShifts().forEach(System.out::println);
     }
 
     public void setEmployees(List<Employee> e) {

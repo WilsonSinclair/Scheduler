@@ -1,7 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.*;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -40,9 +40,14 @@ public class MainViewController implements Initializable {
     private Button saveEmployeeButton, addForbiddenTImeButton;
 
     @FXML
-    private TableView2<ScheduleTable> scheduleTable;
+    private TableView2<Employee> scheduleTable;
+
+    @FXML
+    private TableColumn<Employee, String> employeeNameColumn;
 
     private static List<Schedule> schedules;
+
+    private static Schedule schedule;
 
     private static ScheduleTable scheduleTableWrapper;
 
@@ -203,9 +208,15 @@ public class MainViewController implements Initializable {
         scheduleTable.setOnSort(Event::consume);
 
         schedules = Serializer.loadSchedules();
+        if (schedules.isEmpty()) {
+            schedule = new Schedule();
+        }
+        else {
+            schedule = schedules.getFirst();
+        }
 
-        scheduleTableWrapper = new ScheduleTable(schedules.getFirst(), employees);
-        scheduleTable.getItems().add(scheduleTableWrapper);
+        employeeNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
+        scheduleTable.getItems().addAll(FXCollections.observableArrayList(employees));
     }
 
     private Employee getSelectedEmployee() {

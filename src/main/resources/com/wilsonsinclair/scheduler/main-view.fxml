@@ -26,8 +26,9 @@
             <content>
               <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                      <children>
-                        <TableView2 fx:id="scheduleTable" layoutX="430.0" layoutY="208.0" prefHeight="419.0" prefWidth="526.0" rowHeaderVisible="true" rowHeaderWidth="70.0">
+                        <TableView2 fx:id="scheduleTable" layoutX="401.0" layoutY="208.0" prefHeight="419.0" prefWidth="602.0" rowHeaderWidth="70.0">
                            <columns>
+                              <TableColumn fx:id="employeeNameColumn" prefWidth="75.0" text="Employee" />
                               <TableColumn prefWidth="75.0" text="Monday" />
                               <TableColumn prefWidth="75.0" text="Tuesday" />
                               <TableColumn prefWidth="75.0" text="Wednesday" />
