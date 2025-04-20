@@ -1,7 +1,6 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.*;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -45,11 +44,12 @@ public class MainViewController implements Initializable {
     @FXML
     private TableColumn<Employee, String> employeeNameColumn;
 
+    @FXML
+    private TableColumn<Employee, Shift> mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
+
     private static List<Schedule> schedules;
 
     private static Schedule schedule;
-
-    private static ScheduleTable scheduleTableWrapper;
 
     @FXML
     public void loadEmployee() {
@@ -209,14 +209,22 @@ public class MainViewController implements Initializable {
 
         schedules = Serializer.loadSchedules();
         if (schedules.isEmpty()) {
-            schedule = new Schedule();
+            schedule = new Schedule(employees);
         }
         else {
             schedule = schedules.getFirst();
         }
 
         employeeNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
-        scheduleTable.getItems().addAll(FXCollections.observableArrayList(employees));
+        mondayColumn.setCellValueFactory(data -> data.getValue().mondayShiftProperty());
+        tuesdayColumn.setCellValueFactory(data -> data.getValue().tuesdayShiftProperty());
+        wednesdayColumn.setCellValueFactory(data -> data.getValue().wednesdayShiftProperty());
+        thursdayColumn.setCellValueFactory(data -> data.getValue().thursdayShiftProperty());
+        fridayColumn.setCellValueFactory(data -> data.getValue().fridayShiftProperty());
+        saturdayColumn.setCellValueFactory(data -> data.getValue().saturdayShiftProperty());
+        sundayColumn.setCellValueFactory(data -> data.getValue().sundayShiftProperty());
+
+        scheduleTable.getItems().addAll(FXCollections.observableArrayList(schedule.employeeListProperty()));
     }
 
     private Employee getSelectedEmployee() {

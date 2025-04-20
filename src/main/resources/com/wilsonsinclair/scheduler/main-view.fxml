@@ -29,13 +29,13 @@
                         <TableView2 fx:id="scheduleTable" layoutX="401.0" layoutY="208.0" prefHeight="419.0" prefWidth="602.0" rowHeaderWidth="70.0">
                            <columns>
                               <TableColumn fx:id="employeeNameColumn" prefWidth="75.0" text="Employee" />
-                              <TableColumn prefWidth="75.0" text="Monday" />
-                              <TableColumn prefWidth="75.0" text="Tuesday" />
-                              <TableColumn prefWidth="75.0" text="Wednesday" />
-                              <TableColumn prefWidth="75.0" text="Thursday" />
-                              <TableColumn prefWidth="75.0" text="Friday" />
-                              <TableColumn prefWidth="75.0" text="Saturday" />
-                              <TableColumn prefWidth="75.0" text="Sunday" />
+                              <TableColumn fx:id="mondayColumn" prefWidth="75.0" text="Monday" />
+                              <TableColumn fx:id="tuesdayColumn" prefWidth="75.0" text="Tuesday" />
+                              <TableColumn fx:id="wednesdayColumn" prefWidth="75.0" text="Wednesday" />
+                              <TableColumn fx:id="thursdayColumn" prefWidth="75.0" text="Thursday" />
+                              <TableColumn fx:id="fridayColumn" prefWidth="75.0" text="Friday" />
+                              <TableColumn fx:id="saturdayColumn" prefWidth="75.0" text="Saturday" />
+                              <TableColumn fx:id="sundayColumn" prefWidth="75.0" text="Sunday" />
                            </columns>
                         </TableView2>
                      </children></AnchorPane>

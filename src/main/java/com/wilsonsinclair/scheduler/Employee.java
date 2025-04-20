@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.time.Shift;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.util.Callback;
 
 /*
@@ -25,6 +27,17 @@ public class Employee implements Serializable {
     private transient BooleanProperty isOpener;
     private transient BooleanProperty isCloser;
 
+    // Shifts that are assigned to the employee
+    private transient ListProperty<Shift> assignedShifts;
+
+    private transient ObjectProperty<Shift> mondayShift;
+    private transient ObjectProperty<Shift> tuesdayShift;
+    private transient ObjectProperty<Shift> wednesdayShift;
+    private transient ObjectProperty<Shift> thursdayShift;
+    private transient ObjectProperty<Shift> fridayShift;
+    private transient ObjectProperty<Shift> saturdayShift;
+    private transient ObjectProperty<Shift> sundayShift;
+
     // A list of all the times an employee cannot work
     private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
@@ -33,6 +46,13 @@ public class Employee implements Serializable {
         setCloser(isCloser);
         setOpener(isOpener);
         forbiddenTimes = new ArrayList<>();
+    }
+
+    public final ListProperty<Shift> assignedShiftsProperty() {
+        if (assignedShifts == null || assignedShifts.getValue() == null) {
+            assignedShifts = new SimpleListProperty<>(FXCollections.observableArrayList());
+        }
+        return assignedShifts;
     }
 
     public final StringProperty nameProperty() {
@@ -56,8 +76,56 @@ public class Employee implements Serializable {
         return isCloser;
     }
 
+    public final ObjectProperty<Shift> mondayShiftProperty() {
+        if (mondayShift == null || mondayShift.getValue() == null) {
+            mondayShift = new SimpleObjectProperty<>();
+        }
+        return mondayShift;
+    }
 
-    public void setForbiddenTimes(List<ForbiddenTime> times) {
+    public final ObjectProperty<Shift> tuesdayShiftProperty() {
+        if (tuesdayShift == null || tuesdayShift.getValue() == null) {
+            tuesdayShift = new SimpleObjectProperty<>();
+        }
+        return tuesdayShift;
+    }
+
+    public final ObjectProperty<Shift> wednesdayShiftProperty() {
+        if (wednesdayShift == null || wednesdayShift.getValue() == null) {
+            wednesdayShift = new SimpleObjectProperty<>();
+        }
+        return wednesdayShift;
+    }
+
+    public final ObjectProperty<Shift> thursdayShiftProperty() {
+        if (thursdayShift == null || thursdayShift.getValue() == null) {
+            thursdayShift = new SimpleObjectProperty<>();
+        }
+        return thursdayShift;
+    }
+
+    public final ObjectProperty<Shift> fridayShiftProperty() {
+        if (fridayShift == null || fridayShift.getValue() == null) {
+            fridayShift = new SimpleObjectProperty<>();
+        }
+        return fridayShift;
+    }
+
+    public final ObjectProperty<Shift> saturdayShiftProperty() {
+        if (saturdayShift == null || saturdayShift.getValue() == null) {
+            saturdayShift = new SimpleObjectProperty<>();
+        }
+        return saturdayShift;
+    }
+
+    public final ObjectProperty<Shift> sundayShiftProperty() {
+        if (sundayShift == null || sundayShift.getValue() == null) {
+            sundayShift = new SimpleObjectProperty<>();
+        }
+        return sundayShift;
+    }
+
+        public void setForbiddenTimes(List<ForbiddenTime> times) {
         forbiddenTimes = new ArrayList<>(times);
     }
 
@@ -89,8 +157,54 @@ public class Employee implements Serializable {
         return openerProperty().get();
     }
 
+    public List<Shift> getAssignedShifts() {
+        return assignedShiftsProperty().get();
+    }
+
+    public void setMondayShift(Shift s) {
+        mondayShiftProperty().set(s);
+    }
+
+    public void setTuesdayShift(Shift s) {
+        tuesdayShiftProperty().set(s);
+    }
+
+    public void setWednesdayShift(Shift s) {
+        wednesdayShiftProperty().set(s);
+    }
+
+    public void setThursdayShift(Shift s) {
+        thursdayShiftProperty().set(s);
+    }
+
+    public void setFridayShift(Shift s) {
+        fridayShiftProperty().set(s);
+    }
+
+    public void setSaturdayShift(Shift s) {
+        saturdayShiftProperty().set(s);
+    }
+
+    public void setSundayShift(Shift s) {
+        sundayShiftProperty().set(s);
+    }
+
     public void addForbiddenTime(ForbiddenTime time) {
         forbiddenTimes.add(time);
+    }
+
+    public void assignShift(Shift s) {
+        getAssignedShifts().add(s);
+        switch (s.dateProperty().getValue().getDayOfWeek()) {
+            case MONDAY -> setMondayShift(s);
+            case TUESDAY -> setTuesdayShift(s);
+            case WEDNESDAY -> setWednesdayShift(s);
+            case THURSDAY -> setThursdayShift(s);
+            case FRIDAY -> setFridayShift(s);
+            case SATURDAY -> setSaturdayShift(s);
+            case SUNDAY -> setSundayShift(s);
+            default -> System.err.println("Shift has no day of week associated with it."); // Should never get here
+        }
     }
 
     public boolean canWork(LocalDate date) {
@@ -132,14 +246,30 @@ public class Employee implements Serializable {
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
         out.writeObject(getForbiddenTimes());
+
+        // writing assigned shifts
+        int size = assignedShiftsProperty().size();
+        out.writeInt(size);
+        for (int i = 0; i < size; i++) {
+            for (Shift s : assignedShiftsProperty()) {
+                out.writeObject(s);
+            }
+        }
     }
 
     @Serial
-    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-        nameProperty().set(s.readUTF());
-        openerProperty().set(s.readBoolean());
-        closerProperty().set(s.readBoolean());
-        forbiddenTimes = (ArrayList<ForbiddenTime>) s.readObject();
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        nameProperty().set(in.readUTF());
+        openerProperty().set(in.readBoolean());
+        closerProperty().set(in.readBoolean());
+        forbiddenTimes = (ArrayList<ForbiddenTime>) in.readObject();
+
+        // reading assigned shifts
+        int size = in.readInt();
+        assignedShifts = new SimpleListProperty<>(FXCollections.observableArrayList());
+        for (int i = 0; i < size; i++) {
+            assignShift((Shift) in.readObject());
+        }
     }
 
     @Override

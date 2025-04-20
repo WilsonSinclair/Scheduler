@@ -1,5 +1,6 @@
 package com.wilsonsinclair.scheduler.time;
 
+import com.wilsonsinclair.scheduler.Employee;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -15,10 +16,12 @@ import java.util.List;
 public class Schedule implements Serializable {
 
     private transient ListProperty<Day> daysProperty;
+    private transient ListProperty<Employee> employees;
 
-    public Schedule() {
+    public Schedule(List<Employee> e) {
         ObservableList<Day> list = FXCollections.observableArrayList();
         daysProperty = new SimpleListProperty<>(list);
+        setEmployees(e);
     }
 
     public List<Day> getDays() {
@@ -30,8 +33,20 @@ public class Schedule implements Serializable {
         return daysProperty;
     }
 
+    public ListProperty<Employee> employeeListProperty() {
+        if (employees == null || employees.getValue() == null) {
+            employees = new SimpleListProperty<>();
+        }
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> e) {
+        employeeListProperty().set(FXCollections.observableArrayList(e));
+    }
+
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
+        // writing the list of days
         if (daysProperty == null || daysProperty.getValue() == null) {
             // Write the size of the List as 0.
             out.writeInt(0);
@@ -43,22 +58,41 @@ public class Schedule implements Serializable {
                 out.writeObject(o);
             }
         }
+
+        // writing the list of employees
+        if (employees == null || employees.getValue() == null) {
+            out.writeInt(0);
+        }
+        else {
+            out.writeInt(employees.size());
+            for (Employee e : employees.getValue()) {
+                out.writeObject(e);
+            }
+        }
     }
 
     @Serial
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         daysProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+        employees = new SimpleListProperty<>(FXCollections.observableArrayList());
         int size = in.readInt(); // the size of our list
         for (int i = 0; i < size; i++) { // we read until the end of the list
             daysProperty.add((Day) in.readObject());
+        }
+
+        size = in.readInt();
+        for (int i = 0; i < size; i++) {
+            employees.add((Employee) in.readObject());
         }
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Day day : getDays()) {
-            sb.append(day);
+        for (Employee e : employeeListProperty()) {
+            for (Shift s : e.getAssignedShifts()) {
+                sb.append(s);
+            }
         }
         return sb.toString();
     }
