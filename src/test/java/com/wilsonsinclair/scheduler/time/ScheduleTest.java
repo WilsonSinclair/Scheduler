@@ -16,7 +16,7 @@ public class ScheduleTest {
     void toStringTest() {
         Shift s1 = new Shift(employees.get(0), LocalDate.now(), LocalTime.of(8, 0), LocalTime.of(14, 0));
 
-        Schedule schedule = new Schedule(employees);
+        Schedule schedule = new Schedule(employees, LocalDate.now());
         schedule.employeeListProperty().getValue().getFirst().assignShift(s1);
 
         Serializer.saveSchedules(List.of(schedule));

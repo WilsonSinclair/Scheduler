@@ -11,7 +11,7 @@ public class Serializer {
 
     private static final String EMPLOYEE_FILE = "employees.ser";
     private static final String SCHEDULE_FILE = "schedules.ser";
-
+    
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
         to only have to open 2 streams instead of 2 * number of employees.

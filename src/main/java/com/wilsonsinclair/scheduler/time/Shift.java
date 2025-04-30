@@ -83,6 +83,6 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
-        return "In: " + getStartTime().toString() + "\nOut: " + getEndTime().toString() + "\n";
+        return getStartTime().toString() + "\n" + getEndTime().toString() + "\n";
     }
 }

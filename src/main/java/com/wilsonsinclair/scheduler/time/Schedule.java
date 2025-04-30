@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.List;
 
 /*
@@ -18,10 +19,13 @@ public class Schedule implements Serializable {
     private transient ListProperty<Day> daysProperty;
     private transient ListProperty<Employee> employees;
 
-    public Schedule(List<Employee> e) {
+    private final LocalDate scheduleStartDate;
+
+    public Schedule(List<Employee> e, LocalDate scheduleStartDate) {
         ObservableList<Day> list = FXCollections.observableArrayList();
         daysProperty = new SimpleListProperty<>(list);
         setEmployees(e);
+        this.scheduleStartDate = scheduleStartDate;
     }
 
     public List<Day> getDays() {
@@ -46,6 +50,8 @@ public class Schedule implements Serializable {
 
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
         // writing the list of days
         if (daysProperty == null || daysProperty.getValue() == null) {
             // Write the size of the List as 0.
@@ -88,12 +94,6 @@ public class Schedule implements Serializable {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Employee e : employeeListProperty()) {
-            for (Shift s : e.getAssignedShifts()) {
-                sb.append(s);
-            }
-        }
-        return sb.toString();
+        return scheduleStartDate.toString() + " - " + scheduleStartDate.plusDays(7);
     }
 }
