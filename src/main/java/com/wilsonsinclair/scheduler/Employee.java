@@ -26,6 +26,7 @@ public class Employee implements Serializable {
     private transient StringProperty name;
     private transient BooleanProperty isOpener;
     private transient BooleanProperty isCloser;
+    private transient BooleanProperty isManager;
 
     // Shifts that are assigned to the employee
     private transient ListProperty<Shift> assignedShifts;
@@ -41,10 +42,11 @@ public class Employee implements Serializable {
     // A list of all the times an employee cannot work
     private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
-    public Employee(String name, boolean isOpener, boolean isCloser) {
+    public Employee(String name, boolean isOpener, boolean isCloser, boolean isManager) {
         setName(name);
         setCloser(isCloser);
         setOpener(isOpener);
+        setManager(isManager);
         forbiddenTimes = new ArrayList<>();
     }
 
@@ -75,7 +77,13 @@ public class Employee implements Serializable {
         }
         return isCloser;
     }
-
+    
+    public final BooleanProperty managerProperty() {
+        if (isManager == null) {
+            isManager = new SimpleBooleanProperty();
+        }
+        return isManager;
+    }
     public final ObjectProperty<Shift> mondayShiftProperty() {
         if (mondayShift == null || mondayShift.getValue() == null) {
             mondayShift = new SimpleObjectProperty<>();
@@ -155,6 +163,14 @@ public class Employee implements Serializable {
 
     public boolean canOpen() {
         return openerProperty().get();
+    }
+    
+    public boolean isManager() {
+        return managerProperty().get();
+    }
+    
+    public void setManager(boolean isManager) {
+        managerProperty().set(isManager);
     }
 
     public List<Shift> getAssignedShifts() {
@@ -245,6 +261,7 @@ public class Employee implements Serializable {
         out.writeUTF(getName());
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
+        out.writeBoolean(isManager());
         out.writeObject(getForbiddenTimes());
 
         // writing assigned shifts
@@ -262,6 +279,7 @@ public class Employee implements Serializable {
         nameProperty().set(in.readUTF());
         openerProperty().set(in.readBoolean());
         closerProperty().set(in.readBoolean());
+        managerProperty().set(in.readBoolean());
         forbiddenTimes = (ArrayList<ForbiddenTime>) in.readObject();
 
         // reading assigned shifts

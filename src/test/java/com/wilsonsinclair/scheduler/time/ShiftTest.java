@@ -23,6 +23,6 @@ public class ShiftTest {
     void toStringTest() {
         Employee e = getRandomEmployee();
         Shift shift = new Shift(e, LocalDate.now(), LocalTime.of(9, 0), LocalTime.of(12, 0));
-        assertEquals("In: 09:00\nOut: 12:00\n", shift.toString());
+        assertEquals("09:00\n12:00\n", shift.toString());
     }
 }

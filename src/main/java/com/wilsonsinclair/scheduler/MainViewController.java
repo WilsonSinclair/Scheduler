@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -37,7 +38,7 @@ public class MainViewController implements Initializable {
     private TextField employeeName;
 
     @FXML
-    private RadioButton isOpenerButton, isCloserButton;
+    private RadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
     private Button saveEmployeeButton, addForbiddenTImeButton;
@@ -74,15 +75,17 @@ public class MainViewController implements Initializable {
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
         addForbiddenTImeButton.setDisable(false);
+        isManagerButton.setDisable(false);
 
         saveEmployeeButton.setDisable(true);
 
         employeeName.setText(employee.getName());
         isOpenerButton.setSelected(employee.canOpen());
         isCloserButton.setSelected(employee.canClose());
-
+        isManagerButton.setSelected(employee.isManager());
+        
         ObservableList<ForbiddenTime> forbiddenTimes =
-        FXCollections.observableArrayList(employee.getForbiddenTimes());
+            FXCollections.observableArrayList(employee.getForbiddenTimes());
         forbiddenTimesListView.setItems(forbiddenTimes);
     }
 
@@ -106,7 +109,9 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void addEmployee() {
-        employeeListView.getItems().add(new Employee("Employee", false, false));
+        employeeListView
+            .getItems()
+            .add(new Employee("Employee", false, false, false));
         employeeListView.getSelectionModel().selectLast();
         loadEmployee();
     }
@@ -238,7 +243,7 @@ public class MainViewController implements Initializable {
             }
         );
         ObservableList<Employee> employeeList =
-        FXCollections.observableArrayList(Employee.extractor());
+            FXCollections.observableArrayList(Employee.extractor());
         ArrayList<Employee> employees = Serializer.loadEmployees();
         employeeList.addAll(employees);
         employeeListView.setItems(employeeList);
@@ -252,6 +257,7 @@ public class MainViewController implements Initializable {
             // If there are no previously saved schedules, we create a blank one as a placeholder.
             schedule = new Schedule(new ArrayList<>(), LocalDate.now());
         } else {
+            //otherwise, we load the first schedule
             schedule = schedules.getFirst();
         }
         scheduleComboBox.setOnAction(event -> {

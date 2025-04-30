@@ -98,6 +98,7 @@
                                        <effect>
                                           <DropShadow blurType="ONE_PASS_BOX" />
                                        </effect></Button>
+                                    <RadioButton fx:id="isManagerButton" disable="true" layoutX="616.0" layoutY="18.0" mnemonicParsing="false" text="Manager" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
