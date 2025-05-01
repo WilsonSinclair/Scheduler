@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /*
@@ -94,6 +95,7 @@ public class Schedule implements Serializable {
     }
 
     public String toString() {
-        return scheduleStartDate.toString() + " - " + scheduleStartDate.plusDays(7);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        return format.format(scheduleStartDate) + " - " + format.format(scheduleStartDate.plusDays(7));
     }
 }
