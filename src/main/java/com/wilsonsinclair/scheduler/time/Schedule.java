@@ -25,6 +25,9 @@ public class Schedule implements Serializable {
 
     private final LocalDate scheduleStartDate;
 
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     public Schedule(List<Employee> e, LocalDate scheduleStartDate) {
         this.scheduleStartDate = scheduleStartDate;
         ObservableList<Day> list = FXCollections.observableArrayList();
@@ -141,16 +144,36 @@ public class Schedule implements Serializable {
     }
     
     /*
-    This method checks if a given day has the required number of closer shifts.
+    This method checks if a given day has the required number of closing shifts.
     The number of closers required may change depending on the store's sales volume.
     */
-    public boolean hasClosers(Day day, int numClosers) {
+    public boolean hasClosers(Day day, int num) {
         int count = 0;
         for (Shift shift : day.shiftsProperty()) {
             Shift.ShiftType shiftType = shift.getType();
-            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
+            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE || shiftType == Shift.ShiftType.LUNCH_TO_CLOSE) {
                 count++;
-                if (count >= numClosers) {
+                if (count >= num) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /*
+    This method, similar to the ones above, checks if a given Day has enough lunch shifts. The desired number
+    may also change according to a store's sales volume.
+     */
+    public boolean hasLunchers(Day day, int num) {
+        int count = 0;
+        for (Shift shift : day.shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+
+            // All others shift types would be here during lunch, with the exception being a shift that is exclusively a closer.
+            if (!shiftType.equals(Shift.ShiftType.CLOSER)) {
+                count++;
+                if (count >= num) {
                     return true;
                 }
             }

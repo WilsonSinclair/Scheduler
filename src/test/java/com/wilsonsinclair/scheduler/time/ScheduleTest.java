@@ -25,7 +25,8 @@ public class ScheduleTest {
         }
         
         Day day = schedule.getDays().getFirst();
-        
+
+        // Add an open to 2 shift. Expect true.
         day.addShift(new Shift(testManager, date, Shift.OPENING_TIME, LocalTime.of(14, 0)));
         assertTrue(schedule.hasOpener(schedule.getDays().getFirst()));
     }
@@ -49,5 +50,29 @@ public class ScheduleTest {
         // Test with two closers
         day.addShift(new Shift(testShiftLead, date, LocalTime.of(14, 0), Shift.CLOSING_TIME));
         assertTrue(schedule.hasClosers(day, 2));
+
+        // Test with 10 closers, which we expect to return false since we only have 2 closing shifts assigned.
+        assertFalse(schedule.hasClosers(day, 10));
+    }
+
+    @Test
+    void hasLunchersTest() {
+        LocalDate date = LocalDate.now();
+        Schedule schedule = new Schedule(List.of(testManager, testShiftLead), date);
+
+        // Test with empty schedule. No shifts are assigned. Expect false. Assume 3 for lunch.
+        for (Day day : schedule.daysProperty()) {
+            assertFalse(schedule.hasLunchers(day, 3));
+        }
+
+        Day day = schedule.getDays().getFirst();
+
+        // Add only an opening Shift and expect 2 for lunch. Expect false.
+        day.addShift(new Shift(testManager, date, Shift.OPENING_TIME, LocalTime.of(14, 0)));
+        assertFalse(schedule.hasLunchers(day, 2));
+
+        // Now add a 10-2 shift. Still expect 2 for lunch. Expect true.
+        day.addShift(new Shift(testShiftLead, date, LocalTime.of(10, 0), LocalTime.of(14, 0)));
+        assertTrue(schedule.hasLunchers(day, 2));
     }
 }

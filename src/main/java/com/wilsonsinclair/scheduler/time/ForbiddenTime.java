@@ -3,14 +3,16 @@ package com.wilsonsinclair.scheduler.time;
 import java.io.Serial;
 import java.io.Serializable;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 /*
-    A class to represent a time that a shift can not occur.
+    A class to represent a tme that a shift can not occur.
     This time can span the entire day, a portion of it, or the same time for every day of the week.
  */
 public class ForbiddenTime implements Serializable {
@@ -44,6 +46,22 @@ public class ForbiddenTime implements Serializable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.isRepeating = isRepeating;
+    }
+
+    /*
+        The nth Day of the week of the month. For example, can't work the 1st Thursday of the month
+        or can't work the 1st and 3rd Monday of the month. N must be in the range (0, 5] as a month
+        cannot have <= 0 or > 5 occurrences of a specified day of the week.
+     */
+    public ForbiddenTime(DayOfWeek dayOfWeek, int n, Month month, Year year) {
+        if (n <= 0 || n > 5) {
+            throw new IllegalArgumentException("n must be in the range (0, 5]");
+        }
+        else {
+            this.date = YearMonth.of(year.getValue(), month)
+                    .atDay(1)
+                    .with(TemporalAdjusters.dayOfWeekInMonth(n, dayOfWeek));
+        }
     }
 
     /*

@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 public class Day implements Serializable {
     
     private final LocalDate date;
-    private ListProperty<Shift> shiftsProperty;
+    private transient ListProperty<Shift> shiftsProperty;
 
     public Day(LocalDate date) {
         this.date = date;

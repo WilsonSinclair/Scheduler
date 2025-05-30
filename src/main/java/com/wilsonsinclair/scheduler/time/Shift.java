@@ -32,7 +32,7 @@ public class Shift implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     
-    private ShiftType shiftType;
+    private transient ShiftType shiftType;
 
     public Shift(Employee employee, LocalDate date, LocalTime startTime, LocalTime endTime) {
         setStartTime(startTime);

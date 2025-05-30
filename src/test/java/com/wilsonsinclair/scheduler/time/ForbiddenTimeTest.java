@@ -2,10 +2,7 @@ package com.wilsonsinclair.scheduler.time;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +12,32 @@ class ForbiddenTimeTest {
     void getRepeatingDayOfWeekTest() {
         ForbiddenTime time = new ForbiddenTime(DayOfWeek.SUNDAY, true);
         assertTrue(time.getDayOfWeek().isPresent());
-        assertEquals(time.getDayOfWeek().get(), DayOfWeek.SUNDAY);
+        assertEquals(DayOfWeek.SUNDAY, time.getDayOfWeek().get());
         assertTrue(time.isRepeating());
+    }
+
+    @Test
+    void thirdThursdayOfJanuary2025Test() {
+        ForbiddenTime time = new ForbiddenTime(DayOfWeek.THURSDAY, 3, Month.JANUARY, Year.of(2025));
+        assertTrue(time.getDate().isPresent());
+        assertEquals(LocalDate.of(2025, Month.JANUARY, 16), time.getDate().get());
+    }
+
+    @Test
+    void fifthMondayOfMay2023Test() {
+        ForbiddenTime time = new ForbiddenTime(DayOfWeek.MONDAY, 5, Month.MAY, Year.of(2023));
+        assertTrue(time.getDate().isPresent());
+        assertEquals(LocalDate.of(2023, Month.MAY, 29), time.getDate().get());
+    }
+
+    @Test
+    void sixthMondayOfJanuary2024Test() {
+        assertThrows(IllegalArgumentException.class, () -> new ForbiddenTime(DayOfWeek.MONDAY, 6, Month.JANUARY, Year.of(2024)));
+    }
+
+    @Test
+    void zerothFridayOfFebruary2025Test() {
+        assertThrows(IllegalArgumentException.class, () -> new ForbiddenTime(DayOfWeek.FRIDAY, 0, Month.FEBRUARY, Year.of(2025)));
     }
 
     @Test
@@ -37,7 +58,7 @@ class ForbiddenTimeTest {
         assertTrue(time.getEndTime().isPresent());
 
         assertTrue(time.isRepeating());
-        assertEquals(time.getDayOfWeek().get(), DayOfWeek.SUNDAY);
+        assertEquals(DayOfWeek.SUNDAY, time.getDayOfWeek().get());
         assertTrue(time.getStartTime().get().isAfter(LocalTime.of(7, 0)));
         assertTrue(time.getStartTime().get().isBefore(LocalTime.of(11, 0)));
     }
@@ -46,7 +67,7 @@ class ForbiddenTimeTest {
     void getNonRepeatingDayOfWeekTest() {
         ForbiddenTime time = new ForbiddenTime(DayOfWeek.WEDNESDAY, false);
         assertTrue(time.getDayOfWeek().isPresent());
-        assertEquals(time.getDayOfWeek().get(), DayOfWeek.WEDNESDAY);
+        assertEquals(DayOfWeek.WEDNESDAY, time.getDayOfWeek().get());
         assertFalse(time.isRepeating());
     }
 
@@ -56,8 +77,8 @@ class ForbiddenTimeTest {
         assertTrue(time.getDate().isPresent());
         assertTrue(time.getDayOfWeek().isPresent());
 
-        assertEquals(time.getDayOfWeek().get(), DayOfWeek.SATURDAY);
-        assertEquals(time.getDate().get().getMonth(), Month.JANUARY);
+        assertEquals(DayOfWeek.SATURDAY, time.getDayOfWeek().get());
+        assertEquals(Month.JANUARY, time.getDate().get().getMonth());
     }
 
     @Test
@@ -140,10 +161,5 @@ class ForbiddenTimeTest {
         LocalTime shiftStart = LocalTime.of(13, 0);
         LocalTime shiftEnd = LocalTime.of(14, 0);
         assertFalse(forbiddenTime.intersects(shiftStart, shiftEnd));
-    }
-
-    @Test
-    void isRepeating() {
-
     }
 }
