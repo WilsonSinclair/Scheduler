@@ -7,9 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
+import java.util.Arrays;
 
 /*
     This class models an actual schedule posted in a store. The underlying data is just a List of Days. Each Day
@@ -23,10 +26,16 @@ public class Schedule implements Serializable {
     private final LocalDate scheduleStartDate;
 
     public Schedule(List<Employee> e, LocalDate scheduleStartDate) {
+        this.scheduleStartDate = scheduleStartDate;
         ObservableList<Day> list = FXCollections.observableArrayList();
         daysProperty = new SimpleListProperty<>(list);
+        
+        // Populate the schedule with 7 days
+        for (int i = 0; i < 7; i++) {
+            daysProperty().get().add(new Day(scheduleStartDate.plusDays(i)));
+        }
+        
         setEmployees(e);
-        this.scheduleStartDate = scheduleStartDate;
     }
 
     public List<Day> getDays() {
@@ -92,6 +101,61 @@ public class Schedule implements Serializable {
         for (int i = 0; i < size; i++) {
             employees.add((Employee) in.readObject());
         }
+    }
+    
+    /*  
+        This method takes a list of employees and a starting date as input,
+        and generates a schedule for the next week.
+        
+        @param employees The list of employees to generate the schedule for.
+        @param startDate The starting date of the schedule.
+        @return The generated schedule.
+    */
+    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate) {
+        Schedule schedule = new Schedule(employees, startDate);
+        
+        // We use a random object to help us incorporate some pseudorandomness into the generated schedule
+        // when choosing a possible employee or creating a shift's start and end time.
+        Random r = new Random();
+        
+        // Use this list of days to help us generate one day of the week at a time.
+        List<DayOfWeek> days = Arrays.asList(DayOfWeek.values());
+        
+        //TODO: Implement schedule generation logic here
+        
+        return schedule;
+    }
+    
+    /*
+    This method checks if a given day has an opener shift.
+    We only ever need one opener per day.
+    */
+    public boolean hasOpener(Day day) {
+        for (Shift shift : day.shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+            if (shiftType == Shift.ShiftType.OPENER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /*
+    This method checks if a given day has the required number of closer shifts.
+    The number of closers required may change depending on the store's sales volume.
+    */
+    public boolean hasClosers(Day day, int numClosers) {
+        int count = 0;
+        for (Shift shift : day.shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
+                count++;
+                if (count >= numClosers) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String toString() {

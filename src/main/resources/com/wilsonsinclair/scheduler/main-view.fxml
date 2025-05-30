@@ -39,7 +39,8 @@
                               <TableColumn fx:id="sundayColumn" prefWidth="75.0" text="Sunday" />
                            </columns>
                         </TableView2>
-                        <SearchableComboBox fx:id="scheduleComboBox" layoutX="610.0" layoutY="95.0" />
+                        <SearchableComboBox fx:id="scheduleComboBox" layoutX="819.0" layoutY="142.0" />
+                        <Button fx:id="generateScheduleButton" layoutX="401.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="151.0" text="Generate New Schedule" />
                      </children></AnchorPane>
             </content>
           </Tab>

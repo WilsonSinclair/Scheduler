@@ -41,7 +41,7 @@ public class MainViewController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
-    private Button saveEmployeeButton, addForbiddenTImeButton;
+    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton;
 
     @FXML
     private TableView2<Employee> scheduleTable;

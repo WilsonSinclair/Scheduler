@@ -9,6 +9,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Shift implements Serializable {
+    
+    enum ShiftType {
+        OPENER,
+        CLOSER,
+        LUNCH,
+        OPEN_TO_CLOSE,
+        LUNCH_TO_CLOSE
+    }
+     
+    public static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
+    public static final LocalTime CLOSING_TIME = LocalTime.of(21, 0);
 
     //The starting and ending times of this shift
     private transient ObjectProperty<LocalTime> startTime, endTime;
@@ -17,12 +28,19 @@ public class Shift implements Serializable {
 
     //The employee that is assigned to this shift
     private transient ObjectProperty<Employee> employee;
+    
+    @Serial
+    private static final long serialVersionUID = 1L;
+    
+    private ShiftType shiftType;
 
     public Shift(Employee employee, LocalDate date, LocalTime startTime, LocalTime endTime) {
         setStartTime(startTime);
         setEndTime(endTime);
         setEmployee(employee);
         setDate(date);
+        
+        shiftType = assignShiftType();
     }
 
     public ObjectProperty<LocalDate> dateProperty() {
@@ -56,11 +74,34 @@ public class Shift implements Serializable {
     public LocalTime getStartTime() { return startTimeProperty().get(); }
     public LocalTime getEndTime() { return endTimeProperty().get(); }
     public Employee getEmployee() { return employeeProperty().get(); }
+    public ShiftType getType() { return shiftType; }
 
     public void setEmployee(Employee e) { employeeProperty().set(e); }
     public void setStartTime(LocalTime t) { startTimeProperty().set(t); }
     public void setEndTime(LocalTime t) { endTimeProperty().set(t); }
     public void setDate(LocalDate d) { dateProperty().set(d); }
+    
+    /*
+    Assigns a shift type based on the start and end times.
+    */
+    private ShiftType assignShiftType() {
+        // Opening shifts
+        if (getStartTime().equals(OPENING_TIME)) {
+            if (getEndTime().equals(CLOSING_TIME)) {
+                return ShiftType.OPEN_TO_CLOSE;
+            }
+            return ShiftType.OPENER;
+        }
+        
+        // Lunch Shifts
+        if (getStartTime().equals(LocalTime.of(10, 0)) || getStartTime().equals(LocalTime.of(11, 0))) {
+            if (getEndTime().equals(CLOSING_TIME)) {
+                return ShiftType.LUNCH_TO_CLOSE;
+            }
+            return ShiftType.LUNCH;
+        }
+        return ShiftType.CLOSER;
+    }
 
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
