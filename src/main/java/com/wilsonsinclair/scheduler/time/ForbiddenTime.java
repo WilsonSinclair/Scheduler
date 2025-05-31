@@ -5,10 +5,7 @@ import java.io.Serializable;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 /*
@@ -62,6 +59,22 @@ public class ForbiddenTime implements Serializable {
                     .atDay(1)
                     .with(TemporalAdjusters.dayOfWeekInMonth(n, dayOfWeek));
         }
+    }
+
+    /*
+        Just as above, but also has an associated starting and ending time
+     */
+    public ForbiddenTime(DayOfWeek dayOfWeek, int n, Month month, Year year, LocalTime startTime, LocalTime endTime) {
+        if (n <= 0 || n > 5) {
+            throw new IllegalArgumentException("n must be in the range (0, 5]");
+        }
+        else {
+            this.date = YearMonth.of(year.getValue(), month)
+                    .atDay(1)
+                    .with(TemporalAdjusters.dayOfWeekInMonth(n, dayOfWeek));
+        }
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /*

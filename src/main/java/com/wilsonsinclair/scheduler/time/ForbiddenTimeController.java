@@ -20,7 +20,10 @@ public class ForbiddenTimeController implements Initializable {
     private DatePicker datePicker;
 
     @FXML
-    private ChoiceBox<String> choiceBox;
+    private ChoiceBox<String> typeChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> ordinalChoiceBox;
 
     @FXML
     private ComboBox<DayOfWeek> dayOfWeekComboBox;
@@ -36,7 +39,9 @@ public class ForbiddenTimeController implements Initializable {
 
     private ForbiddenTime forbiddenTime;
 
-    private final String[] CHOICE_BOX_VALUES = {"Certain Date", "Certain Time", "Day of Week"};
+    private final String[] TYPE_CHOICE_BOX_VALUES = {"Certain Date", "Certain Time", "Day of Week"};
+
+    private final String[] ORDINAL_CHOICE_BOX_VALUES = {"All", "1st", "2nd", "3rd", "4th", "5th"};
 
     private final Integer[] HOURS = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
@@ -50,7 +55,13 @@ public class ForbiddenTimeController implements Initializable {
     private final EventHandler<ActionEvent> dayOfWeekComboBoxEvent = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            forbiddenTime.setDayOfWeek(dayOfWeekComboBox.getValue());
+            DayOfWeek dayOfWeek = dayOfWeekComboBox.getValue();
+            switch (ordinalChoiceBox.getSelectionModel().getSelectedIndex()) {
+                //TODO
+
+
+            }
+            forbiddenTime.setDayOfWeek(dayOfWeek);
             if (!allDayDayOfWeekSwitch.isSelected()) {
                 addForbiddenTime();
             }
@@ -145,7 +156,10 @@ public class ForbiddenTimeController implements Initializable {
         // The OK button at the bottom right of the dialog window
         Button okButton = (Button) pane.lookupButton(ButtonType.OK);
         
-        choiceBox.setItems(FXCollections.observableArrayList(CHOICE_BOX_VALUES));
+        typeChoiceBox.setItems(FXCollections.observableArrayList(TYPE_CHOICE_BOX_VALUES));
+        ordinalChoiceBox.setItems(FXCollections.observableArrayList(ORDINAL_CHOICE_BOX_VALUES));
+        ordinalChoiceBox.getSelectionModel().selectFirst();
+
         dayOfWeekComboBox.setItems(FXCollections.observableArrayList(DayOfWeek.values()));
 
         // Attaching handlers
@@ -165,8 +179,8 @@ public class ForbiddenTimeController implements Initializable {
         allDayDayOfWeekSwitch.setOnMouseClicked(allDaySwitchEvent);
 
         //Listen for changes to this choice box
-        choiceBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
-            switch (CHOICE_BOX_VALUES[newValue.intValue()]) {
+        typeChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
+            switch (TYPE_CHOICE_BOX_VALUES[newValue.intValue()]) {
                 case "Certain Date" -> {
                     forbiddenTime = new ForbiddenTime();
                     okButton.setOnAction(datePickerEvent);
@@ -180,6 +194,7 @@ public class ForbiddenTimeController implements Initializable {
                     allDayDateSwitch.setDisable(false);
                     allDayDayOfWeekSwitch.setDisable(true);
                     dayOfWeekComboBox.setDisable(true);
+                    ordinalChoiceBox.setDisable(true);
 
                     okButton.disableProperty().bind(datePicker.valueProperty().isNull());
                 }
@@ -197,6 +212,8 @@ public class ForbiddenTimeController implements Initializable {
 
                     allDayDateSwitch.setDisable(true);
                     allDayDayOfWeekSwitch.setDisable(true);
+
+                    ordinalChoiceBox.setDisable(true);
 
                     okButton.disableProperty().bind(startHourComboBox.getSelectionModel().selectedItemProperty().isNull());
                     okButton.disableProperty().bind(startMinuteComboBox.getSelectionModel().selectedItemProperty().isNull());
@@ -216,6 +233,8 @@ public class ForbiddenTimeController implements Initializable {
                     allDayDateSwitch.setDisable(true);
                     dayOfWeekComboBox.setDisable(false);
                     datePicker.setDisable(true);
+
+                    ordinalChoiceBox.setDisable(false);
 
                     okButton.disableProperty().bind(dayOfWeekComboBox.valueProperty().isNull());
                 }

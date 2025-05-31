@@ -14,7 +14,7 @@ public class EmployeeTest {
     @Test
     void getNameTest() {
         Employee employee = new Employee("Wilson", true, true, true);
-        assertEquals(employee.getName(), "Wilson");
+        assertEquals("Wilson", employee.getName());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class EmployeeTest {
     void getNonEmptyForbiddenTimesTest() {
         Employee wilson = new Employee("Wilson", true, true, true);
         wilson.addForbiddenTime(new ForbiddenTime(DayOfWeek.SUNDAY, true));
-        assertEquals(wilson.getForbiddenTimes().size(), 1);
+        assertEquals(1, wilson.getForbiddenTimes().size());
     }
 
     @Test
