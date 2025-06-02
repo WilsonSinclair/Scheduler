@@ -58,7 +58,11 @@ public class ForbiddenTimeController implements Initializable {
             DayOfWeek dayOfWeek = dayOfWeekComboBox.getValue();
             switch (ordinalChoiceBox.getSelectionModel().getSelectedIndex()) {
                 //TODO
-
+                case 1 -> forbiddenTime.setNthDay(1);
+                case 2 -> forbiddenTime.setNthDay(2);
+                case 3 -> forbiddenTime.setNthDay(3);
+                case 4 -> forbiddenTime.setNthDay(4);
+                case 5 -> forbiddenTime.setNthDay(5);
 
             }
             forbiddenTime.setDayOfWeek(dayOfWeek);

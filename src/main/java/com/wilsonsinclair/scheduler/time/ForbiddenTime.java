@@ -22,6 +22,7 @@ public class ForbiddenTime implements Serializable {
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
     private LocalTime endTime;
+    private int nthDay;
 
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
@@ -58,6 +59,7 @@ public class ForbiddenTime implements Serializable {
             this.date = YearMonth.of(year.getValue(), month)
                     .atDay(1)
                     .with(TemporalAdjusters.dayOfWeekInMonth(n, dayOfWeek));
+            this.nthDay = n;
         }
     }
 
@@ -72,6 +74,7 @@ public class ForbiddenTime implements Serializable {
             this.date = YearMonth.of(year.getValue(), month)
                     .atDay(1)
                     .with(TemporalAdjusters.dayOfWeekInMonth(n, dayOfWeek));
+            this.nthDay = n;
         }
         this.startTime = startTime;
         this.endTime = endTime;
@@ -119,6 +122,14 @@ public class ForbiddenTime implements Serializable {
     }
 
     public void setDate(LocalDate date) { this.date = date; }
+
+    public Optional<Integer> getNthDay() {
+        return Optional.of(nthDay);
+    }
+
+    public void setNthDay(int n) {
+        this.nthDay = n;
+    }
 
     /*
         Get the starting time of the forbidden time.
@@ -211,6 +222,15 @@ public class ForbiddenTime implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         if (getDayOfWeek().isPresent()) {
+            if (getNthDay().isPresent()) {
+                switch (getNthDay().get()) {
+                    case 1 -> sb.append("1st ");
+                    case 2 -> sb.append("2nd ");
+                    case 3 -> sb.append("3rd ");
+                    case 4 -> sb.append("4th ");
+                    case 5 -> sb.append("5th ");
+                }
+            }
             sb.append(dayOfWeek.toString()).append(" ");
         }
         if (getDate().isPresent()) {

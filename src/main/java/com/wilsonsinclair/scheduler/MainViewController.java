@@ -212,7 +212,7 @@ public class MainViewController implements Initializable {
     }
 
     private void populateScheduleTable(Schedule s) {
-        scheduleTable.getItems().addAll(s.employeeListProperty());
+        scheduleTable.getItems().setAll(s.employeeListProperty());
     }
 
     @Override
