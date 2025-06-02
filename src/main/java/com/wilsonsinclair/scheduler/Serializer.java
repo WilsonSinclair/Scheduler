@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Serializer {
 
-    private static final String EMPLOYEE_FILE = "employees.ser";
-    private static final String SCHEDULE_FILE = "schedules.ser";
+    private static final File EMPLOYEE_FILE = new File("employees.ser");
+    private static final File SCHEDULE_FILE = new File("schedules.ser");
     
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
@@ -23,7 +23,7 @@ public class Serializer {
         try {
 
             // write object to file
-            FileOutputStream fos = new FileOutputStream(EMPLOYEE_FILE);
+            FileOutputStream fos = new FileOutputStream(EMPLOYEE_FILE, false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(employees);
             oos.close();
@@ -35,9 +35,14 @@ public class Serializer {
         }
     }
 
+    /*
+        Serializes a list of schedules for reading on subsequent runs of the program. We append to this
+        file rather than overwriting it, so that we can still retain previous schedules.
+     */
+
     public static void saveSchedules(List<Schedule> schedules) {
         try {
-            FileOutputStream fos = new FileOutputStream(SCHEDULE_FILE);
+            FileOutputStream fos = new FileOutputStream(SCHEDULE_FILE, true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(schedules);
             oos.close();
@@ -49,6 +54,12 @@ public class Serializer {
 
     public static ArrayList<Employee> loadEmployees() {
         try {
+            // checks if file exists and creates it if not
+            // immediately return to avoid any EOF exceptions.
+            if (EMPLOYEE_FILE.createNewFile()) {
+                return new ArrayList<>();
+            }
+
             FileInputStream in = new FileInputStream(EMPLOYEE_FILE);
             ObjectInputStream ois = new ObjectInputStream(in);
             SerializableObservableList<Employee> loadedEmployees = (SerializableObservableList<Employee>) ois.readObject();
@@ -62,6 +73,12 @@ public class Serializer {
 
     public static List<Schedule> loadSchedules() {
         try {
+            // checks if file exists and creates it if not
+            // immediately return to avoid any EOF exceptions.
+            if (SCHEDULE_FILE.createNewFile()) {
+                return new ArrayList<>();
+            }
+
             FileInputStream in = new FileInputStream(SCHEDULE_FILE);
             ObjectInputStream ois = new ObjectInputStream(in);
             return (List<Schedule>) ois.readObject();
