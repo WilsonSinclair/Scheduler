@@ -27,13 +27,16 @@ public class Shift implements Serializable {
     }
 
     // A Set of times that opening shifts can end at. We ideally avoid CLOSING_TIME if possible.
+    // The use of a TreeSet instead of HashSet guarantees the order of the elements as this is important.
+    // When looping through these times, we want to try to assign an open till 2 or 4 shift before we
+    // resort to an open to close.
     public static final Set<LocalTime> OPENING_SHIFT_END_TIMES = new TreeSet<>(Set.of(
          TWO_PM,
          FOUR_PM,
          CLOSING_TIME
     ));
 
-    // A Set of times that lunch shifts can end at.
+    // A Set of times that lunch shifts can end at. Order here is important as before.
     public static final Set<LocalTime> LUNCH_SHIFT_END_TIMES = new TreeSet<>(Set.of(
             FOUR_PM,
             TWO_PM,

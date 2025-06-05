@@ -7,12 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Random;
-import java.util.Arrays;
 
 /*
     This class models an actual schedule posted in a store. The underlying data is just a List of Days. Each Day

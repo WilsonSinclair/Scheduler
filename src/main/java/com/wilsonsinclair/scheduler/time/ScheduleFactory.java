@@ -43,7 +43,7 @@ public class ScheduleFactory {
                 Shift s = new Shift(e, day.getDate(), Shift.OPENING_TIME, time);
                 if (e.canWork(s)) {
                     day.addShift(s);
-                    break;
+                    return;
                 }
             }
         }
