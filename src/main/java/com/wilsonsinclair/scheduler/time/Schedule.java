@@ -105,43 +105,7 @@ public class Schedule implements Serializable {
             employees.add((Employee) in.readObject());
         }
     }
-    
-    /*  
-        This method takes a list of employees and a starting date as input,
-        and generates a schedule for the next week.
-        
-        @param employees The list of employees to generate the schedule for.
-        @param startDate The starting date of the schedule.
-        @return The generated schedule.
-    */
-    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate) {
-        Schedule schedule = new Schedule(employees, startDate);
-        
-        // We use a random object to help us incorporate some pseudorandomness into the generated schedule
-        // when choosing a possible employee or creating a shift's start and end time.
-        Random r = new Random();
-        
-        // Use this list of days to help us generate one day of the week at a time.
-        List<DayOfWeek> days = Arrays.asList(DayOfWeek.values());
-        
-        //TODO: Implement schedule generation logic here
-        
-        return schedule;
-    }
-    
-    /*
-    This method checks if a given day has an opener shift.
-    We only ever need one opener per day.
-    */
-    public boolean hasOpener(Day day) {
-        for (Shift shift : day.shiftsProperty()) {
-            Shift.ShiftType shiftType = shift.getType();
-            if (shiftType == Shift.ShiftType.OPENER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     
     /*
     This method checks if a given day has the required number of closing shifts.

@@ -15,23 +15,6 @@ public class ScheduleTest {
     private static final Employee testShiftLead = new Employee("Test Shift Lead", true, true, false);
     
     @Test
-    void dayHasOpenerTest() {
-        LocalDate date = LocalDate.now();
-        Schedule schedule = new Schedule(List.of(testManager), date);
-        
-        // Test with an empty schedule with no shifts assigned
-        for (Day day : schedule.daysProperty()) {
-            assertFalse(schedule.hasOpener(day));
-        }
-        
-        Day day = schedule.getDays().getFirst();
-
-        // Add an open to 2 shift. Expect true.
-        day.addShift(new Shift(testManager, date, Shift.OPENING_TIME, LocalTime.of(14, 0)));
-        assertTrue(schedule.hasOpener(schedule.getDays().getFirst()));
-    }
-    
-    @Test
     void dayHasCloserTest() {
         LocalDate date = LocalDate.now();
         Schedule schedule = new Schedule(List.of(testManager), date);

@@ -252,6 +252,14 @@ public class Employee implements Serializable {
         return true;
     }
 
+    public boolean canWork(Shift s) {
+        // Can work on this day of the week in general
+        if (canWork(s.dateProperty().get().getDayOfWeek())) {
+            return canWork(s.dateProperty().get(), s.getStartTime(), s.getEndTime());
+        }
+        return false;
+    }
+
     public static Callback<Employee, Observable[]> extractor() {
         return (Employee e) -> new Observable[]{e.nameProperty(), e.openerProperty(), e.closerProperty()};
     }

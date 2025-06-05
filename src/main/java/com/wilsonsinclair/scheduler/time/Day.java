@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.wilsonsinclair.scheduler.Employee;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -42,7 +43,28 @@ public class Day implements Serializable {
     public void addShift(Shift s) {
         shiftsProperty().add(s);
     }
-    
+
+    public boolean hasAssigned(Employee e) {
+        for (Shift s : shiftsProperty) {
+            if (s.getEmployee().equals(e)) { return true; }
+        }
+        return false;
+    }
+
+    /*
+    This method checks if a given day has an opener shift.
+    We only ever need one opener per day.
+    */
+    public boolean hasOpener() {
+        for (Shift shift : shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+            if (shiftType == Shift.ShiftType.OPENER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();

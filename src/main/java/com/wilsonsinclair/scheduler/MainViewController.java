@@ -1,9 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
-import com.wilsonsinclair.scheduler.time.ForbiddenTime;
-import com.wilsonsinclair.scheduler.time.ForbiddenTimeController;
-import com.wilsonsinclair.scheduler.time.Schedule;
-import com.wilsonsinclair.scheduler.time.Shift;
+import com.wilsonsinclair.scheduler.time.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -262,6 +260,16 @@ public class MainViewController implements Initializable {
         }
         scheduleComboBox.setOnAction(event -> {
             schedule = scheduleComboBox.getSelectionModel().getSelectedItem();
+            populateScheduleTable(schedule);
+        });
+
+        generateScheduleButton.setOnAction(event -> {
+            schedule = ScheduleFactory.generateSchedule(Serializer.loadEmployees(), LocalDate.now());
+            for (Day d : schedule.getDays()) {
+                for (Shift s : d.getShifts()) {
+                    System.out.println(s);
+                }
+            }
             populateScheduleTable(schedule);
         });
 

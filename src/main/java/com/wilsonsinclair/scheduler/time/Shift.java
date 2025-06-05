@@ -7,8 +7,16 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Shift implements Serializable {
+
+    public static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
+    public static final LocalTime CLOSING_TIME = LocalTime.of(21, 0);
+
+    private static final LocalTime TWO_PM = LocalTime.of(14, 0);
+    private static final LocalTime FOUR_PM = LocalTime.of(16, 0);
     
     enum ShiftType {
         OPENER,
@@ -17,9 +25,20 @@ public class Shift implements Serializable {
         OPEN_TO_CLOSE,
         LUNCH_TO_CLOSE
     }
-     
-    public static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
-    public static final LocalTime CLOSING_TIME = LocalTime.of(21, 0);
+
+    // A Set of times that opening shifts can end at. We ideally avoid CLOSING_TIME if possible.
+    public static final Set<LocalTime> OPENING_SHIFT_END_TIMES = new TreeSet<>(Set.of(
+         TWO_PM,
+         FOUR_PM,
+         CLOSING_TIME
+    ));
+
+    // A Set of times that lunch shifts can end at.
+    public static final Set<LocalTime> LUNCH_SHIFT_END_TIMES = new TreeSet<>(Set.of(
+            FOUR_PM,
+            TWO_PM,
+            CLOSING_TIME
+    ));
 
     //The starting and ending times of this shift
     private transient ObjectProperty<LocalTime> startTime, endTime;
