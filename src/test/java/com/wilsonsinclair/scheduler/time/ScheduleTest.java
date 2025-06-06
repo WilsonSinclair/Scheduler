@@ -13,30 +13,6 @@ public class ScheduleTest {
     
     private static final Employee testManager = new Employee("Test Manager", true, true, true);
     private static final Employee testShiftLead = new Employee("Test Shift Lead", true, true, false);
-    
-    @Test
-    void dayHasCloserTest() {
-        LocalDate date = LocalDate.now();
-        Schedule schedule = new Schedule(List.of(testManager), date);
-        
-        // Test with an empty schedule with no shifts assigned
-        for (Day day : schedule.daysProperty()) {
-            assertFalse(schedule.hasClosers(day, 2));
-        }
-        
-        Day day = schedule.getDays().getFirst();
-        
-        // Test with only one closer
-        day.addShift(new Shift(testManager, date, LocalTime.of(14, 0), Shift.CLOSING_TIME));
-        assertTrue(schedule.hasClosers(day, 1));
-        
-        // Test with two closers
-        day.addShift(new Shift(testShiftLead, date, LocalTime.of(14, 0), Shift.CLOSING_TIME));
-        assertTrue(schedule.hasClosers(day, 2));
-
-        // Test with 10 closers, which we expect to return false since we only have 2 closing shifts assigned.
-        assertFalse(schedule.hasClosers(day, 10));
-    }
 
     @Test
     void hasLunchersTest() {

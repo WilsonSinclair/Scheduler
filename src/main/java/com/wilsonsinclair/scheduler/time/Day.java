@@ -65,6 +65,24 @@ public class Day implements Serializable {
         return false;
     }
 
+    /*
+   This method checks if a given day has the required number of closing shifts.
+   The number of closers required may change depending on the store's sales volume.
+   */
+    public boolean hasClosers(int num) {
+        int count = 0;
+        for (Shift shift : shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE || shiftType == Shift.ShiftType.LUNCH_TO_CLOSE) {
+                count++;
+                if (count >= num) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();

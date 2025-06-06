@@ -103,25 +103,6 @@ public class Schedule implements Serializable {
         }
     }
 
-    
-    /*
-    This method checks if a given day has the required number of closing shifts.
-    The number of closers required may change depending on the store's sales volume.
-    */
-    public boolean hasClosers(Day day, int num) {
-        int count = 0;
-        for (Shift shift : day.shiftsProperty()) {
-            Shift.ShiftType shiftType = shift.getType();
-            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE || shiftType == Shift.ShiftType.LUNCH_TO_CLOSE) {
-                count++;
-                if (count >= num) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
     /*
     This method, similar to the ones above, checks if a given Day has enough lunch shifts. The desired number
     may also change according to a store's sales volume.
