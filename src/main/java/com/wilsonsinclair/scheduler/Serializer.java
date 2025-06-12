@@ -36,13 +36,12 @@ public class Serializer {
     }
 
     /*
-        Serializes a list of schedules for reading on subsequent runs of the program. We append to this
-        file rather than overwriting it, so that we can still retain previous schedules.
+        Serializes a list of schedules for reading on subsequent runs of the program.
      */
 
-    public static void saveSchedules(List<Schedule> schedules) {
+    public static void saveSchedules(SerializableObservableList<Schedule> schedules) {
         try {
-            FileOutputStream fos = new FileOutputStream(SCHEDULE_FILE, true);
+            FileOutputStream fos = new FileOutputStream(SCHEDULE_FILE, false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(schedules);
             oos.close();
@@ -78,13 +77,20 @@ public class Serializer {
             if (SCHEDULE_FILE.createNewFile()) {
                 return new ArrayList<>();
             }
+            
+            if (SCHEDULE_FILE.length() == 0) {
+                return new ArrayList<>();
+            }
 
             FileInputStream in = new FileInputStream(SCHEDULE_FILE);
             ObjectInputStream ois = new ObjectInputStream(in);
-            return (List<Schedule>) ois.readObject();
+            SerializableObservableList<Schedule> loadedSchedules = (SerializableObservableList<Schedule>) ois.readObject();
+            System.out.println(loadedSchedules.getData()); 
+            return new ArrayList<>(loadedSchedules.getData());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("Returning empty schedule list");
         return new ArrayList<>();
     }
 }

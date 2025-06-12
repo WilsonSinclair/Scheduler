@@ -1,14 +1,13 @@
 package com.wilsonsinclair.scheduler;
 
+import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.time.Shift;
 import java.io.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.wilsonsinclair.scheduler.time.ForbiddenTime;
-import com.wilsonsinclair.scheduler.time.Shift;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -42,7 +41,12 @@ public class Employee implements Serializable {
     // A list of all the times an employee cannot work
     private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
-    public Employee(String name, boolean isOpener, boolean isCloser, boolean isManager) {
+    public Employee(
+        String name,
+        boolean isOpener,
+        boolean isCloser,
+        boolean isManager
+    ) {
         setName(name);
         setCloser(isCloser);
         setOpener(isOpener);
@@ -52,7 +56,9 @@ public class Employee implements Serializable {
 
     public final ListProperty<Shift> assignedShiftsProperty() {
         if (assignedShifts == null || assignedShifts.getValue() == null) {
-            assignedShifts = new SimpleListProperty<>(FXCollections.observableArrayList());
+            assignedShifts = new SimpleListProperty<>(
+                FXCollections.observableArrayList()
+            );
         }
         return assignedShifts;
     }
@@ -77,13 +83,14 @@ public class Employee implements Serializable {
         }
         return isCloser;
     }
-    
+
     public final BooleanProperty managerProperty() {
         if (isManager == null) {
             isManager = new SimpleBooleanProperty();
         }
         return isManager;
     }
+
     public final ObjectProperty<Shift> mondayShiftProperty() {
         if (mondayShift == null || mondayShift.getValue() == null) {
             mondayShift = new SimpleObjectProperty<>();
@@ -133,7 +140,7 @@ public class Employee implements Serializable {
         return sundayShift;
     }
 
-        public void setForbiddenTimes(List<ForbiddenTime> times) {
+    public void setForbiddenTimes(List<ForbiddenTime> times) {
         forbiddenTimes = new ArrayList<>(times);
     }
 
@@ -164,11 +171,11 @@ public class Employee implements Serializable {
     public boolean canOpen() {
         return openerProperty().get();
     }
-    
+
     public boolean isManager() {
         return managerProperty().get();
     }
-    
+
     public void setManager(boolean isManager) {
         managerProperty().set(isManager);
     }
@@ -211,6 +218,13 @@ public class Employee implements Serializable {
 
     public void assignShift(Shift s) {
         getAssignedShifts().add(s);
+
+        // Check if the shift has a valid date
+        if (s.dateProperty().getValue() == null) {
+            System.err.println("Shift has no date associated with it.");
+            return;
+        }
+
         switch (s.dateProperty().getValue().getDayOfWeek()) {
             case MONDAY -> setMondayShift(s);
             case TUESDAY -> setTuesdayShift(s);
@@ -219,22 +233,32 @@ public class Employee implements Serializable {
             case FRIDAY -> setFridayShift(s);
             case SATURDAY -> setSaturdayShift(s);
             case SUNDAY -> setSundayShift(s);
-            default -> System.err.println("Shift has no day of week associated with it."); // Should never get here
+            default -> System.err.println(
+                "Shift has no day of week associated with it."
+            ); // Should never get here
         }
     }
 
     public boolean canWork(LocalDate date) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
+            if (
+                forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)
+            ) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean canWork(LocalDate date, LocalTime shiftStart, LocalTime shiftEnd) {
+    public boolean canWork(
+        LocalDate date,
+        LocalTime shiftStart,
+        LocalTime shiftEnd
+    ) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
+            if (
+                forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)
+            ) {
                 if (forbiddenTime.intersects(shiftStart, shiftEnd)) {
                     return false;
                 }
@@ -245,7 +269,10 @@ public class Employee implements Serializable {
 
     public boolean canWork(DayOfWeek dayOfWeek) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (forbiddenTime.getDayOfWeek().isPresent() && forbiddenTime.isOn(dayOfWeek)) {
+            if (
+                forbiddenTime.getDayOfWeek().isPresent() &&
+                forbiddenTime.isOn(dayOfWeek)
+            ) {
                 return false;
             }
         }
@@ -255,13 +282,22 @@ public class Employee implements Serializable {
     public boolean canWork(Shift s) {
         // Can work on this day of the week in general
         if (canWork(s.dateProperty().get().getDayOfWeek())) {
-            return canWork(s.dateProperty().get(), s.getStartTime(), s.getEndTime());
+            return canWork(
+                s.dateProperty().get(),
+                s.getStartTime(),
+                s.getEndTime()
+            );
         }
         return false;
     }
 
     public static Callback<Employee, Observable[]> extractor() {
-        return (Employee e) -> new Observable[]{e.nameProperty(), e.openerProperty(), e.closerProperty()};
+        return (Employee e) ->
+            new Observable[] {
+                e.nameProperty(),
+                e.openerProperty(),
+                e.closerProperty(),
+            };
     }
 
     @Serial
@@ -273,9 +309,11 @@ public class Employee implements Serializable {
         out.writeObject(getForbiddenTimes());
 
         // writing assigned shifts
-        int size = assignedShiftsProperty().size();
-        out.writeInt(size);
-        for (int i = 0; i < size; i++) {
+        if (assignedShifts == null || assignedShifts.getValue() == null) {
+            out.writeInt(0);
+        } else {
+            int size = assignedShiftsProperty().size();
+            out.writeInt(size);
             for (Shift s : assignedShiftsProperty()) {
                 out.writeObject(s);
             }
@@ -283,7 +321,8 @@ public class Employee implements Serializable {
     }
 
     @Serial
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in)
+        throws IOException, ClassNotFoundException {
         nameProperty().set(in.readUTF());
         openerProperty().set(in.readBoolean());
         closerProperty().set(in.readBoolean());
@@ -292,9 +331,12 @@ public class Employee implements Serializable {
 
         // reading assigned shifts
         int size = in.readInt();
-        assignedShifts = new SimpleListProperty<>(FXCollections.observableArrayList());
+        assignedShifts = new SimpleListProperty<>(
+            FXCollections.observableArrayList()
+        );
         for (int i = 0; i < size; i++) {
-            assignShift((Shift) in.readObject());
+            Shift shift = (Shift) in.readObject();
+            assignShift(shift);
         }
     }
 

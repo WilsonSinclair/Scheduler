@@ -28,7 +28,6 @@ public class ScheduleFactory {
 
         //TODO: Implement schedule generation logic here
         for (Day day : schedule.getDays()) {
-            // Fill one day at a time.
             assignOpener(openers, day, r);
         }
         return schedule;
@@ -42,6 +41,7 @@ public class ScheduleFactory {
             for (LocalTime time : Shift.OPENING_SHIFT_END_TIMES) {
                 Shift s = new Shift(e, day.getDate(), Shift.OPENING_TIME, time);
                 if (e.canWork(s)) {
+                    e.assignShift(s);
                     day.addShift(s);
                     return;
                 }
