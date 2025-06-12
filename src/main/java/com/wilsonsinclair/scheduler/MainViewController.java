@@ -273,7 +273,6 @@ public class MainViewController implements Initializable {
         } else {
             //otherwise, we load the first schedule
             schedule = schedules.getFirst();
-            populateScheduleTable(schedule);
         }
         scheduleComboBox.setOnAction(event -> {
             populateScheduleTable(

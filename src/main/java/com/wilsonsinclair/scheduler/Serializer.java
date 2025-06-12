@@ -85,7 +85,6 @@ public class Serializer {
             FileInputStream in = new FileInputStream(SCHEDULE_FILE);
             ObjectInputStream ois = new ObjectInputStream(in);
             SerializableObservableList<Schedule> loadedSchedules = (SerializableObservableList<Schedule>) ois.readObject();
-            System.out.println(loadedSchedules.getData()); 
             return new ArrayList<>(loadedSchedules.getData());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
