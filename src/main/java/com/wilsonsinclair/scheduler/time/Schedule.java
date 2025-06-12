@@ -68,7 +68,7 @@ public class Schedule implements Serializable {
             out.writeInt(0);
         }
         else {
-            out.writeInt(daysProperty.size());
+            out.writeInt(daysProperty().getSize());
             // write the size of the list
             for (Object o : daysProperty.getValue()) {
                 out.writeObject(o);
@@ -94,7 +94,8 @@ public class Schedule implements Serializable {
         employees = new SimpleListProperty<>(FXCollections.observableArrayList());
         int size = in.readInt(); // the size of our list
         for (int i = 0; i < size; i++) { // we read until the end of the list
-            daysProperty.add((Day) in.readObject());
+            // throwing EOFException here
+            daysProperty().add((Day) in.readObject());
         }
 
         size = in.readInt();
@@ -102,27 +103,8 @@ public class Schedule implements Serializable {
             employees.add((Employee) in.readObject());
         }
     }
-
-    /*
-    This method, similar to the ones above, checks if a given Day has enough lunch shifts. The desired number
-    may also change according to a store's sales volume.
-     */
-    public boolean hasLunchers(Day day, int num) {
-        int count = 0;
-        for (Shift shift : day.shiftsProperty()) {
-            Shift.ShiftType shiftType = shift.getType();
-
-            // All others shift types would be here during lunch, with the exception being a shift that is exclusively a closer.
-            if (!shiftType.equals(Shift.ShiftType.CLOSER)) {
-                count++;
-                if (count >= num) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
+    
+    @Override
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd, yyyy");
         return format.format(scheduleStartDate) + " - " + format.format(scheduleStartDate.plusDays(7));

@@ -1,14 +1,13 @@
 package com.wilsonsinclair.scheduler.time;
 
+import com.wilsonsinclair.scheduler.Employee;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-
-import com.wilsonsinclair.scheduler.Employee;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +17,7 @@ import javafx.collections.FXCollections;
     to each of these shifts. A day has a date associated with it. A schedule is made up of 7 sequential Days.
  */
 public class Day implements Serializable {
-    
+
     private final LocalDate date;
     private transient ListProperty<Shift> shiftsProperty;
 
@@ -26,27 +25,33 @@ public class Day implements Serializable {
         this.date = date;
         shiftsProperty = new SimpleListProperty<>();
     }
-    
+
     public ListProperty<Shift> shiftsProperty() {
         if (shiftsProperty == null || shiftsProperty.getValue() == null) {
-            shiftsProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+            shiftsProperty = new SimpleListProperty<>(
+                FXCollections.observableArrayList()
+            );
         }
         return shiftsProperty;
     }
 
-    public LocalDate getDate() { return date; }
-    
+    public LocalDate getDate() {
+        return date;
+    }
+
     public List<Shift> getShifts() {
         return shiftsProperty().get();
     }
-    
+
     public void addShift(Shift s) {
         shiftsProperty().add(s);
     }
 
     public boolean hasAssigned(Employee e) {
         for (Shift s : shiftsProperty) {
-            if (s.getEmployee().equals(e)) { return true; }
+            if (s.getEmployee().equals(e)) {
+                return true;
+            }
         }
         return false;
     }
@@ -58,7 +63,10 @@ public class Day implements Serializable {
     public boolean hasOpener() {
         for (Shift shift : shiftsProperty()) {
             Shift.ShiftType shiftType = shift.getType();
-            if (shiftType == Shift.ShiftType.OPENER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE) {
+            if (
+                shiftType == Shift.ShiftType.OPENER ||
+                shiftType == Shift.ShiftType.OPEN_TO_CLOSE
+            ) {
                 return true;
             }
         }
@@ -73,7 +81,31 @@ public class Day implements Serializable {
         int count = 0;
         for (Shift shift : shiftsProperty()) {
             Shift.ShiftType shiftType = shift.getType();
-            if (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE || shiftType == Shift.ShiftType.LUNCH_TO_CLOSE) {
+            if (
+                shiftType == Shift.ShiftType.CLOSER ||
+                shiftType == Shift.ShiftType.OPEN_TO_CLOSE ||
+                shiftType == Shift.ShiftType.LUNCH_TO_CLOSE
+            ) {
+                count++;
+                if (count >= num) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+    This method, similar to the ones above, checks if a given Day has enough lunch shifts. The desired number
+    may also change according to a store's sales volume.
+     */
+    public boolean hasLunchers(int num) {
+        int count = 0;
+        for (Shift shift : shiftsProperty()) {
+            Shift.ShiftType shiftType = shift.getType();
+
+            // All others shift types would be here during lunch, with the exception being a shift that is exclusively a closer.
+            if (!shiftType.equals(Shift.ShiftType.CLOSER)) {
                 count++;
                 if (count >= num) {
                     return true;
@@ -86,23 +118,25 @@ public class Day implements Serializable {
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        
+
         if (shiftsProperty == null || shiftsProperty.getValue() == null) {
             out.writeInt(0);
-        }
-        else {
-            out.write(shiftsProperty().getSize());
+        } else {
+            out.writeInt(shiftsProperty().getSize());
             for (Shift shift : shiftsProperty) {
                 out.writeObject(shift);
             }
         }
     }
-    
+
     @Serial
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in)
+        throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        
-        shiftsProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        shiftsProperty = new SimpleListProperty<>(
+            FXCollections.observableArrayList()
+        );
         int size = in.readInt();
         for (int i = 0; i < size; i++) {
             shiftsProperty().add((Shift) in.readObject());

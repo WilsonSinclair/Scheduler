@@ -1,7 +1,6 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -17,8 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.TableCell;
 import javafx.util.Callback;
-import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.tableview2.TableView2;
 
 public class MainViewController implements Initializable {
@@ -54,7 +52,7 @@ public class MainViewController implements Initializable {
     > mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
 
     @FXML
-    private SearchableComboBox<Schedule> scheduleComboBox;
+    private ComboBox<Schedule> scheduleComboBox;
 
     private static List<Schedule> schedules;
 
@@ -81,7 +79,7 @@ public class MainViewController implements Initializable {
         isOpenerButton.setSelected(employee.canOpen());
         isCloserButton.setSelected(employee.canClose());
         isManagerButton.setSelected(employee.isManager());
-        
+
         ObservableList<ForbiddenTime> forbiddenTimes =
             FXCollections.observableArrayList(employee.getForbiddenTimes());
         forbiddenTimesListView.setItems(forbiddenTimes);
@@ -210,6 +208,24 @@ public class MainViewController implements Initializable {
     }
 
     private void populateScheduleTable(Schedule s) {
+        if (s == null) {
+            return;
+        }
+
+        // Clear existing employees' shift assignments
+        for (Employee emp : s.employeeListProperty()) {
+            emp.getAssignedShifts().clear();
+        }
+
+        // Reassign shifts from the schedule's days to employees
+        for (Day day : s.getDays()) {
+            for (Shift shift : day.getShifts()) {
+                if (shift.getEmployee() != null) {
+                    shift.getEmployee().assignShift(shift);
+                }
+            }
+        }
+
         scheduleTable.getItems().setAll(s.employeeListProperty());
     }
 
@@ -257,20 +273,25 @@ public class MainViewController implements Initializable {
         } else {
             //otherwise, we load the first schedule
             schedule = schedules.getFirst();
+            populateScheduleTable(schedule);
         }
         scheduleComboBox.setOnAction(event -> {
-            schedule = scheduleComboBox.getSelectionModel().getSelectedItem();
-            populateScheduleTable(schedule);
+            populateScheduleTable(
+                scheduleComboBox.getSelectionModel().getSelectedItem()
+            );
         });
 
         generateScheduleButton.setOnAction(event -> {
-            schedule = ScheduleFactory.generateSchedule(Serializer.loadEmployees(), LocalDate.now());
-            for (Day d : schedule.getDays()) {
-                for (Shift s : d.getShifts()) {
-                    System.out.println(s);
-                }
-            }
-            populateScheduleTable(schedule);
+            schedule = ScheduleFactory.generateSchedule(
+                Serializer.loadEmployees(),
+                LocalDate.now()
+            );
+            scheduleComboBox.getItems().add(schedule);
+            scheduleComboBox.getSelectionModel().selectLast();
+
+            Serializer.saveSchedules(
+                new SerializableObservableList<>(scheduleComboBox.getItems())
+            );
         });
 
         employeeNameColumn.setCellValueFactory(data ->
@@ -297,7 +318,119 @@ public class MainViewController implements Initializable {
         sundayColumn.setCellValueFactory(data ->
             data.getValue().sundayShiftProperty()
         );
-        populateScheduleTable(schedule);
+
+        // Set custom cell factories for shift columns to display shift times
+        mondayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        tuesdayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        wednesdayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        thursdayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        fridayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        saturdayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
+
+        sundayColumn.setCellFactory(column ->
+            new TableCell<Employee, Shift>() {
+                @Override
+                protected void updateItem(Shift shift, boolean empty) {
+                    super.updateItem(shift, empty);
+                    if (empty || shift == null) {
+                        setText(null);
+                    } else {
+                        setText(
+                            shift.getStartTime() + " - " + shift.getEndTime()
+                        );
+                    }
+                }
+            }
+        );
     }
 
     private Employee getSelectedEmployee() {
