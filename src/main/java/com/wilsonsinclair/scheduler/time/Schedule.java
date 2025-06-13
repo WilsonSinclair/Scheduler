@@ -94,7 +94,6 @@ public class Schedule implements Serializable {
         employees = new SimpleListProperty<>(FXCollections.observableArrayList());
         int size = in.readInt(); // the size of our list
         for (int i = 0; i < size; i++) { // we read until the end of the list
-            // throwing EOFException here
             daysProperty().add((Day) in.readObject());
         }
 
