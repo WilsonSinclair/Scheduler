@@ -1,9 +1,6 @@
 package com.wilsonsinclair.scheduler.time;
 
 import com.wilsonsinclair.scheduler.Employee;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ScheduleTest {
     

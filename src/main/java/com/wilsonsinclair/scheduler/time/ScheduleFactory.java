@@ -18,6 +18,7 @@ public class ScheduleFactory {
         @return The generated schedule.
     */
     public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate) {
+
         Schedule schedule = new Schedule(employees, startDate);
 
         // We use a random object to help us incorporate some pseudorandomness into the generated schedule

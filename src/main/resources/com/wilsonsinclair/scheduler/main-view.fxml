@@ -39,8 +39,9 @@
                               <TableColumn fx:id="sundayColumn" prefWidth="75.0" text="Sunday" />
                            </columns>
                         </TableView2>
-                        <Button fx:id="generateScheduleButton" layoutX="401.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="151.0" text="Generate New Schedule" />
-                        <ComboBox fx:id="scheduleComboBox" layoutX="853.0" layoutY="143.0" prefWidth="150.0" />
+                        <Button fx:id="generateScheduleButton" layoutX="401.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Generate Schedule" />
+                        <ComboBox fx:id="scheduleComboBox" layoutX="557.0" layoutY="143.0" prefHeight="25.0" prefWidth="290.0" />
+                        <Button fx:id="deleteScheduleButton" layoutX="881.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Delete Schedule" />
                      </children></AnchorPane>
             </content>
           </Tab>

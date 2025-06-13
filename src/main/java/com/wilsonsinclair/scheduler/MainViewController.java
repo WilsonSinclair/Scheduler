@@ -37,7 +37,7 @@ public class MainViewController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
-    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton;
+    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton, deleteScheduleButton;
 
     @FXML
     private TableView2<Employee> scheduleTable;
@@ -291,6 +291,24 @@ public class MainViewController implements Initializable {
             Serializer.saveSchedules(
                 new SerializableObservableList<>(scheduleComboBox.getItems())
             );
+        });
+
+        deleteScheduleButton.setOnAction(event -> {
+            final int index = scheduleComboBox.getSelectionModel().getSelectedIndex();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("WARNING");
+            alert.setHeaderText("Delete selected Schedule?");
+            alert
+                .showAndWait()
+                .ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        scheduleComboBox.getItems().remove(index);
+                        Serializer.saveSchedules(
+                                new SerializableObservableList<>(scheduleComboBox.getItems())
+                        );
+                    }
+                });
+            scheduleComboBox.getSelectionModel().select(index);
         });
 
         employeeNameColumn.setCellValueFactory(data ->
