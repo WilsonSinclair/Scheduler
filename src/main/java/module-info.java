@@ -1,12 +1,14 @@
 module com.wilsonsinclair.scheduler {
-    requires javafx.controls;
-    requires javafx.fxml;
 
     requires com.dlsc.formsfx;
     requires com.google.common;
     requires org.controlsfx.controls;
+    requires com.google.gson;
+    requires MaterialFX;
+    requires ch.qos.logback.classic;
+    requires org.slf4j;
 
-    opens com.wilsonsinclair.scheduler to javafx.fxml;
+    opens com.wilsonsinclair.scheduler to javafx.fxml, com.google.gson;
     opens com.wilsonsinclair.scheduler.time to javafx.fxml;
 
     exports com.wilsonsinclair.scheduler;

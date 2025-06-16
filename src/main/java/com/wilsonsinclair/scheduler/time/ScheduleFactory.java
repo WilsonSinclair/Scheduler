@@ -17,7 +17,7 @@ public class ScheduleFactory {
         @param startDate The starting date of the schedule.
         @return The generated schedule.
     */
-    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate) {
+    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate, int numLunchers, int numClosers) {
 
         Schedule schedule = new Schedule(employees, startDate);
 
@@ -30,6 +30,7 @@ public class ScheduleFactory {
         //TODO: Implement schedule generation logic here
         for (Day day : schedule.getDays()) {
             assignOpener(openers, day, r);
+            assignLunchers(employees,day, r, numLunchers);
         }
         return schedule;
     }
@@ -47,6 +48,16 @@ public class ScheduleFactory {
                     return;
                 }
             }
+        }
+    }
+
+    private static void assignLunchers(List<Employee> employees, Day day, Random r, int numLunchers) {
+        while (!day.hasLunchers(numLunchers)) {
+            Employee e = employees.get(r.nextInt(employees.size()));
+            if (day.hasAssigned(e)) { continue; }
+
+            // Assign a lunch shift that starts at 10:00 so that there are at least two people on shift when the store opens
+            
         }
     }
 

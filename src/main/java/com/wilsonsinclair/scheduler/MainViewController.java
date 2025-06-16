@@ -1,6 +1,8 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.*;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -15,9 +19,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TextField;
+
 import javafx.util.Callback;
 import org.controlsfx.control.tableview2.TableView2;
+
+import org.controlsfx.validation.Severity;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 public class MainViewController implements Initializable {
 
@@ -34,10 +46,13 @@ public class MainViewController implements Initializable {
     private TextField employeeName;
 
     @FXML
+    private MFXTextField managerHoursTextField;
+
+    @FXML
     private RadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
-    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton, deleteScheduleButton;
+    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton, deleteScheduleButton, saveSettingsButton;
 
     @FXML
     private TableView2<Employee> scheduleTable;
@@ -54,9 +69,15 @@ public class MainViewController implements Initializable {
     @FXML
     private ComboBox<Schedule> scheduleComboBox;
 
+    @FXML
+    private ChoiceBox<Integer> numLunchersChoiceBox, numClosersChoiceBox;
+
     private static List<Schedule> schedules;
 
     private static Schedule schedule;
+
+    private static final Integer[] NUM_LUNCHERS_CHOICES = new Integer[]{2, 3, 4};
+    private static final Integer[] NUM_CLOSERS_CHOICES = new Integer[]{2, 3};
 
     @FXML
     public void loadEmployee() {
@@ -101,6 +122,20 @@ public class MainViewController implements Initializable {
             ButtonType.OK
         ).showAndWait();
         saveEmployeeButton.setDisable(true);
+    }
+
+    @FXML
+    public void handleSaveSettingsButton() {
+        try {
+            Settings newSettings = Settings.getInstance();
+            newSettings.setNumLunchers(numLunchersChoiceBox.getValue());
+            newSettings.setNumClosers(numClosersChoiceBox.getValue());
+            newSettings.setManagerHours(Integer.parseInt(managerHoursTextField.getText()));
+            newSettings.save();
+        } catch (IOException e) {
+            System.err.println("Error saving settings.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -207,6 +242,11 @@ public class MainViewController implements Initializable {
         saveEmployees();
     }
 
+    @FXML
+    private void saveSettings() {
+
+    }
+
     private void populateScheduleTable(Schedule s) {
         if (s == null) {
             return;
@@ -256,6 +296,16 @@ public class MainViewController implements Initializable {
                 }
             }
         );
+
+        // Read settings from settings.json
+        Settings settings = Settings.getInstance();
+        numLunchersChoiceBox.setValue(settings.getNumLunchers());
+        numClosersChoiceBox.setValue(settings.getNumClosers());
+        managerHoursTextField.setText(Integer.toString(settings.getManagerHours()));
+
+        numLunchersChoiceBox.setItems(FXCollections.observableArrayList(NUM_LUNCHERS_CHOICES));
+        numClosersChoiceBox.setItems(FXCollections.observableArrayList(NUM_CLOSERS_CHOICES));
+
         ObservableList<Employee> employeeList =
             FXCollections.observableArrayList(Employee.extractor());
         ArrayList<Employee> employees = Serializer.loadEmployees();
@@ -283,7 +333,9 @@ public class MainViewController implements Initializable {
         generateScheduleButton.setOnAction(event -> {
             schedule = ScheduleFactory.generateSchedule(
                 Serializer.loadEmployees(),
-                LocalDate.now()
+                LocalDate.now(),
+                    3,
+                    2
             );
             scheduleComboBox.getItems().add(schedule);
             scheduleComboBox.getSelectionModel().selectLast();
@@ -292,6 +344,8 @@ public class MainViewController implements Initializable {
                 new SerializableObservableList<>(scheduleComboBox.getItems())
             );
         });
+
+        deleteScheduleButton.disableProperty().bind(scheduleComboBox.getSelectionModel().selectedIndexProperty().lessThan(0));
 
         deleteScheduleButton.setOnAction(event -> {
             final int index = scheduleComboBox.getSelectionModel().getSelectedIndex();
@@ -448,6 +502,9 @@ public class MainViewController implements Initializable {
                 }
             }
         );
+
+        ValidationSupport validator = new ValidationSupport();
+        validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));
     }
 
     private Employee getSelectedEmployee() {

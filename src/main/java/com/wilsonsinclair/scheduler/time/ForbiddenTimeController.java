@@ -244,7 +244,6 @@ public class ForbiddenTimeController implements Initializable {
                 }
                 default -> {
                 }
-                //TODO
             }
         });
     }
