@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.scene.control.ButtonType?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import org.controlsfx.control.ToggleSwitch?>
 
 <DialogPane fx:id="pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.time.ForbiddenTimeController">
    <content>
@@ -17,24 +17,21 @@
          <children>
             <AnchorPane fx:id="dialogPane" prefHeight="345.0" prefWidth="582.0">
                <children>
-                  <DatePicker fx:id="datePicker" disable="true" layoutX="204.0" layoutY="100.0" promptText="Select Date" />
-                  <ChoiceBox fx:id="typeChoiceBox" layoutX="215.0" layoutY="28.0" prefWidth="150.0" />
                   <Separator layoutX="-1.0" layoutY="71.0" prefHeight="4.0" prefWidth="583.0" />
-                  <Label layoutX="88.0" layoutY="32.0" text="Choose One:" />
-                  <Label layoutX="55.0" layoutY="105.0" text="Date:" />
-                  <ComboBox fx:id="dayOfWeekComboBox" disable="true" layoutX="204.0" layoutY="174.0" prefHeight="26.0" prefWidth="182.0" />
-                  <Label layoutX="23.0" layoutY="178.0" text="Day of the Week:" />
                   <ComboBox fx:id="startHourComboBox" disable="true" layoutX="204.0" layoutY="250.0" prefHeight="26.0" prefWidth="75.0" promptText="Hour" />
                   <ComboBox fx:id="endHourComboBox" disable="true" layoutX="204.0" layoutY="302.0" prefHeight="26.0" prefWidth="75.0" promptText="Hour" />
                   <Label layoutX="54.0" layoutY="255.0" text="From:" />
                   <Label layoutX="61.0" layoutY="307.0" text="To:" />
                   <ComboBox fx:id="startMinuteComboBox" disable="true" layoutX="297.0" layoutY="250.0" prefHeight="26.0" prefWidth="88.0" promptText="Minute" />
                   <ComboBox fx:id="endMinuteComboBox" disable="true" layoutX="297.0" layoutY="303.0" prefHeight="26.0" prefWidth="90.0" promptText="Minute" />
-                  <ToggleSwitch fx:id="startTimeAmPmToggleSwitch" disable="true" layoutX="435.0" layoutY="254.0" text="AM" textAlignment="CENTER" />
-                  <ToggleSwitch fx:id="endTimeAmPmToggleSwitch" disable="true" layoutX="435.0" layoutY="306.0" text="AM" textAlignment="CENTER" />
-                  <ToggleSwitch fx:id="allDayDayOfWeekSwitch" disable="true" layoutX="416.0" layoutY="178.0" selected="true" text="All Day" AnchorPane.leftAnchor="416.0" AnchorPane.rightAnchor="76.0" />
-                  <ToggleSwitch fx:id="allDayDateSwitch" disable="true" layoutX="416.0" layoutY="104.0" selected="true" text="All Day" />
-                  <ChoiceBox fx:id="ordinalChoiceBox" disable="true" layoutX="137.0" layoutY="174.0" prefHeight="25.0" prefWidth="49.0" />
+                  <MFXDatePicker fx:id="datePicker" disable="true" floatMode="BORDER" floatingText="Date" layoutX="179.0" layoutY="95.0" />
+                  <MFXToggleButton fx:id="allDayDateSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="95.0" radius="9.0" text="All Day" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="allDayDayOfWeekSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="168.0" radius="9.0" text="All Day" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="startTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="244.0" radius="9.0" text="AM" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="endTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="297.0" radius="9.0" text="AM" textFill="#9a13dd" />
+                  <MFXComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Choose One" layoutX="217.0" layoutY="20.0" />
+                  <MFXComboBox fx:id="dayOfWeekComboBox" disable="true" floatMode="BORDER" floatingText="Day of Week" layoutX="179.0" layoutY="167.0" prefHeight="35.0" prefWidth="200.0" />
+                  <MFXComboBox fx:id="ordinalChoiceBox" disable="true" floatMode="BORDER" floatingText="Ordinal" layoutX="42.0" layoutY="167.0" prefHeight="20.0" prefWidth="50.0" />
                </children>
             </AnchorPane>
          </children>

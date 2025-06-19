@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -126,7 +127,7 @@
                               <ChoiceBox fx:id="numClosersChoiceBox" prefWidth="150.0" />
                               <Label prefHeight="17.0" prefWidth="170.0" text="Number of Employees for Night" underline="true" />
                               <MFXTextField fx:id="managerHoursTextField" floatingText="Manager Hours" floatingTextGap="0.0" graphicTextGap="5.0" prefHeight="30.0" prefWidth="118.0" stylesheets="@css/mfx-text-field.css" />
-                              <Button fx:id="saveSettingsButton" mnemonicParsing="false" onAction="#handleSaveSettingsButton" prefHeight="25.0" prefWidth="59.0" text="Save" />
+                              <MFXButton fx:id="saveSettingsButton" buttonType="RAISED" onAction="#handleSaveSettingsButton" rippleAnimateShadow="true" rippleColor="#a70fcd" text="Save" />
                            </children>
                         </VBox>
                      </children></AnchorPane>

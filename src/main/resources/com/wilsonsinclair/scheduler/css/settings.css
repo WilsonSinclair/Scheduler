@@ -1,20 +1,6 @@
 #settingsVBox {
     -fx-background-color: #ffffff;
-    -fx-padding: 10px;
+    -fx-padding: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
     -fx-shadow-radius: 5px;
-}
-
-#managerHoursTextField {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
-    -fx-shadow-radius: 5px;
-}
-
-.text-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ffffff;
 }

@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import org.controlsfx.control.ToggleSwitch;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -17,22 +19,22 @@ import java.util.stream.IntStream;
 public class ForbiddenTimeController implements Initializable {
 
     @FXML
-    private DatePicker datePicker;
+    private MFXDatePicker datePicker;
 
     @FXML
-    private ChoiceBox<String> typeChoiceBox;
+    private MFXComboBox<String> typeComboBox;
 
     @FXML
-    private ChoiceBox<String> ordinalChoiceBox;
+    private MFXComboBox<String> ordinalChoiceBox;
 
     @FXML
-    private ComboBox<DayOfWeek> dayOfWeekComboBox;
+    private MFXComboBox<DayOfWeek> dayOfWeekComboBox;
 
     @FXML
     private ComboBox<Integer> startHourComboBox, endHourComboBox, startMinuteComboBox, endMinuteComboBox;
-
+    
     @FXML
-    private ToggleSwitch startTimeAmPmToggleSwitch, endTimeAmPmToggleSwitch, allDayDayOfWeekSwitch, allDayDateSwitch;
+    private MFXToggleButton allDayDateSwitch, allDayDayOfWeekSwitch, startTimeAmPmToggleSwitch, endTimeAmPmToggleSwitch;
 
     @FXML
     private DialogPane pane;
@@ -114,7 +116,7 @@ public class ForbiddenTimeController implements Initializable {
     };
 
     private final EventHandler<MouseEvent> amPMToggleSwitchEvent = mouseEvent -> {
-        ToggleSwitch toggleSwitch = (ToggleSwitch) mouseEvent.getSource();
+        MFXToggleButton toggleSwitch = (MFXToggleButton) mouseEvent.getSource();
         if (toggleSwitch.isSelected()) {
             toggleSwitch.setText("PM");
         }
@@ -130,7 +132,7 @@ public class ForbiddenTimeController implements Initializable {
         public void handle(MouseEvent mouseEvent) {
 
             // The toggle switch that triggered this handler
-            ToggleSwitch toggleSwitch = (ToggleSwitch) mouseEvent.getSource();
+            MFXToggleButton toggleSwitch = (MFXToggleButton) mouseEvent.getSource();
 
             // This should never fail
             assert(toggleSwitch != null);
@@ -160,7 +162,7 @@ public class ForbiddenTimeController implements Initializable {
         // The OK button at the bottom right of the dialog window
         Button okButton = (Button) pane.lookupButton(ButtonType.OK);
         
-        typeChoiceBox.setItems(FXCollections.observableArrayList(TYPE_CHOICE_BOX_VALUES));
+        typeComboBox.setItems(FXCollections.observableArrayList(TYPE_CHOICE_BOX_VALUES));
         ordinalChoiceBox.setItems(FXCollections.observableArrayList(ORDINAL_CHOICE_BOX_VALUES));
         ordinalChoiceBox.getSelectionModel().selectFirst();
 
@@ -183,7 +185,7 @@ public class ForbiddenTimeController implements Initializable {
         allDayDayOfWeekSwitch.setOnMouseClicked(allDaySwitchEvent);
 
         //Listen for changes to this choice box
-        typeChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
+        typeComboBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
             switch (TYPE_CHOICE_BOX_VALUES[newValue.intValue()]) {
                 case "Certain Date" -> {
                     forbiddenTime = new ForbiddenTime();
