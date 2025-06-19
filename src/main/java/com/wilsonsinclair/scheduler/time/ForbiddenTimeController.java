@@ -31,13 +31,13 @@ public class ForbiddenTimeController implements Initializable {
     private MFXComboBox<DayOfWeek> dayOfWeekComboBox;
 
     @FXML
-    private ComboBox<Integer> startHourComboBox, endHourComboBox, startMinuteComboBox, endMinuteComboBox;
+    private MFXComboBox<Integer> startHourComboBox, endHourComboBox, startMinuteComboBox, endMinuteComboBox;
     
     @FXML
     private MFXToggleButton allDayDateSwitch, allDayDayOfWeekSwitch, startTimeAmPmToggleSwitch, endTimeAmPmToggleSwitch;
 
     @FXML
-    private DialogPane pane;
+    private DialogPane forbiddenTimeDialogPane;
 
     private ForbiddenTime forbiddenTime;
 
@@ -160,7 +160,7 @@ public class ForbiddenTimeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // The OK button at the bottom right of the dialog window
-        Button okButton = (Button) pane.lookupButton(ButtonType.OK);
+        Button okButton = (Button) forbiddenTimeDialogPane.lookupButton(ButtonType.OK);
         
         typeComboBox.setItems(FXCollections.observableArrayList(TYPE_CHOICE_BOX_VALUES));
         ordinalChoiceBox.setItems(FXCollections.observableArrayList(ORDINAL_CHOICE_BOX_VALUES));

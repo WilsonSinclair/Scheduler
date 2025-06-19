@@ -1,0 +1,12 @@
+.forbiddenTimeDialogPane {
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-background-color: #7820A1;
+    -fx-text-fill: #ffffff;
+    -fx-button-type: RAISED;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-shadow-radius: 5px;
+}

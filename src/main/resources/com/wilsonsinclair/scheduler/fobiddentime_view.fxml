@@ -4,34 +4,33 @@
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.scene.control.ButtonType?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane fx:id="pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.time.ForbiddenTimeController">
+<DialogPane fx:id="forbiddenTimeDialogPane" stylesheets="@css/forbiddentime-dialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.time.ForbiddenTimeController">
    <content>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
             <AnchorPane fx:id="dialogPane" prefHeight="345.0" prefWidth="582.0">
                <children>
                   <Separator layoutX="-1.0" layoutY="71.0" prefHeight="4.0" prefWidth="583.0" />
-                  <ComboBox fx:id="startHourComboBox" disable="true" layoutX="204.0" layoutY="250.0" prefHeight="26.0" prefWidth="75.0" promptText="Hour" />
-                  <ComboBox fx:id="endHourComboBox" disable="true" layoutX="204.0" layoutY="302.0" prefHeight="26.0" prefWidth="75.0" promptText="Hour" />
                   <Label layoutX="54.0" layoutY="255.0" text="From:" />
                   <Label layoutX="61.0" layoutY="307.0" text="To:" />
-                  <ComboBox fx:id="startMinuteComboBox" disable="true" layoutX="297.0" layoutY="250.0" prefHeight="26.0" prefWidth="88.0" promptText="Minute" />
-                  <ComboBox fx:id="endMinuteComboBox" disable="true" layoutX="297.0" layoutY="303.0" prefHeight="26.0" prefWidth="90.0" promptText="Minute" />
                   <MFXDatePicker fx:id="datePicker" disable="true" floatMode="BORDER" floatingText="Date" layoutX="179.0" layoutY="95.0" />
                   <MFXToggleButton fx:id="allDayDateSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="95.0" radius="9.0" text="All Day" textFill="#9a13dd" />
                   <MFXToggleButton fx:id="allDayDayOfWeekSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="168.0" radius="9.0" text="All Day" textFill="#9a13dd" />
-                  <MFXToggleButton fx:id="startTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="244.0" radius="9.0" text="AM" textFill="#9a13dd" />
-                  <MFXToggleButton fx:id="endTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="297.0" radius="9.0" text="AM" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="startTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="429.0" layoutY="244.0" radius="9.0" text="AM" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="endTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="429.0" layoutY="296.0" radius="9.0" text="AM" textFill="#9a13dd" />
                   <MFXComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Choose One" layoutX="217.0" layoutY="20.0" />
                   <MFXComboBox fx:id="dayOfWeekComboBox" disable="true" floatMode="BORDER" floatingText="Day of Week" layoutX="179.0" layoutY="167.0" prefHeight="35.0" prefWidth="200.0" />
                   <MFXComboBox fx:id="ordinalChoiceBox" disable="true" floatMode="BORDER" floatingText="Ordinal" layoutX="42.0" layoutY="167.0" prefHeight="20.0" prefWidth="50.0" />
+                  <MFXComboBox fx:id="startHourComboBox" disable="true" floatMode="BORDER" floatingText="Hour" layoutX="179.0" layoutY="247.0" minWidth="90.0" prefWidth="90.0" />
+                  <MFXComboBox fx:id="startMinuteComboBox" disable="true" floatMode="BORDER" floatingText="Minute" layoutX="290.0" layoutY="247.0" minWidth="90.0" prefWidth="90.0" />
+                  <MFXComboBox fx:id="endHourComboBox" disable="true" floatMode="BORDER" floatingText="Hour" layoutX="179.0" layoutY="299.0" minWidth="90.0" prefWidth="90.0" />
+                  <MFXComboBox fx:id="endMinuteComboBox" disable="true" floatMode="BORDER" floatingText="Minute" layoutX="290.0" layoutY="299.0" minWidth="90.0" prefWidth="90.0" />
                </children>
             </AnchorPane>
          </children>
