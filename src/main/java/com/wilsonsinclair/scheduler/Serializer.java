@@ -1,6 +1,8 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.Schedule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +13,8 @@ public class Serializer {
 
     private static final File EMPLOYEE_FILE = new File("employees.ser");
     private static final File SCHEDULE_FILE = new File("schedules.ser");
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(Serializer.class);
     /*
         Serialize employees to a file for use on subsequent runs of the application. We pass in a list of employees
         to only have to open 2 streams instead of 2 * number of employees.
@@ -29,9 +32,10 @@ public class Serializer {
             oos.close();
             fos.close();
 
+            logger.info("Employees saved to {}", EMPLOYEE_FILE.getAbsolutePath());
+
         } catch (IOException e) {
-            System.err.println("Error saving employees to a file.");
-            e.printStackTrace();
+            logger.error("Error saving employees to a file.", e);
         }
     }
 
@@ -47,7 +51,7 @@ public class Serializer {
             oos.close();
             fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error saving schedules to a file.", e);
         }
     }
 
@@ -65,7 +69,7 @@ public class Serializer {
             return new ArrayList<>(loadedEmployees.getData());
 
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            logger.error("Error loading employees from file.", e);
         }
         return new ArrayList<>();
     }
@@ -87,9 +91,9 @@ public class Serializer {
             SerializableObservableList<Schedule> loadedSchedules = (SerializableObservableList<Schedule>) ois.readObject();
             return new ArrayList<>(loadedSchedules.getData());
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error("Error loading schedules from file.", e);
         }
-        System.out.println("Returning empty schedule list");
+        logger.info("Returning empty schedule list");
         return new ArrayList<>();
     }
 }

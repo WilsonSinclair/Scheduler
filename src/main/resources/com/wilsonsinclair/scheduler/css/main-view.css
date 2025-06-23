@@ -20,9 +20,50 @@
 .success     { -fx-background-color: #b0f3c1; }  /* oklch(0.7 0.05 160) */
 .info        { -fx-background-color: #b0c1f3; }  /* oklch(0.7 0.05 260) */
 
-#settingsVBox {
-    -fx-background-color: #d8d1ff;
-    -fx-padding: 5px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
-    -fx-shadow-radius: 5px;
+.root {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14px;
+    -fx-font-color: #f6f3ff;
 }
+
+#schedulePane {
+    -fx-border-radius: 15px;
+    -fx-border-color: #514e77;
+    -fx-border-width: 1px;
+}
+
+.VBox {
+    -fx-background-color: #3b3842;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-border-color: #514e77;
+    -fx-background-color: #1a1820;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: #d8d1ff;
+    -fx-text-fill: #3b3842;
+}
+
+#scheduleTable {
+    -fx-background-color:  #d8d1ff;
+}
+
+.table-cell {
+    -fx-border-color: #c6c0d6;
+    -fx-background-color: #3b3842;
+    -fx-text-fill: #f6f3ff;
+}
+
+.TableColumn {
+    -fx-background-color: #d8d1ff;
+    -fx-color: #3b3842;
+}
+
+#scheduleTable .column-header-background {
+    -fx-background-color: #d8d1ff;
+}
+
+

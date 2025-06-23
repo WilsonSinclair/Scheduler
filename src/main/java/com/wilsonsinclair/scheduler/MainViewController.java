@@ -2,7 +2,6 @@ package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -11,7 +10,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -25,11 +27,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 
 import javafx.util.Callback;
-import org.controlsfx.control.tableview2.TableView2;
 
 import org.controlsfx.validation.Severity;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainViewController implements Initializable {
 
@@ -55,16 +58,13 @@ public class MainViewController implements Initializable {
     private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton, deleteScheduleButton, saveSettingsButton;
 
     @FXML
-    private TableView2<Employee> scheduleTable;
+    private MFXTableView<Employee> scheduleTable;
 
     @FXML
-    private TableColumn<Employee, String> employeeNameColumn;
+    private MFXTableColumn<Employee> employeeNameColumn;
 
     @FXML
-    private TableColumn<
-        Employee,
-        Shift
-    > mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
+    private MFXTableColumn<Employee> mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
 
     @FXML
     private ComboBox<Schedule> scheduleComboBox;
@@ -78,6 +78,8 @@ public class MainViewController implements Initializable {
 
     private static final Integer[] NUM_LUNCHERS_CHOICES = new Integer[]{2, 3, 4};
     private static final Integer[] NUM_CLOSERS_CHOICES = new Integer[]{2, 3};
+
+    private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     public void loadEmployee() {
@@ -133,8 +135,7 @@ public class MainViewController implements Initializable {
             newSettings.setManagerHours(Integer.parseInt(managerHoursTextField.getText()));
             newSettings.save();
         } catch (IOException e) {
-            System.err.println("Error saving settings.");
-            e.printStackTrace();
+            logger.error("Error saving settings.", e);
         }
     }
 
@@ -225,9 +226,7 @@ public class MainViewController implements Initializable {
                 }
             }
         } catch (IOException exception) {
-            System.err.println(
-                "Error loading the ForbiddenTimeView FXML file."
-            );
+            logger.error("Error loading the ForbiddenTimeView FXML file.", exception);
         }
     }
 
@@ -313,7 +312,7 @@ public class MainViewController implements Initializable {
         employeeListView.setItems(employeeList);
 
         // Simply consumes any sort events, as we don't want the user to be able to sort columns on this table.
-        scheduleTable.setOnSort(Event::consume);
+        //scheduleTable.setOnSort(Event::consume);
 
         schedules = Serializer.loadSchedules();
         scheduleComboBox.setItems(FXCollections.observableArrayList(schedules));
@@ -365,143 +364,27 @@ public class MainViewController implements Initializable {
             scheduleComboBox.getSelectionModel().select(index);
         });
 
-        employeeNameColumn.setCellValueFactory(data ->
-            data.getValue().nameProperty()
-        );
-        mondayColumn.setCellValueFactory(data ->
-            data.getValue().mondayShiftProperty()
-        );
-        tuesdayColumn.setCellValueFactory(data ->
-            data.getValue().tuesdayShiftProperty()
-        );
-        wednesdayColumn.setCellValueFactory(data ->
-            data.getValue().wednesdayShiftProperty()
-        );
-        thursdayColumn.setCellValueFactory(data ->
-            data.getValue().thursdayShiftProperty()
-        );
-        fridayColumn.setCellValueFactory(data ->
-            data.getValue().fridayShiftProperty()
-        );
-        saturdayColumn.setCellValueFactory(data ->
-            data.getValue().saturdayShiftProperty()
-        );
-        sundayColumn.setCellValueFactory(data ->
-            data.getValue().sundayShiftProperty()
-        );
+        employeeNameColumn = new MFXTableColumn<>("Name");
+        mondayColumn = new MFXTableColumn<>("Monday");
+        tuesdayColumn = new MFXTableColumn<>("Tuesday");
+        wednesdayColumn = new MFXTableColumn<>("Wednesday");
+        thursdayColumn = new MFXTableColumn<>("Thursday");
+        fridayColumn = new MFXTableColumn<>("Friday");
+        saturdayColumn = new MFXTableColumn<>("Saturday");
+        sundayColumn = new MFXTableColumn<>("Sunday");
 
-        // Set custom cell factories for shift columns to display shift times
-        mondayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
+        employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::nameProperty));
+        mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::mondayShiftProperty));
+        tuesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::tuesdayShiftProperty));
+        wednesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::wednesdayShiftProperty));
+        thursdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::thursdayShiftProperty));
+        fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::fridayShiftProperty));
+        saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::saturdayShiftProperty));
+        sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::sundayShiftProperty));
 
-        tuesdayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
+        scheduleTable.getTableColumns().addAll(employeeNameColumn, mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn);
 
-        wednesdayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
-
-        thursdayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
-
-        fridayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
-
-        saturdayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
-
-        sundayColumn.setCellFactory(column ->
-            new TableCell<Employee, Shift>() {
-                @Override
-                protected void updateItem(Shift shift, boolean empty) {
-                    super.updateItem(shift, empty);
-                    if (empty || shift == null) {
-                        setText(null);
-                    } else {
-                        setText(
-                            shift.getStartTime() + " - " + shift.getEndTime()
-                        );
-                    }
-                }
-            }
-        );
+        scheduleTable.autosizeColumnsOnInitialization();
 
         ValidationSupport validator = new ValidationSupport();
         validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));

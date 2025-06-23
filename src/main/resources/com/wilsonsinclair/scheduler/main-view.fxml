@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -15,37 +16,29 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.tableview2.TableView2?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" styleClass="bg" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
    <children>
-      <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+      <TabPane stylesheets="@css/main-view.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
-          <Tab text="Schedules">
+          <Tab fx:id="schedulesTab" text="Schedules">
             <content>
-              <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="913.0" prefWidth="1679.0" stylesheets="@css/main-view.css">
                      <children>
-                        <TableView2 fx:id="scheduleTable" layoutX="401.0" layoutY="208.0" rowHeaderWidth="70.0">
-                           <columns>
-                              <TableColumn fx:id="employeeNameColumn" prefWidth="75.0" text="Employee" />
-                              <TableColumn fx:id="mondayColumn" prefWidth="75.0" text="Monday" />
-                              <TableColumn fx:id="tuesdayColumn" prefWidth="75.0" text="Tuesday" />
-                              <TableColumn fx:id="wednesdayColumn" prefWidth="75.0" text="Wednesday" />
-                              <TableColumn fx:id="thursdayColumn" prefWidth="75.0" text="Thursday" />
-                              <TableColumn fx:id="fridayColumn" prefWidth="75.0" text="Friday" />
-                              <TableColumn fx:id="saturdayColumn" prefWidth="75.0" text="Saturday" />
-                              <TableColumn fx:id="sundayColumn" minWidth="-Infinity" prefWidth="75.0" text="Sunday" />
-                           </columns>
-                        </TableView2>
-                        <Button fx:id="generateScheduleButton" layoutX="401.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Generate Schedule" />
-                        <ComboBox fx:id="scheduleComboBox" layoutX="557.0" layoutY="143.0" prefHeight="25.0" prefWidth="290.0" />
-                        <Button fx:id="deleteScheduleButton" disable="true" layoutX="881.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Delete Schedule" />
+                        <Pane fx:id="schedulePane" layoutX="432.0" layoutY="195.0" prefHeight="661.0" prefWidth="1056.0" styleClass="bg-light" stylesheets="@css/main-view.css">
+                           <children>
+                              <Button fx:id="generateScheduleButton" layoutX="81.0" layoutY="62.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="147.0" text="Generate Schedule" />
+                              <ComboBox fx:id="scheduleComboBox" layoutX="383.0" layoutY="62.0" prefHeight="25.0" prefWidth="290.0" />
+                              <Button fx:id="deleteScheduleButton" disable="true" layoutX="844.0" layoutY="62.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Delete Schedule" />
+                              <MFXTableView fx:id="scheduleTable" layoutX="81.0" layoutY="189.0" prefHeight="402.0" prefWidth="884.0" />
+                           </children>
+                        </Pane>
                      </children></AnchorPane>
             </content>
           </Tab>
