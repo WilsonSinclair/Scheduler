@@ -47,6 +47,11 @@
     -fx-text-fill: #3b3842;
 }
 
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #d8ffd1;
+    -fx-text-fill: #f6f3ff;
+}
+
 #scheduleTable {
     -fx-background-color:  #d8d1ff;
 }
@@ -64,6 +69,21 @@
 
 #scheduleTable .column-header-background {
     -fx-background-color: #d8d1ff;
+}
+
+#generateScheduleButton {
+    -fx-background-color: #d8ffd1;
+    -fx-text-fill: #3b3842;
+}
+
+#deleteScheduleButton {
+    -fx-background-color: #f3c1b0;
+    -fx-text-fill: #3b3842;
+}
+
+#scheduleComboBox {
+    -fx-background-color: #d8d1ff;
+    -fx-text-fill: #3b3842;
 }
 
 

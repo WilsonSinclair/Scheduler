@@ -184,6 +184,34 @@ public class Employee implements Serializable {
         return assignedShiftsProperty().get();
     }
 
+    public Shift getMondayShift() {
+        return mondayShiftProperty().get();
+    }
+
+    public Shift getTuesdayShift() {
+        return tuesdayShiftProperty().get();
+    }
+
+    public Shift getWednesdayShift() {
+        return wednesdayShiftProperty().get();
+    }
+
+    public Shift getThursdayShift() {
+        return thursdayShiftProperty().get();
+    }
+
+    public Shift getFridayShift() {
+        return fridayShiftProperty().get();
+    }
+
+    public Shift getSaturdayShift() {
+        return saturdayShiftProperty().get();
+    }
+
+    public Shift getSundayShift() {
+        return sundayShiftProperty().get();
+    }
+
     public void setMondayShift(Shift s) {
         mondayShiftProperty().set(s);
     }

@@ -24,7 +24,7 @@ public class Main extends Application {
         .setGlobal();
         
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1440, 810);
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Scheduler");
         stage.setScene(scene);
         stage.setResizable(false);

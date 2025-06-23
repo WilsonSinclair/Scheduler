@@ -10,20 +10,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import io.github.palexdev.materialfx.controls.MFXTableColumn;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 
 import javafx.util.Callback;
@@ -55,7 +51,10 @@ public class MainViewController implements Initializable {
     private RadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
-    private Button saveEmployeeButton, addForbiddenTImeButton, generateScheduleButton, deleteScheduleButton, saveSettingsButton;
+    private Button saveEmployeeButton, addForbiddenTImeButton, deleteScheduleButton;
+
+    @FXML
+    private MFXButton generateScheduleButton;
 
     @FXML
     private MFXTableView<Employee> scheduleTable;
@@ -67,7 +66,7 @@ public class MainViewController implements Initializable {
     private MFXTableColumn<Employee> mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
 
     @FXML
-    private ComboBox<Schedule> scheduleComboBox;
+    private MFXComboBox<Schedule> scheduleComboBox;
 
     @FXML
     private ChoiceBox<Integer> numLunchersChoiceBox, numClosersChoiceBox;
@@ -361,7 +360,7 @@ public class MainViewController implements Initializable {
                         );
                     }
                 });
-            scheduleComboBox.getSelectionModel().select(index);
+            scheduleComboBox.getSelectionModel().selectIndex(index);
         });
 
         employeeNameColumn = new MFXTableColumn<>("Name");
@@ -373,18 +372,19 @@ public class MainViewController implements Initializable {
         saturdayColumn = new MFXTableColumn<>("Saturday");
         sundayColumn = new MFXTableColumn<>("Sunday");
 
-        employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::nameProperty));
-        mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::mondayShiftProperty));
-        tuesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::tuesdayShiftProperty));
-        wednesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::wednesdayShiftProperty));
-        thursdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::thursdayShiftProperty));
-        fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::fridayShiftProperty));
-        saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::saturdayShiftProperty));
-        sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::sundayShiftProperty));
+        employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getName));
+        mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getMondayShift));
+        tuesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getTuesdayShift));
+        wednesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getWednesdayShift));
+        thursdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getThursdayShift));
+        fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getFridayShift));
+        saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSaturdayShift));
+        sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSundayShift));
 
         scheduleTable.getTableColumns().addAll(employeeNameColumn, mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn);
 
         scheduleTable.autosizeColumnsOnInitialization();
+
 
         ValidationSupport validator = new ValidationSupport();
         validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));

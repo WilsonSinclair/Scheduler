@@ -1,6 +1,8 @@
 package com.wilsonsinclair.scheduler.time;
 
 import com.wilsonsinclair.scheduler.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 public class ScheduleFactory {
+
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleFactory.class);
 
     /*
         This method takes a list of employees and a starting date as input,
@@ -30,7 +34,7 @@ public class ScheduleFactory {
         //TODO: Implement schedule generation logic here
         for (Day day : schedule.getDays()) {
             assignOpener(openers, day, r);
-            assignLunchers(employees,day, r, numLunchers);
+            //assignLunchers(employees,day, r, numLunchers);
         }
         return schedule;
     }
