@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Button?>
@@ -9,12 +10,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -63,10 +62,6 @@
                                  </children></AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" onKeyTyped="#enableSaveButton" AnchorPane.leftAnchor="100.0" />
-                                    <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="327.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="482.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.leftAnchor="482.0" />
                                     <ListView fx:id="forbiddenTimesListView" layoutX="100.0" layoutY="211.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="211.0">
                                        <contextMenu>
                                           <ContextMenu fx:id="forbiddenTimesListViewContextMenu">
@@ -95,7 +90,10 @@
                                        <effect>
                                           <DropShadow blurType="ONE_PASS_BOX" />
                                        </effect></Button>
-                                    <RadioButton fx:id="isManagerButton" disable="true" layoutX="616.0" layoutY="18.0" mnemonicParsing="false" text="Manager" />
+                                    <MFXTextField fx:id="employeeName" floatMode="BORDER" floatingText="Name" layoutX="152.0" layoutY="12.0" prefHeight="32.0" prefWidth="143.0" />
+                                    <MFXRadioButton fx:id="isOpenerButton" disable="true" gap="10.0" layoutX="364.0" layoutY="23.0" radius="9.0" text="Opener" />
+                                    <MFXRadioButton fx:id="isCloserButton" disable="true" gap="10.0" layoutX="616.0" layoutY="23.0" radius="9.0" text="Closer" />
+                                    <MFXRadioButton fx:id="isManagerButton" disable="true" gap="10.0" layoutX="896.0" layoutY="23.0" radius="9.0" text="Manager" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>

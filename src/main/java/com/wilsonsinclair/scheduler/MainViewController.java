@@ -39,13 +39,13 @@ public class MainViewController implements Initializable {
     private ListView<ForbiddenTime> forbiddenTimesListView;
 
     @FXML
-    private TextField employeeName;
+    private MFXTextField employeeName;
 
     @FXML
     private MFXTextField managerHoursTextField;
 
     @FXML
-    private RadioButton isOpenerButton, isCloserButton, isManagerButton;
+    private MFXRadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
     private Button saveEmployeeButton, addForbiddenTImeButton, deleteScheduleButton;
