@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" styleClass="bg" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" styleClass="background-gradient" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
    <children>
       <TabPane rotateGraphic="true" stylesheets="@css/main-view.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
@@ -29,7 +29,7 @@
             <content>
               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="913.0" prefWidth="1679.0" stylesheets="@css/main-view.css">
                      <children>
-                        <Pane fx:id="schedulePane" layoutX="432.0" layoutY="195.0" prefHeight="661.0" prefWidth="1056.0" styleClass="bg-light" stylesheets="@css/main-view.css">
+                        <Pane fx:id="schedulePane" layoutX="432.0" layoutY="195.0" prefHeight="661.0" prefWidth="1056.0" stylesheets="@css/main-view.css">
                            <children>
                               <MFXTableView fx:id="scheduleTable" layoutX="86.0" layoutY="130.0" prefHeight="402.0" prefWidth="884.0" />
                               <MFXButton fx:id="generateScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="86.0" layoutY="579.0" prefHeight="30.0" prefWidth="134.0" text="Generate" />

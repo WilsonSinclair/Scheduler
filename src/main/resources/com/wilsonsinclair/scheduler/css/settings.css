@@ -20,8 +20,28 @@
 .success     { -fx-background-color: #b0f3c1; }  /* oklch(0.7 0.05 160) */
 .info        { -fx-background-color: #b0c1f3; }  /* oklch(0.7 0.05 260) */
 
+{
+    -fx-bg-dark: #1a1820;
+    -fx-bg: #2a2831;
+    -fx-bg-light: #3b3842;
+
+    -fx-text: #f6f3ff;
+    -fx-text-muted: #c6c0d6;
+
+    -fx-highlight: #7e7aa0;
+    -fx-border: #6c6891;
+    -fx-border-muted: #514e77;
+
+    -fx-primary: #d8d1ff;
+    -fx-secondary: #d8ffd1;
+    -fx-danger: #f3c1b0;
+    -fx-warning: #f3ecb0;
+    -fx-success: #b0f3c1;
+    -fx-info: #b0c1f3;
+}
+
 #settingsVBox {
-    -fx-background-color: #3b3842;
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
     -fx-border-radius: 15px;
     -fx-border-color: #514e77;
     -fx-border-width: 1px;

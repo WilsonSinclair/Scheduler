@@ -18,7 +18,11 @@
 .danger      { -fx-background-color: #f3c1b0; }  /* oklch(0.7 0.05 30) */
 .warning     { -fx-background-color: #f3ecb0; }  /* oklch(0.7 0.05 100) */
 .success     { -fx-background-color: #b0f3c1; }  /* oklch(0.7 0.05 160) */
-.info        { -fx-background-color: #b0c1f3; }  /* oklch(0.7 0.05 260) */
+.info        { -fx-background-color: #b0c1f3; }
+
+.background-gradient {
+    -fx-background-color: linear-gradient(to bottom right, -fx-bg-dark, -fx-bg);
+}
 
 {
     -fx-bg-dark: #1a1820;
@@ -47,18 +51,19 @@
 }
 
 #schedulePane {
+    -fx-background-color: linear-gradient(to bottom, -fx-bg, transparent);
     -fx-border-radius: 15px;
     -fx-border-color: -fx-border-muted;
     -fx-border-width: 1px;
 }
 
 .VBox {
-    -fx-background-color: -fx-bg-light;
+    -fx-background-color: -fx-bg-dark;
 }
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-border-color: #514e77;
-    -fx-background-color: -fx-bg-dark;
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, transparent);
     -fx-border-width: 0 0 1 0;
 }
 
