@@ -21,7 +21,7 @@
 .info        { -fx-background-color: #b0c1f3; }  /* oklch(0.7 0.05 260) */
 
 .root {
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Menlo";
     -fx-font-size: 14px;
     -fx-font-color: #f6f3ff;
 }
@@ -54,10 +54,11 @@
 
 #scheduleTable {
     -fx-background-color:  #d8d1ff;
+    -fx-border-color: #514e77;
 }
 
 .table-cell {
-    -fx-border-color: #c6c0d6;
+    -fx-border-color: #514e77;
     -fx-background-color: #3b3842;
     -fx-text-fill: #f6f3ff;
 }
@@ -76,9 +77,17 @@
     -fx-text-fill: #3b3842;
 }
 
+#generateScheduleButton:hover {
+    -fx-background-color: #b8ffd1;
+}
+
 #deleteScheduleButton {
     -fx-background-color: #f3c1b0;
     -fx-text-fill: #3b3842;
+}
+
+#deleteScheduleButton:hover {
+    -fx-background-color: #f3b0b0;
 }
 
 #scheduleComboBox {

@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -184,32 +186,39 @@ public class Employee implements Serializable {
         return assignedShiftsProperty().get();
     }
 
-    public Shift getMondayShift() {
-        return mondayShiftProperty().get();
+    public String getMondayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(mondayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getTuesdayShift() {
-        return tuesdayShiftProperty().get();
+    public String getTuesdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(tuesdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getWednesdayShift() {
-        return wednesdayShiftProperty().get();
+    public String getWednesdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(wednesdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getThursdayShift() {
-        return thursdayShiftProperty().get();
+    public String getThursdayShiftAsString() {
+        Optional<Shift> shift = Optional.ofNullable(thursdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getFridayShift() {
-        return fridayShiftProperty().get();
+    public String getFridayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(fridayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getSaturdayShift() {
-        return saturdayShiftProperty().get();
+    public String getSaturdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(saturdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
-    public Shift getSundayShift() {
-        return sundayShiftProperty().get();
+    public String getSundayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(sundayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
     }
 
     public void setMondayShift(Shift s) {

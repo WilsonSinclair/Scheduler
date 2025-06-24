@@ -33,9 +33,6 @@ import org.slf4j.LoggerFactory;
 public class MainViewController implements Initializable {
 
     @FXML
-    private ContextMenu employeeListViewContextMenu, forbiddenTimesListViewContextMenu;
-
-    @FXML
     private ListView<Employee> employeeListView;
 
     @FXML
@@ -69,7 +66,7 @@ public class MainViewController implements Initializable {
     private MFXComboBox<Schedule> scheduleComboBox;
 
     @FXML
-    private ChoiceBox<Integer> numLunchersChoiceBox, numClosersChoiceBox;
+    private MFXComboBox<Integer> numLunchersComboBox, numClosersComboBox;
 
     private static List<Schedule> schedules;
 
@@ -129,8 +126,8 @@ public class MainViewController implements Initializable {
     public void handleSaveSettingsButton() {
         try {
             Settings newSettings = Settings.getInstance();
-            newSettings.setNumLunchers(numLunchersChoiceBox.getValue());
-            newSettings.setNumClosers(numClosersChoiceBox.getValue());
+            newSettings.setNumLunchers(numLunchersComboBox.getValue());
+            newSettings.setNumClosers(numClosersComboBox.getValue());
             newSettings.setManagerHours(Integer.parseInt(managerHoursTextField.getText()));
             newSettings.save();
         } catch (IOException e) {
@@ -297,12 +294,12 @@ public class MainViewController implements Initializable {
 
         // Read settings from settings.json
         Settings settings = Settings.getInstance();
-        numLunchersChoiceBox.setValue(settings.getNumLunchers());
-        numClosersChoiceBox.setValue(settings.getNumClosers());
+        numLunchersComboBox.setValue(settings.getNumLunchers());
+        numClosersComboBox.setValue(settings.getNumClosers());
         managerHoursTextField.setText(Integer.toString(settings.getManagerHours()));
 
-        numLunchersChoiceBox.setItems(FXCollections.observableArrayList(NUM_LUNCHERS_CHOICES));
-        numClosersChoiceBox.setItems(FXCollections.observableArrayList(NUM_CLOSERS_CHOICES));
+        numLunchersComboBox.setItems(FXCollections.observableArrayList(NUM_LUNCHERS_CHOICES));
+        numClosersComboBox.setItems(FXCollections.observableArrayList(NUM_CLOSERS_CHOICES));
 
         ObservableList<Employee> employeeList =
             FXCollections.observableArrayList(Employee.extractor());
@@ -360,7 +357,7 @@ public class MainViewController implements Initializable {
                         );
                     }
                 });
-            scheduleComboBox.getSelectionModel().selectIndex(index);
+            scheduleComboBox.getSelectionModel().selectLast();
         });
 
         employeeNameColumn = new MFXTableColumn<>("Name");
@@ -373,13 +370,13 @@ public class MainViewController implements Initializable {
         sundayColumn = new MFXTableColumn<>("Sunday");
 
         employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getName));
-        mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getMondayShift));
-        tuesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getTuesdayShift));
-        wednesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getWednesdayShift));
-        thursdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getThursdayShift));
-        fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getFridayShift));
-        saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSaturdayShift));
-        sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSundayShift));
+        mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getMondayShiftAsString));
+        tuesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getTuesdayShiftAsString));
+        wednesdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getWednesdayShiftAsString));
+        thursdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getThursdayShiftAsString));
+        fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getFridayShiftAsString));
+        saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSaturdayShiftAsString));
+        sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSundayShiftAsString));
 
         scheduleTable.getTableColumns().addAll(employeeNameColumn, mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn);
 
