@@ -98,12 +98,12 @@
 }
 
 #generateScheduleButton {
-    -fx-background-color: #d8ffd1;
+    -fx-background-color: -fx-success;
     -fx-text-fill: #3b3842;
 }
 
 #generateScheduleButton:hover {
-    -fx-background-color: #b8ffd1;
+    -fx-background-color: -fx-secondary;
 }
 
 #deleteScheduleButton {
@@ -140,6 +140,10 @@
     -fx-border-radius: 10px;
 }
 
+#employeeListView .virtual-flow .mfx-list-cell .user-icon {
+    -mfx-color: -fx-highlight;
+}
+
 #employeeListView .virtual-flow .mfx-list-cell:hover,
 #employeeListView .virtual-flow .mfx-list-cell:selected {
     -fx-background-color: -fx-highlight;
@@ -150,8 +154,32 @@
     -fx-font-size: 17px;
 }
 
+#employeeListView .virtual-flow .mfx-list-cell:selected .user-icon {
+    -mfx-color: -fx-primary;
+}
+
 #employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
     mfx-auto-clip: true;
+}
+
+#addEmployeeButton {
+    -fx-background-color: -fx-success;
+}
+
+#addEmployeeButton:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+#addForbiddenTimeButton {
+    -fx-background-color: -fx-info;
+}
+
+#saveEmployeeButton {
+    -fx-background-color: -fx-success;
+}
+
+#saveEmployeeButton:hover {
+    -fx-background-color: -fx-secondary;
 }
 
 

@@ -21,10 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
-
-import javafx.util.Callback;
 
 import javafx.util.StringConverter;
 import org.controlsfx.validation.Severity;
@@ -51,10 +48,7 @@ public class MainViewController implements Initializable {
     private MFXRadioButton isOpenerButton, isCloserButton, isManagerButton;
 
     @FXML
-    private Button saveEmployeeButton, addForbiddenTImeButton, deleteScheduleButton;
-
-    @FXML
-    private MFXButton generateScheduleButton;
+    private MFXButton saveEmployeeButton, addForbiddenTimeButton, deleteScheduleButton, generateScheduleButton;
 
     @FXML
     private MFXTableView<Employee> scheduleTable;
@@ -92,7 +86,7 @@ public class MainViewController implements Initializable {
         employeeName.setDisable(false);
         isOpenerButton.setDisable(false);
         isCloserButton.setDisable(false);
-        addForbiddenTImeButton.setDisable(false);
+        addForbiddenTimeButton.setDisable(false);
         isManagerButton.setDisable(false);
 
         saveEmployeeButton.setDisable(true);

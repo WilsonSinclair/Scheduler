@@ -14,7 +14,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -52,9 +51,9 @@
                               </ContextMenu>
                            </contextMenu>
                         </ListView>
-                        <MFXRadioButton fx:id="isOpenerButton" disable="true" gap="10.0" layoutX="863.0" layoutY="11.0" radius="9.0" text="Opener" />
-                        <MFXRadioButton fx:id="isCloserButton" disable="true" gap="10.0" layoutX="1115.0" layoutY="11.0" radius="9.0" text="Closer" />
-                        <MFXRadioButton fx:id="isManagerButton" disable="true" gap="10.0" layoutX="1395.0" layoutY="11.0" radius="9.0" text="Manager" />
+                        <MFXRadioButton fx:id="isOpenerButton" disable="true" gap="10.0" layoutX="863.0" layoutY="11.0" onAction="#enableSaveButton" radius="9.0" text="Opener" />
+                        <MFXRadioButton fx:id="isCloserButton" disable="true" gap="10.0" layoutX="1115.0" layoutY="11.0" onAction="#enableSaveButton" radius="9.0" text="Closer" />
+                        <MFXRadioButton fx:id="isManagerButton" disable="true" gap="10.0" layoutX="1395.0" layoutY="11.0" onAction="#enableSaveButton" radius="9.0" text="Manager" />
                         <MFXTextField fx:id="employeeName" floatMode="BORDER" floatingText="Name" layoutX="593.0" layoutY="10.0" prefHeight="32.0" prefWidth="143.0" />
                         <Label fx:id="forbiddenTimesListViewLabel" alignment="CENTER" layoutX="901.0" layoutY="141.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="901.0">
                            <font>
@@ -63,17 +62,14 @@
                         </Label>
                         <MFXListView fx:id="employeeListView" layoutX="97.0" layoutY="80.0" onMouseClicked="#loadEmployee" prefHeight="887.0" prefWidth="350.0" />
                         <Separator layoutX="596.0" layoutY="80.0" prefHeight="0.0" prefWidth="1075.0" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="8.0" />
-                        <Button fx:id="addForbiddenTImeButton" disable="true" layoutX="675.0" layoutY="679.0" mnemonicParsing="false" onAction="#handleAddForbiddenTimeButton" prefHeight="26.0" prefWidth="46.0" text="+" AnchorPane.leftAnchor="675.0">
-                           <effect>
-                              <DropShadow blurType="ONE_PASS_BOX" />
-                           </effect>
-                        </Button>
                         <Button fx:id="deleteEmloyeeButton" layoutX="1076.0" layoutY="653.0" mnemonicParsing="false" onMouseClicked="#confirmEmployeeDeletion" prefHeight="31.0" prefWidth="133.0" text="Delete Employee" AnchorPane.bottomAnchor="-524.0" AnchorPane.rightAnchor="-1109.0">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <MFXButton fx:id="saveEmployeeButton" depthLevel="LEVEL5" disable="true" layoutX="1477.0" layoutY="681.0" onAction="#saveEmployees" />
+                        <MFXButton fx:id="saveEmployeeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="1460.0" layoutY="678.0" onAction="#saveEmployees" prefHeight="30.0" prefWidth="72.0" text="Save" />
+                        <MFXButton fx:id="addEmployeeButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="238.0" layoutY="952.0" onAction="#addEmployee" prefHeight="30.0" prefWidth="68.0" text="New" />
+                        <MFXButton fx:id="addForbiddenTimeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="675.0" layoutY="681.0" onAction="#handleAddForbiddenTimeButton" prefHeight="30.0" prefWidth="67.0" text="Add" />
                      </children>
                   </AnchorPane>
             </content>
