@@ -11,7 +11,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.mfxcore.utils.converters.FunctionalStringConverter;
+import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,10 +23,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.TextField;
 
 import javafx.util.Callback;
 
+import javafx.util.StringConverter;
 import org.controlsfx.validation.Severity;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
@@ -33,7 +36,7 @@ import org.slf4j.LoggerFactory;
 public class MainViewController implements Initializable {
 
     @FXML
-    private ListView<Employee> employeeListView;
+    private MFXListView<Employee> employeeListView;
 
     @FXML
     private ListView<ForbiddenTime> forbiddenTimesListView;
@@ -106,7 +109,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void saveEmployees() {
-        Employee e = employeeListView.getSelectionModel().getSelectedItem();
+        Employee e = employeeListView.getSelectionModel().getSelectedValue();
         e.setName(employeeName.getText());
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
@@ -140,7 +143,7 @@ public class MainViewController implements Initializable {
         employeeListView
             .getItems()
             .add(new Employee("Employee", false, false, false));
-        employeeListView.getSelectionModel().selectLast();
+        employeeListView.getSelectionModel().selectIndex(employeeListView.getItems().size() - 1);
         loadEmployee();
     }
 
@@ -170,11 +173,9 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void deleteEmployee() {
-        final int index = employeeListView
-            .getSelectionModel()
-            .getSelectedIndex();
-        if (index >= 0) {
-            employeeListView.getItems().remove(index);
+        Employee e = getSelectedEmployee();
+        if (e != null) {
+            employeeListView.getItems().remove(e);
         }
 
         // We must now refresh the UI to reflect the now currently selected Employee
@@ -266,31 +267,6 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Sets the Cell Factory for the items in this list view. We do this so that this list view does not use
-        // the toString() implementation for Employee as this would provide unnecessary information.
-        employeeListView.setCellFactory(
-            new Callback<>() {
-                @Override
-                public ListCell<Employee> call(
-                    ListView<Employee> employeeListView
-                ) {
-                    return new ListCell<>() {
-                        @Override
-                        public void updateItem(
-                            Employee employee,
-                            boolean empty
-                        ) {
-                            super.updateItem(employee, empty);
-                            if (empty || employee == null) {
-                                setText(null);
-                            } else {
-                                setText(employee.getName());
-                            }
-                        }
-                    };
-                }
-            }
-        );
 
         // Read settings from settings.json
         Settings settings = Settings.getInstance();
@@ -382,12 +358,39 @@ public class MainViewController implements Initializable {
 
         scheduleTable.autosizeColumnsOnInitialization();
 
+        StringConverter<Employee> converter = FunctionalStringConverter.to(employee -> (employee == null) ? "" : employee.getName());
+        employeeListView.setCellFactory(employee -> new EmployeeListCellFactory(employeeListView, employee));
+        employeeListView.setConverter(converter);
+        employeeListView.features().enableBounceEffect();
+        employeeListView.features().enableSmoothScrolling(0.5);
+
 
         ValidationSupport validator = new ValidationSupport();
         validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));
     }
 
     private Employee getSelectedEmployee() {
-        return employeeListView.getSelectionModel().getSelectedItem();
+        return employeeListView.getSelectionModel().getSelectedValue();
+    }
+
+    private static class EmployeeListCellFactory extends MFXListCell<Employee> {
+        private final MFXFontIcon userIcon;
+
+        public EmployeeListCellFactory(MFXListView<Employee> listView, Employee data) {
+            super(listView, data);
+
+            userIcon = new MFXFontIcon("fas-user", 18);
+            userIcon.getStyleClass().add("user-icon");
+            render(data);
+        }
+
+        @Override
+        protected void render(Employee data) {
+            super.render(data);
+            if (userIcon != null) {
+                getChildren().addFirst(userIcon);
+            }
+        }
+
     }
 }
