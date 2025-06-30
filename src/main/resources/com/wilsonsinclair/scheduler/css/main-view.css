@@ -182,5 +182,39 @@
     -fx-background-color: -fx-secondary;
 }
 
+.context-menu {
+    -fx-background-color: -fx-bg-dark;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+    -mfx-depth: 5;
+}
 
+.context-menu .menu-item:focused {
+    -fx-background-color: -fx-danger;
+    -fx-text-fill: -fx-bg;
+}
 
+.context-menu .menu-item {
+    -fx-background-color: -fx-bg;
+    -fx-text-fill: -fx-text;
+}
+
+#employeeName {
+    -fx-background-color: -fx-primary;
+    -mfx-depth: 5;
+}
+
+#employeeInfoPane {
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+    -fx-padding: 4px;
+    -mfx-depth: 5;
+}
+
+#isOpenerButton, #isCloserButton, #isManagerButton {
+    -fx-text-fill: -fx-text-muted;
+    -mfx-depth: 5;
+}

@@ -39,10 +39,7 @@ public class MainViewController implements Initializable {
     private ListView<ForbiddenTime> forbiddenTimesListView;
 
     @FXML
-    private MFXTextField employeeName;
-
-    @FXML
-    private MFXTextField managerHoursTextField;
+    private MFXTextField employeeName, managerHoursTextField;
 
     @FXML
     private MFXRadioButton isOpenerButton, isCloserButton, isManagerButton;
@@ -134,10 +131,12 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void addEmployee() {
+        Employee oldEmployee = getSelectedEmployee();
         employeeListView
             .getItems()
             .add(new Employee("Employee", false, false, false));
         employeeListView.getSelectionModel().selectIndex(employeeListView.getItems().size() - 1);
+        employeeListView.getSelectionModel().deselectItem(oldEmployee);
         loadEmployee();
     }
 
@@ -277,9 +276,6 @@ public class MainViewController implements Initializable {
         employeeList.addAll(employees);
         employeeListView.setItems(employeeList);
 
-        // Simply consumes any sort events, as we don't want the user to be able to sort columns on this table.
-        //scheduleTable.setOnSort(Event::consume);
-
         schedules = Serializer.loadSchedules();
         scheduleComboBox.setItems(FXCollections.observableArrayList(schedules));
         if (schedules.isEmpty()) {
@@ -357,7 +353,6 @@ public class MainViewController implements Initializable {
         employeeListView.setConverter(converter);
         employeeListView.features().enableBounceEffect();
         employeeListView.features().enableSmoothScrolling(0.5);
-
 
         ValidationSupport validator = new ValidationSupport();
         validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));
