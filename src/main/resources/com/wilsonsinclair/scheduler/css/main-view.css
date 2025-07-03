@@ -120,7 +120,7 @@
     -fx-text-fill: #3b3842;
 }
 
-#employeeListView {
+#employeeListView, #forbiddenTimesListView {
     -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
     -fx-background-radius: 10px;
     -fx-border-color: -fx-border-muted;
@@ -129,11 +129,11 @@
     -mfx-depth: 5;
 }
 
-#employeeListView .virtual-flow {
+#employeeListView .virtual-flow, #forbiddenTimesListView .virtual-flow {
     -fx-background-color: transparent;
 }
 
-#employeeListView .virtual-flow .mfx-list-cell {
+#employeeListView .virtual-flow .mfx-list-cell, #forbiddenTimesListView .virtual-flow .mfx-list-cell {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 10px;
@@ -144,12 +144,22 @@
     -mfx-color: -fx-highlight;
 }
 
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon {
+    -mfx-color: -fx-danger;
+}
+
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon:hover {
+    -mfx-color: red;
+}
+
 #employeeListView .virtual-flow .mfx-list-cell:hover,
-#employeeListView .virtual-flow .mfx-list-cell:selected {
+#employeeListView .virtual-flow .mfx-list-cell:selected,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell:hover,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell:selected {
     -fx-background-color: -fx-highlight;
 }
 
-#employeeListView .virtual-flow .mfx-list-cell .data-label {
+#employeeListView .virtual-flow .mfx-list-cell .data-label, #forbiddenTimesListView .virtual-flow .mfx-list-cell .data-label {
     -fx-text-fill: -fx-text-muted;
     -fx-font-size: 17px;
 }
@@ -158,7 +168,8 @@
     -mfx-color: -fx-primary;
 }
 
-#employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
+#employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
     mfx-auto-clip: true;
 }
 
@@ -217,4 +228,13 @@
 #isOpenerButton, #isCloserButton, #isManagerButton {
     -fx-text-fill: -fx-text-muted;
     -mfx-depth: 5;
+}
+
+#forbiddenTimePane {
+    -fx-background-color: linear-gradient(to bottom right, -fx-bg-dark, -fx-bg);
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+    -fx-padding: 4px;
+    -mfx-depth: 5
 }

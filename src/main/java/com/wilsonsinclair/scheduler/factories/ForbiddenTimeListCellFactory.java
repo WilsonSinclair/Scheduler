@@ -1,0 +1,33 @@
+package com.wilsonsinclair.scheduler.factories;
+
+import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.MainViewController;
+import io.github.palexdev.materialfx.controls.MFXListView;
+import io.github.palexdev.materialfx.controls.cell.MFXListCell;
+import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
+
+public class ForbiddenTimeListCellFactory extends MFXListCell<ForbiddenTime> {
+    private final MFXFontIcon deleteIcon;
+
+    public ForbiddenTimeListCellFactory(MainViewController controller, MFXListView<ForbiddenTime> listView, ForbiddenTime data) {
+        super(listView, data);
+
+        deleteIcon = new MFXFontIcon("fas-trash", 18);
+        deleteIcon.getStyleClass().add("delete-icon");
+
+        deleteIcon.setOnMouseClicked(event -> {
+            listView.getItems().remove(data);
+            controller.saveEmployees();
+        });
+
+        render(data);
+    }
+
+    @Override
+    protected void render(ForbiddenTime data) {
+        super.render(data);
+        if (deleteIcon != null) {
+            getChildren().addLast(deleteIcon);
+        }
+    }
+}

@@ -1,21 +1,19 @@
 package com.wilsonsinclair.scheduler;
 
+import com.wilsonsinclair.scheduler.factories.EmployeeListCellFactory;
+import com.wilsonsinclair.scheduler.factories.ForbiddenTimeListCellFactory;
 import com.wilsonsinclair.scheduler.time.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.mfxcore.utils.converters.FunctionalStringConverter;
-import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +34,10 @@ public class MainViewController implements Initializable {
     private MFXListView<Employee> employeeListView;
 
     @FXML
-    private ListView<ForbiddenTime> forbiddenTimesListView;
+    private MFXListView<ForbiddenTime> forbiddenTimesListView;
 
     @FXML
-    private MFXTextField employeeName, managerHoursTextField;
+    private TextField employeeName, managerHoursTextField;
 
     @FXML
     private MFXRadioButton isOpenerButton, isCloserButton, isManagerButton;
@@ -80,21 +78,19 @@ public class MainViewController implements Initializable {
             return;
         }
 
-        employeeName.setDisable(false);
-        isOpenerButton.setDisable(false);
-        isCloserButton.setDisable(false);
-        addForbiddenTimeButton.setDisable(false);
-        isManagerButton.setDisable(false);
-
-        saveEmployeeButton.setDisable(true);
-
         employeeName.setText(employee.getName());
         isOpenerButton.setSelected(employee.canOpen());
         isCloserButton.setSelected(employee.canClose());
         isManagerButton.setSelected(employee.isManager());
 
-        ObservableList<ForbiddenTime> forbiddenTimes =
-            FXCollections.observableArrayList(employee.getForbiddenTimes());
+        employeeName.setDisable(false);
+        isOpenerButton.setDisable(false);
+        isCloserButton.setDisable(false);
+        addForbiddenTimeButton.setDisable(false);
+        isManagerButton.setDisable(false);
+        saveEmployeeButton.setDisable(true);
+
+        ObservableList<ForbiddenTime> forbiddenTimes = FXCollections.observableArrayList(employee.getForbiddenTimes());
         forbiddenTimesListView.setItems(forbiddenTimes);
     }
 
@@ -222,18 +218,11 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void deleteForbiddenTime() {
-        final int index = forbiddenTimesListView
-            .getSelectionModel()
-            .getSelectedIndex();
-        if (index >= 0) {
-            forbiddenTimesListView.getItems().remove(index);
+        final ForbiddenTime forbiddenTime = forbiddenTimesListView.getSelectionModel().getSelectedValue();
+        if (forbiddenTime != null) {
+            forbiddenTimesListView.getItems().remove(forbiddenTime);
         }
         saveEmployees();
-    }
-
-    @FXML
-    private void saveSettings() {
-
     }
 
     private void populateScheduleTable(Schedule s) {
@@ -269,6 +258,13 @@ public class MainViewController implements Initializable {
 
         numLunchersComboBox.setItems(FXCollections.observableArrayList(NUM_LUNCHERS_CHOICES));
         numClosersComboBox.setItems(FXCollections.observableArrayList(NUM_CLOSERS_CHOICES));
+
+        employeeName.textProperty().addListener((observable, oldValue, newValue) -> {
+           if (!oldValue.equals(newValue)) {
+               enableSaveButton();
+           }
+        });
+
 
         ObservableList<Employee> employeeList =
             FXCollections.observableArrayList(Employee.extractor());
@@ -354,32 +350,15 @@ public class MainViewController implements Initializable {
         employeeListView.features().enableBounceEffect();
         employeeListView.features().enableSmoothScrolling(0.5);
 
+        forbiddenTimesListView.setCellFactory(forbiddenTime -> new ForbiddenTimeListCellFactory(this, forbiddenTimesListView, forbiddenTime));
+        forbiddenTimesListView.features().enableBounceEffect();
+        forbiddenTimesListView.features().enableSmoothScrolling(0.5);
+
         ValidationSupport validator = new ValidationSupport();
         validator.registerValidator(managerHoursTextField, Validator.createRegexValidator("Value must be a number > 0", "^[1-9][0-9]*$", Severity.ERROR));
     }
 
     private Employee getSelectedEmployee() {
         return employeeListView.getSelectionModel().getSelectedValue();
-    }
-
-    private static class EmployeeListCellFactory extends MFXListCell<Employee> {
-        private final MFXFontIcon userIcon;
-
-        public EmployeeListCellFactory(MFXListView<Employee> listView, Employee data) {
-            super(listView, data);
-
-            userIcon = new MFXFontIcon("fas-user", 18);
-            userIcon.getStyleClass().add("user-icon");
-            render(data);
-        }
-
-        @Override
-        protected void render(Employee data) {
-            super.render(data);
-            if (userIcon != null) {
-                getChildren().addFirst(userIcon);
-            }
-        }
-
     }
 }
