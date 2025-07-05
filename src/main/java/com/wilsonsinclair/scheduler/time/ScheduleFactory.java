@@ -34,7 +34,6 @@ public class ScheduleFactory {
         //TODO: Implement schedule generation logic here
         for (Day day : schedule.getDays()) {
             assignOpener(openers, day, r);
-            //assignLunchers(employees,day, r, numLunchers);
         }
         return schedule;
     }

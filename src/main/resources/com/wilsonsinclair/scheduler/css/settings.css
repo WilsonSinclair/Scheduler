@@ -52,6 +52,14 @@
     -fx-text-fill: #3b3842;
 }
 
+#numLunchersComboBox .floating-text, #numClosersComboBox .floating-text, #managerHoursTextField .floating-text {
+    -fx-background-color: -fx-primary;
+}
+
+#numLunchersComboBox:hover, #numClosersComboBox:hover, #managerHoursTextField:hover {
+    -fx-font-size: 14.5px;
+}
+
 #numLunchersComboBox .combo-box-popup .list-view {
     -fx-background-color: #d8d1ff;
 }
@@ -67,6 +75,10 @@
 }
 
 #saveSettingsButton {
-    -fx-background-color: #d8ffd1;
+    -fx-background-color: -fx-success;
     -fx-text-fill: #3b3842;
+}
+
+#saveSettingsButton:hover {
+    -fx-background-color: -fx-secondary;
 }

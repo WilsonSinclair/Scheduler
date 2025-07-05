@@ -120,6 +120,10 @@
     -fx-text-fill: #3b3842;
 }
 
+#scheduleComboBox .floating-text {
+    -fx-background-color: -fx-primary;
+}
+
 #employeeListView, #forbiddenTimesListView {
     -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
     -fx-background-radius: 10px;
@@ -146,6 +150,7 @@
 
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon {
     -mfx-color: -fx-danger;
+
 }
 
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon:hover {
@@ -185,6 +190,10 @@
     -fx-background-color: -fx-info;
 }
 
+#addForbiddenTimeButton:hover {
+    -fx-background-color: -fx-warning;
+}
+
 #saveEmployeeButton {
     -fx-background-color: -fx-success;
 }
@@ -216,6 +225,10 @@
     -mfx-depth: 5;
 }
 
+#employeeName .floating-text {
+    -fx-background-color: -fx-primary;
+}
+
 #employeeInfoPane {
     -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
     -fx-background-radius: 10px;
@@ -228,6 +241,22 @@
 #isOpenerButton, #isCloserButton, #isManagerButton {
     -fx-text-fill: -fx-text-muted;
     -mfx-depth: 5;
+}
+
+#isOpenerButton .mfx-ripple-generator, #isCloserButton .mfx-ripple-generator, #isManagerButton .mfx-ripple-generator {
+    -mfx-ripple-color: -fx-secondary;
+}
+
+#isCloserButton .mfx-ripple-generator {
+    -mfx-ripple-color: -fx-secondary;
+}
+
+#isOpenerButton .dot, #isCloserButton .dot, #isManagerButton .dot {
+    -fx-fill: -fx-secondary;
+}
+
+#isOpenerButton:selected .radio, #isCloserButton:selected .radio, #isManagerButton:selected .radio {
+    -fx-stroke: -fx-secondary;
 }
 
 #forbiddenTimePane {

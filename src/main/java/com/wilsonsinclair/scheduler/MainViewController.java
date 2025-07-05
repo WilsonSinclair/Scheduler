@@ -13,7 +13,6 @@ import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.mfxcore.utils.converters.FunctionalStringConverter;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -266,8 +265,7 @@ public class MainViewController implements Initializable {
         });
 
 
-        ObservableList<Employee> employeeList =
-            FXCollections.observableArrayList(Employee.extractor());
+        ObservableList<Employee> employeeList = FXCollections.observableArrayList(Employee.extractor());
         ArrayList<Employee> employees = Serializer.loadEmployees();
         employeeList.addAll(employees);
         employeeListView.setItems(employeeList);
