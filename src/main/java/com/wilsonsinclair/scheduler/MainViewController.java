@@ -1,6 +1,8 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.factories.EmployeeListCellFactory;
+import com.wilsonsinclair.scheduler.factories.ScheduleFactory;
+import com.wilsonsinclair.scheduler.time.ForbiddenTimeController;
 import com.wilsonsinclair.scheduler.factories.ForbiddenTimeListCellFactory;
 import com.wilsonsinclair.scheduler.time.*;
 
@@ -46,12 +48,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     private MFXTableView<Employee> scheduleTable;
-
-    @FXML
-    private MFXTableColumn<Employee> employeeNameColumn;
-
-    @FXML
-    private MFXTableColumn<Employee> mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
 
     @FXML
     private MFXComboBox<Schedule> scheduleComboBox;
@@ -160,7 +156,7 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void deleteEmployee() {
+    private void deleteEmployee() {
         Employee e = getSelectedEmployee();
         if (e != null) {
             employeeListView.getItems().remove(e);
@@ -193,8 +189,7 @@ public class MainViewController implements Initializable {
                 getClass().getResource("fobiddentime_view.fxml")
             );
             DialogPane pane = loader.load();
-            ForbiddenTimeController forbiddenTimeController =
-                loader.getController();
+            ForbiddenTimeController forbiddenTimeController = loader.getController();
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(pane);
@@ -320,14 +315,14 @@ public class MainViewController implements Initializable {
             scheduleComboBox.getSelectionModel().selectLast();
         });
 
-        employeeNameColumn = new MFXTableColumn<>("Name");
-        mondayColumn = new MFXTableColumn<>("Monday");
-        tuesdayColumn = new MFXTableColumn<>("Tuesday");
-        wednesdayColumn = new MFXTableColumn<>("Wednesday");
-        thursdayColumn = new MFXTableColumn<>("Thursday");
-        fridayColumn = new MFXTableColumn<>("Friday");
-        saturdayColumn = new MFXTableColumn<>("Saturday");
-        sundayColumn = new MFXTableColumn<>("Sunday");
+        MFXTableColumn<Employee> employeeNameColumn = new MFXTableColumn<>("Name");
+        MFXTableColumn<Employee> mondayColumn = new MFXTableColumn<>("Monday");
+        MFXTableColumn<Employee> tuesdayColumn = new MFXTableColumn<>("Tuesday");
+        MFXTableColumn<Employee> wednesdayColumn = new MFXTableColumn<>("Wednesday");
+        MFXTableColumn<Employee> thursdayColumn = new MFXTableColumn<>("Thursday");
+        MFXTableColumn<Employee> fridayColumn = new MFXTableColumn<>("Friday");
+        MFXTableColumn<Employee> saturdayColumn = new MFXTableColumn<>("Saturday");
+        MFXTableColumn<Employee> sundayColumn = new MFXTableColumn<>("Sunday");
 
         employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getName));
         mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getMondayShiftAsString));
@@ -343,7 +338,7 @@ public class MainViewController implements Initializable {
         scheduleTable.autosizeColumnsOnInitialization();
 
         StringConverter<Employee> converter = FunctionalStringConverter.to(employee -> (employee == null) ? "" : employee.getName());
-        employeeListView.setCellFactory(employee -> new EmployeeListCellFactory(employeeListView, employee));
+        employeeListView.setCellFactory(employee -> new EmployeeListCellFactory(this, employeeListView, employee));
         employeeListView.setConverter(converter);
         employeeListView.features().enableBounceEffect();
         employeeListView.features().enableSmoothScrolling(0.5);

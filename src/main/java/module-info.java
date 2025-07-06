@@ -13,4 +13,6 @@ module com.wilsonsinclair.scheduler {
 
     exports com.wilsonsinclair.scheduler;
     exports com.wilsonsinclair.scheduler.time;
+    exports com.wilsonsinclair.scheduler.factories;
+    opens com.wilsonsinclair.scheduler.factories to javafx.fxml;
 }

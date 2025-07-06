@@ -43,15 +43,7 @@
                            <children>
                               <MFXButton fx:id="saveEmployeeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="757.0" layoutY="442.0" onAction="#saveEmployees" prefHeight="30.0" prefWidth="72.0" text="Save" />
                               <MFXButton fx:id="addForbiddenTimeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="29.0" layoutY="442.0" onAction="#handleAddForbiddenTimeButton" prefHeight="30.0" prefWidth="67.0" text="Add" />
-                              <MFXListView fx:id="forbiddenTimesListView" layoutX="29.0" layoutY="29.0" prefHeight="387.0" prefWidth="800.0">
-                                 <contextMenu>
-                                    <ContextMenu>
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#deleteForbiddenTime" text="Delete" />
-                                      </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                              </MFXListView>
+                              <MFXListView fx:id="forbiddenTimesListView" layoutX="29.0" layoutY="29.0" prefHeight="387.0" prefWidth="800.0" />
                            </children>
                         </Pane>
                         <Pane fx:id="employeeInfoPane" layoutX="674.0" layoutY="80.0" prefHeight="76.0" prefWidth="859.0">

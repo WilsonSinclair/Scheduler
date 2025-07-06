@@ -173,6 +173,18 @@
     -mfx-color: -fx-primary;
 }
 
+#employeeListView .virtual-flow .mfx-list-cell:hover .user-icon {
+    -mfx-color: -fx-primary;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .delete-icon {
+    -mfx-color: -fx-danger;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell:hover .delete-icon {
+    -mfx-color: red;
+}
+
 #employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator,
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
     mfx-auto-clip: true;

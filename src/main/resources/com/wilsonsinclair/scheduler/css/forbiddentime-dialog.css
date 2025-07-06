@@ -80,3 +80,80 @@
 #allDayDateSwitch:selected .line, #allDayDayOfWeekSwitch:selected .line, #startTimeAmPmToggleSwitch:selected .line, #endTimeAmPmToggleSwitch:selected .line {
     -fx-stroke: -fx-success;
 }
+
+#datePicker .icon {
+    -mfx-color: -fx-highlight;
+}
+
+#datePicker .date-picker-popup .content {
+    -fx-background-color: linear-gradient(to bottom right, -fx-bg-light, -fx-bg);
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+}
+
+#datePicker .date-picker-popup .left-arrow .mfx-font-icon,
+#datePicker .date-picker-popup .right-arrow .mfx-font-icon {
+	-mfx-color: -fx-secondary;
+}
+
+#datePicker .date-picker-popup .months-combo,
+#datePicker .date-picker-popup .years-combo {
+	-fx-border-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-color: -fx-primary;
+	-fx-text-fill: -fx-bg;
+	-fx-padding: 4;
+	-fx-background-insets: 0;
+}
+
+#datePicker .date-picker-popup .months-combo:focus-within,
+#datePicker .date-picker-popup .years-combo:focus-within {
+	-fx-text-fill: -fx-bg;
+}
+
+#datePicker .date-picker-popup .months-combo .virtual-flow,
+#datePicker .date-picker-popup .years-combo .virtual-flow {
+	-track-color: derive(-fx-primary, 50%);
+	-thumb-color: derive(-fx-primary, 70%);
+	-thumb-hover-color: derive(-fx-primary, 45%);
+}
+
+#datePicker .date-picker-popup .mfx-date-cell {
+	-fx-text-fill: -fx-text;
+}
+
+#datePicker .date-picker-popup .mfx-date-cell:selected {
+	-fx-background-color: -fx-highlight;
+	-fx-text-fill: -fx-bg;
+}
+
+#datePicker .date-picker-popup .mfx-date-cell:hover {
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: -fx-bg;
+}
+
+#datePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:hover,
+#datePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:hover,
+#datePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected,
+#datePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected {
+	-fx-background-color: -fx-highlight;
+	-fx-text-fill: -fx-bg;
+}
+
+#datePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell,
+#datePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-bg;
+    -fx-background-radius: 0;
+}
+
+#datePicker .date-picker-popup .mfx-date-cell:current {
+	-fx-background-color: -fx-highlight;
+	-fx-border-color: -fx-border-muted;
+	-fx-border-width: 2;
+	-fx-text-fill: -fx-bg;
+}
+
+#datePicker .date-picker-popup .week-day {
+	-fx-text-fill: -fx-text-muted;
+}

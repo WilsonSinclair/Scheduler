@@ -1,6 +1,9 @@
-package com.wilsonsinclair.scheduler.time;
+package com.wilsonsinclair.scheduler.factories;
 
 import com.wilsonsinclair.scheduler.Employee;
+import com.wilsonsinclair.scheduler.time.Day;
+import com.wilsonsinclair.scheduler.time.Schedule;
+import com.wilsonsinclair.scheduler.time.Shift;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
