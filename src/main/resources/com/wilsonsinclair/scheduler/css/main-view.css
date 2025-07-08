@@ -181,7 +181,7 @@
     -mfx-color: -fx-danger;
 }
 
-#employeeListView .virtual-flow .mfx-list-cell:hover .delete-icon {
+#employeeListView .virtual-flow .mfx-list-cell .delete-icon:hover {
     -mfx-color: red;
 }
 
