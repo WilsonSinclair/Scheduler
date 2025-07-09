@@ -54,7 +54,7 @@
                               <MFXRadioButton fx:id="isManagerButton" disable="true" gap="10.0" layoutX="560.0" layoutY="28.0" onAction="#enableSaveButton" radius="9.0" text="Manager" />
                            </children>
                         </Pane>
-                        <MFXListView fx:id="employeeListView" layoutX="97.0" layoutY="80.0" onMouseClicked="#loadEmployee" prefHeight="887.0" prefWidth="350.0">
+                        <MFXListView fx:id="employeeListView" layoutX="97.0" layoutY="80.0" onMouseClicked="#loadSelectedEmployee" prefHeight="887.0" prefWidth="350.0">
                            <contextMenu>
                               <ContextMenu>
                                 <items>

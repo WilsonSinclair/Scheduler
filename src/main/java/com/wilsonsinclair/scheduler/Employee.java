@@ -334,6 +334,7 @@ public class Employee implements Serializable {
                 e.nameProperty(),
                 e.openerProperty(),
                 e.closerProperty(),
+                e.managerProperty()
             };
     }
 

@@ -5,6 +5,9 @@ import com.wilsonsinclair.scheduler.MainViewController;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public class ForbiddenTimeListCellFactory extends MFXListCell<ForbiddenTime> {
     private final MFXFontIcon deleteIcon;
@@ -26,8 +29,10 @@ public class ForbiddenTimeListCellFactory extends MFXListCell<ForbiddenTime> {
     @Override
     protected void render(ForbiddenTime data) {
         super.render(data);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
         if (deleteIcon != null) {
-            getChildren().addLast(deleteIcon);
+            getChildren().addAll(spacer, deleteIcon);
         }
     }
 }

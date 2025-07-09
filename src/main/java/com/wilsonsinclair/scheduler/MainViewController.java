@@ -14,6 +14,8 @@ import java.util.*;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.mfxcore.utils.converters.FunctionalStringConverter;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -65,7 +67,7 @@ public class MainViewController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
-    public void loadEmployee() {
+    public void loadSelectedEmployee() {
         Employee employee = getSelectedEmployee();
 
         //In case an empty cell is selected, this should avoid any Null Pointer exceptions.
@@ -91,7 +93,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void saveEmployees() {
-        Employee e = employeeListView.getSelectionModel().getSelectedValue();
+        Employee e = getSelectedEmployee();
         e.setName(employeeName.getText());
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
@@ -128,7 +130,7 @@ public class MainViewController implements Initializable {
             .add(new Employee("Employee", false, false, false));
         employeeListView.getSelectionModel().selectIndex(employeeListView.getItems().size() - 1);
         employeeListView.getSelectionModel().deselectItem(oldEmployee);
-        loadEmployee();
+        loadSelectedEmployee();
     }
 
     /*
@@ -160,11 +162,12 @@ public class MainViewController implements Initializable {
         Employee e = getSelectedEmployee();
         if (e != null) {
             employeeListView.getItems().remove(e);
+            employeeListView.getSelectionModel().selectIndex(employeeListView.getItems().size() - 1);
         }
 
         // We must now refresh the UI to reflect the now currently selected Employee
         // because the last selected one is now deleted from the ListView.
-        loadEmployee();
+        loadSelectedEmployee();
 
         // We save the employee data here now that the selected employee has been deleted.
         saveEmployees();
@@ -259,10 +262,8 @@ public class MainViewController implements Initializable {
            }
         });
 
-
         ObservableList<Employee> employeeList = FXCollections.observableArrayList(Employee.extractor());
-        ArrayList<Employee> employees = Serializer.loadEmployees();
-        employeeList.addAll(employees);
+        employeeList.addAll(Serializer.loadEmployees());
         employeeListView.setItems(employeeList);
 
         schedules = Serializer.loadSchedules();
@@ -339,6 +340,7 @@ public class MainViewController implements Initializable {
 
         StringConverter<Employee> converter = FunctionalStringConverter.to(employee -> (employee == null) ? "" : employee.getName());
         employeeListView.setCellFactory(employee -> new EmployeeListCellFactory(this, employeeListView, employee));
+        employeeListView.getSelectionModel().setAllowsMultipleSelection(false);
         employeeListView.setConverter(converter);
         employeeListView.features().enableBounceEffect();
         employeeListView.features().enableSmoothScrolling(0.5);

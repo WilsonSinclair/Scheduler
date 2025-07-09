@@ -1,5 +1,132 @@
-2025-07-07 19:41:25 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
-2025-07-07 19:42:28 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
-2025-07-07 19:44:17 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
-2025-07-07 19:45:21 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
-2025-07-07 19:45:43 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:05:31 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:09:23 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:09:36 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:09:56 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:11:05 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:19:05 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:19:14 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:19:26 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:20:08 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:20:16 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:20:20 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:22:24 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:22:32 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:22:38 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:23:27 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:23:38 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:23:59 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:24:13 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:29:46 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:30:02 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:30:09 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:31:20 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:33:06 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:33:08 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:33:17 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Employee]
+Can Open: BooleanProperty [value: false]
+Can Close: BooleanProperty [value: false]
+Cannot Work: 
+2025-07-09 15:33:28 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:33:31 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:33:32 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Test123]
+Can Open: BooleanProperty [value: false]
+Can Close: BooleanProperty [value: false]
+Cannot Work: 
+2025-07-09 15:33:39 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:33:39 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:33:40 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:33:49 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Nathan]
+Can Open: BooleanProperty [value: false]
+Can Close: BooleanProperty [value: false]
+Cannot Work: 
+2025-07-09 15:33:50 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:33:52 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Employee]
+Can Open: BooleanProperty [value: false]
+Can Close: BooleanProperty [value: false]
+Cannot Work: 
+2025-07-09 15:33:57 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:34:03 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:34:03 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:34:04 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Loading selected employee: Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: 
+2025-07-09 15:34:17 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:34:23 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:34:27 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:36:00 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:37:17 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:37:25 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:39:39 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:39:56 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:50:25 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:52:45 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:52:54 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:58:25 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 15:58:31 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 15:58:38 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:04:14 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:04:22 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:04:31 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:04:42 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:13:22 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:13:30 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:13:37 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:16:27 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:16:34 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:16:39 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:16:46 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:16:53 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:16:58 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:17:53 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:18:16 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:22:13 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:22:19 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:29:46 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:29:51 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:30:02 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:30:12 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:30:26 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 16:58:53 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 16:59:01 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 17:02:22 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 17:05:32 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 17:05:37 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 17:08:26 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 17:08:36 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 17:09:36 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 17:11:48 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:09:26 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:10:50 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:11:10 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:13:15 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:14:39 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:14:46 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 18:15:19 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 18:15:26 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:18:13 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:20:36 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:24:21 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:27:13 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:30:20 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:31:11 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-07-09 18:33:56 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-07-09 18:34:11 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
