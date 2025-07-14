@@ -150,7 +150,6 @@
 
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon {
     -mfx-color: -fx-danger;
-
 }
 
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon:hover {

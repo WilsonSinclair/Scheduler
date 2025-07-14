@@ -51,6 +51,9 @@ public class ForbiddenTimeController implements Initializable {
 
     public ForbiddenTime getForbiddenTime() { return forbiddenTime; }
 
+    private final boolean ALL_DAY_SWITCH_DEFAULT = true;
+    private final boolean AM_PM_SWITCH_DEFAULT = false;
+
     /*
         Handles changes to the Day of Week combo box.
      */
@@ -65,7 +68,6 @@ public class ForbiddenTimeController implements Initializable {
                 case 3 -> forbiddenTime.setNthDay(3);
                 case 4 -> forbiddenTime.setNthDay(4);
                 case 5 -> forbiddenTime.setNthDay(5);
-
             }
             forbiddenTime.setDayOfWeek(dayOfWeek);
             if (!allDayDayOfWeekSwitch.isSelected()) {
@@ -127,18 +129,19 @@ public class ForbiddenTimeController implements Initializable {
 
     // Handles changes to the allDay switches, which when toggled, mean that there is no need
     // to associate a time with either a certain date or day of the week and vice versa
-    private final EventHandler<MouseEvent> allDaySwitchEvent = new EventHandler<>() {
+    private final EventHandler<ActionEvent> allDaySwitchEvent = new EventHandler<>() {
         @Override
-        public void handle(MouseEvent mouseEvent) {
+        public void handle(ActionEvent event) {
 
             // The toggle switch that triggered this handler
-            MFXToggleButton toggleSwitch = (MFXToggleButton) mouseEvent.getSource();
+            MFXToggleButton toggleSwitch = (MFXToggleButton) event.getSource();
 
             // This should never fail
             assert(toggleSwitch != null);
 
             // the employee is only unable to work within a certain time on this day of the week
             if (!toggleSwitch.isSelected()) {
+                toggleSwitch.setText("Not All Day");
                 startHourComboBox.setDisable(false);
                 startMinuteComboBox.setDisable(false);
                 endHourComboBox.setDisable(false);
@@ -146,6 +149,7 @@ public class ForbiddenTimeController implements Initializable {
                 startTimeAmPmToggleSwitch.setDisable(false);
                 endTimeAmPmToggleSwitch.setDisable(false);
             } else {
+                toggleSwitch.setText("All Day");
                 startHourComboBox.setDisable(true);
                 startMinuteComboBox.setDisable(true);
                 endHourComboBox.setDisable(true);
@@ -181,8 +185,8 @@ public class ForbiddenTimeController implements Initializable {
         startMinuteComboBox.setItems(FXCollections.observableArrayList(minutes));
         endMinuteComboBox.setItems(FXCollections.observableArrayList(minutes));
 
-        allDayDateSwitch.setOnMouseClicked(allDaySwitchEvent);
-        allDayDayOfWeekSwitch.setOnMouseClicked(allDaySwitchEvent);
+        allDayDateSwitch.setOnAction(allDaySwitchEvent);
+        allDayDayOfWeekSwitch.setOnAction(allDaySwitchEvent);
 
         //Listen for changes to this choice box
         typeComboBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, value, newValue) -> {
@@ -247,6 +251,11 @@ public class ForbiddenTimeController implements Initializable {
                 default -> {
                 }
             }
+            //reset toggles switches
+            allDayDateSwitch.setSelected(ALL_DAY_SWITCH_DEFAULT);
+            allDayDayOfWeekSwitch.setSelected(ALL_DAY_SWITCH_DEFAULT);
+            startTimeAmPmToggleSwitch.setSelected(AM_PM_SWITCH_DEFAULT);
+            endTimeAmPmToggleSwitch.setSelected(AM_PM_SWITCH_DEFAULT);
         });
     }
 }

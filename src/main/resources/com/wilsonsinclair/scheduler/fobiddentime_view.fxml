@@ -20,8 +20,8 @@
                   <Label fx:id="fromLabel" layoutX="54.0" layoutY="255.0" text="From:" />
                   <Label fx:id="toLabel" layoutX="61.0" layoutY="307.0" text="To:" />
                   <MFXDatePicker fx:id="datePicker" disable="true" floatMode="BORDER" floatingText="Date" layoutX="179.0" layoutY="95.0" />
-                  <MFXToggleButton fx:id="allDayDateSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="95.0" radius="9.0" stylesheets="@css/forbiddentime-dialog.css" text="All Day" textFill="#9a13dd" />
-                  <MFXToggleButton fx:id="allDayDayOfWeekSwitch" contentDisposition="RIGHT" disable="true" layoutX="410.0" layoutY="168.0" radius="9.0" stylesheets="@css/forbiddentime-dialog.css" text="All Day" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="allDayDateSwitch" disable="true" layoutX="410.0" layoutY="95.0" radius="9.0" selected="true" stylesheets="@css/forbiddentime-dialog.css" text="All Day" textFill="#9a13dd" />
+                  <MFXToggleButton fx:id="allDayDayOfWeekSwitch" disable="true" layoutX="410.0" layoutY="168.0" radius="9.0" selected="true" stylesheets="@css/forbiddentime-dialog.css" text="All Day" textFill="#9a13dd" />
                   <MFXToggleButton fx:id="startTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="429.0" layoutY="244.0" radius="9.0" stylesheets="@css/forbiddentime-dialog.css" text="AM" textFill="#9a13dd" />
                   <MFXToggleButton fx:id="endTimeAmPmToggleSwitch" contentDisposition="RIGHT" disable="true" layoutX="429.0" layoutY="296.0" radius="9.0" stylesheets="@css/forbiddentime-dialog.css" text="AM" textFill="#9a13dd" />
                   <MFXComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Choose One" layoutX="217.0" layoutY="20.0" />

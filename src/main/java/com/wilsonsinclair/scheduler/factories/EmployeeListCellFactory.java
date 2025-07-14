@@ -22,10 +22,13 @@ public class EmployeeListCellFactory extends MFXListCell<Employee> {
         deleteIcon = new MFXFontIcon("fas-trash", 18);
         nameLabel = new Label();
 
-
         HBox.setHgrow(deleteIcon, Priority.ALWAYS);
 
         deleteIcon.getStyleClass().add("delete-icon");
+        deleteIcon.setVisible(false);
+        this.setOnMouseEntered(event -> deleteIcon.setVisible(true));
+        this.setOnMouseExited(event -> deleteIcon.setVisible(false));
+
         deleteIcon.setOnMouseClicked(event -> {
             controller.confirmEmployeeDeletion();
         });

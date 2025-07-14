@@ -18,6 +18,10 @@ public class ForbiddenTimeListCellFactory extends MFXListCell<ForbiddenTime> {
         deleteIcon = new MFXFontIcon("fas-trash", 18);
         deleteIcon.getStyleClass().add("delete-icon");
 
+        deleteIcon.setVisible(false);
+        this.setOnMouseEntered(event -> deleteIcon.setVisible(true));
+        this.setOnMouseExited(event -> deleteIcon.setVisible(false));
+
         deleteIcon.setOnMouseClicked(event -> {
             listView.getItems().remove(data);
             controller.saveEmployees();
