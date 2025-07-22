@@ -54,6 +54,12 @@ public class ForbiddenTimeController implements Initializable {
     private final boolean ALL_DAY_SWITCH_DEFAULT = true;
     private final boolean AM_PM_SWITCH_DEFAULT = false;
 
+    private final String ALL_DAY_SWITCH_SELECTED_TEXT = "All Day";
+    private final String ALL_DAY_SWITCH_NOT_SELECTED_TEXT = "Not All Day";
+
+    private final String AM_TEXT = "AM";
+    private final String PM_TEXT = "PM";
+
     /*
         Handles changes to the Day of Week combo box.
      */
@@ -120,10 +126,10 @@ public class ForbiddenTimeController implements Initializable {
     private final EventHandler<MouseEvent> amPMToggleSwitchEvent = mouseEvent -> {
         MFXToggleButton toggleSwitch = (MFXToggleButton) mouseEvent.getSource();
         if (toggleSwitch.isSelected()) {
-            toggleSwitch.setText("PM");
+            toggleSwitch.setText(PM_TEXT);
         }
         else {
-            toggleSwitch.setText("AM");
+            toggleSwitch.setText(AM_TEXT);
         }
     };
 
@@ -141,7 +147,7 @@ public class ForbiddenTimeController implements Initializable {
 
             // the employee is only unable to work within a certain time on this day of the week
             if (!toggleSwitch.isSelected()) {
-                toggleSwitch.setText("Not All Day");
+                toggleSwitch.setText(ALL_DAY_SWITCH_NOT_SELECTED_TEXT);
                 startHourComboBox.setDisable(false);
                 startMinuteComboBox.setDisable(false);
                 endHourComboBox.setDisable(false);
@@ -149,7 +155,7 @@ public class ForbiddenTimeController implements Initializable {
                 startTimeAmPmToggleSwitch.setDisable(false);
                 endTimeAmPmToggleSwitch.setDisable(false);
             } else {
-                toggleSwitch.setText("All Day");
+                toggleSwitch.setText(ALL_DAY_SWITCH_SELECTED_TEXT);
                 startHourComboBox.setDisable(true);
                 startMinuteComboBox.setDisable(true);
                 endHourComboBox.setDisable(true);
@@ -251,11 +257,18 @@ public class ForbiddenTimeController implements Initializable {
                 default -> {
                 }
             }
-            //reset toggles switches
+            //reset toggles switches and their text
             allDayDateSwitch.setSelected(ALL_DAY_SWITCH_DEFAULT);
+            allDayDateSwitch.setText(ALL_DAY_SWITCH_SELECTED_TEXT);
+
             allDayDayOfWeekSwitch.setSelected(ALL_DAY_SWITCH_DEFAULT);
+            allDayDayOfWeekSwitch.setText(ALL_DAY_SWITCH_SELECTED_TEXT);
+
             startTimeAmPmToggleSwitch.setSelected(AM_PM_SWITCH_DEFAULT);
+            startTimeAmPmToggleSwitch.setText(AM_TEXT);
+
             endTimeAmPmToggleSwitch.setSelected(AM_PM_SWITCH_DEFAULT);
+            endTimeAmPmToggleSwitch.setText(AM_TEXT);
         });
     }
 }

@@ -14,8 +14,6 @@ import java.util.*;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.mfxcore.utils.converters.FunctionalStringConverter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -247,14 +245,14 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        // Read settings from settings.json
-        Settings settings = Settings.getInstance();
-        numLunchersComboBox.setValue(settings.getNumLunchers());
-        numClosersComboBox.setValue(settings.getNumClosers());
-        managerHoursTextField.setText(Integer.toString(settings.getManagerHours()));
-
         numLunchersComboBox.setItems(FXCollections.observableArrayList(NUM_LUNCHERS_CHOICES));
         numClosersComboBox.setItems(FXCollections.observableArrayList(NUM_CLOSERS_CHOICES));
+
+        // Read settings from settings.json
+        Settings settings = Settings.getInstance();
+        numLunchersComboBox.selectItem(settings.getNumLunchers());
+        numClosersComboBox.selectItem(settings.getNumClosers());
+        managerHoursTextField.setText(Integer.toString(settings.getManagerHours()));
 
         employeeName.textProperty().addListener((observable, oldValue, newValue) -> {
            if (!oldValue.equals(newValue)) {
