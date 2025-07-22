@@ -1,51 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.tableview2.TableView2?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" styleClass="background-gradient" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wilsonsinclair.scheduler.MainViewController">
    <children>
-      <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+      <TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" rotateGraphic="true" stylesheets="@css/main-view.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
-          <Tab text="Schedules">
+          <Tab fx:id="schedulesTab" text="Schedules">
             <content>
-              <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="913.0" prefWidth="1679.0" stylesheets="@css/main-view.css">
                      <children>
-                        <TableView2 fx:id="scheduleTable" layoutX="401.0" layoutY="208.0" rowHeaderWidth="70.0">
-                           <columns>
-                              <TableColumn fx:id="employeeNameColumn" prefWidth="75.0" text="Employee" />
-                              <TableColumn fx:id="mondayColumn" prefWidth="75.0" text="Monday" />
-                              <TableColumn fx:id="tuesdayColumn" prefWidth="75.0" text="Tuesday" />
-                              <TableColumn fx:id="wednesdayColumn" prefWidth="75.0" text="Wednesday" />
-                              <TableColumn fx:id="thursdayColumn" prefWidth="75.0" text="Thursday" />
-                              <TableColumn fx:id="fridayColumn" prefWidth="75.0" text="Friday" />
-                              <TableColumn fx:id="saturdayColumn" prefWidth="75.0" text="Saturday" />
-                              <TableColumn fx:id="sundayColumn" minWidth="-Infinity" prefWidth="75.0" text="Sunday" />
-                           </columns>
-                        </TableView2>
-                        <Button fx:id="generateScheduleButton" layoutX="401.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Generate Schedule" />
-                        <ComboBox fx:id="scheduleComboBox" layoutX="557.0" layoutY="143.0" prefHeight="25.0" prefWidth="290.0" />
-                        <Button fx:id="deleteScheduleButton" disable="true" layoutX="881.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Delete Schedule" />
+                        <Pane fx:id="schedulePane" layoutX="432.0" layoutY="195.0" prefHeight="661.0" prefWidth="1056.0" stylesheets="@css/main-view.css">
+                           <children>
+                              <MFXTableView fx:id="scheduleTable" layoutX="86.0" layoutY="130.0" prefHeight="402.0" prefWidth="884.0" />
+                              <MFXButton fx:id="generateScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="86.0" layoutY="579.0" prefHeight="30.0" prefWidth="134.0" text="Generate" />
+                              <MFXButton fx:id="deleteScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="866.0" layoutY="579.0" prefHeight="30.0" prefWidth="104.0" text="Delete" />
+                              <MFXComboBox fx:id="scheduleComboBox" floatingText="Selected Schedule" layoutX="347.0" layoutY="53.0" prefHeight="45.0" prefWidth="321.0" />
+                           </children>
+                        </Pane>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -53,61 +39,35 @@
             <content>
               <AnchorPane>
                      <children>
-                        <SplitPane dividerPositions="0.2" layoutX="860.0" layoutY="446.0" prefHeight="1051.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <ListView fx:id="employeeListView" layoutX="91.0" layoutY="425.0" onMouseClicked="#loadEmployee" prefHeight="1049.0" prefWidth="381.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <contextMenu>
-                                          <ContextMenu fx:id="employeeListViewContextMenu">
-                                            <items>
-                                              <MenuItem fx:id="deleteEmployeeContextMenuItem" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />
-                                            </items>
-                                          </ContextMenu>
-                                       </contextMenu></ListView>
-                                    <Button fx:id="addEmployeeButton" layoutX="315.0" layoutY="1009.0" mnemonicParsing="false" onMouseClicked="#addEmployee" prefHeight="26.0" prefWidth="51.0" text="+" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
-                                       <effect>
-                                          <DropShadow blurType="GAUSSIAN" />
-                                       </effect></Button>
-                                 </children></AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <TextField fx:id="employeeName" disable="true" layoutX="691.0" layoutY="14.0" onKeyTyped="#enableSaveButton" AnchorPane.leftAnchor="100.0" />
-                                    <Label layoutX="33.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isOpenerButton" disable="true" layoutX="327.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Opener" AnchorPane.topAnchor="18.0" />
-                                    <RadioButton fx:id="isCloserButton" disable="true" layoutX="482.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#enableSaveButton" text="Closer" AnchorPane.leftAnchor="482.0" />
-                                    <ListView fx:id="forbiddenTimesListView" layoutX="100.0" layoutY="211.0" prefHeight="391.0" prefWidth="1291.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="211.0">
-                                       <contextMenu>
-                                          <ContextMenu fx:id="forbiddenTimesListViewContextMenu">
-                                            <items>
-                                              <MenuItem fx:id="deleteForbiddenTimeMenuItem" mnemonicParsing="false" onAction="#deleteForbiddenTime" text="Delete" />
-                                            </items>
-                                          </ContextMenu>
-                                       </contextMenu></ListView>
-                                    <Label fx:id="forbiddenTimesListViewLabel" alignment="CENTER" layoutX="100.0" layoutY="164.0" prefHeight="17.0" prefWidth="163.0" text="Cannot Work" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="100.0">
-                                       <font>
-                                          <Font size="26.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="saveEmployeeButton" disable="true" layoutX="99.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#saveEmployees" prefHeight="25.0" prefWidth="95.0" text="Save" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="99.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="deleteEmloyeeButton" layoutX="1278.0" layoutY="1005.0" mnemonicParsing="false" onMouseClicked="#confirmEmployeeDeletion" prefHeight="31.0" prefWidth="133.0" text="Delete Employee" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="120.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Separator layoutX="1.0" layoutY="85.0" prefHeight="0.0" prefWidth="1529.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                    <Button fx:id="addForbiddenTImeButton" disable="true" layoutX="100.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleAddForbiddenTimeButton" prefHeight="26.0" prefWidth="46.0" text="+" AnchorPane.leftAnchor="100.0">
-                                       <effect>
-                                          <DropShadow blurType="ONE_PASS_BOX" />
-                                       </effect></Button>
-                                    <RadioButton fx:id="isManagerButton" disable="true" layoutX="616.0" layoutY="18.0" mnemonicParsing="false" text="Manager" />
-                                 </children></AnchorPane>
-                          </items>
-                        </SplitPane>
+                        <Pane fx:id="forbiddenTimePane" layoutX="674.0" layoutY="277.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="859.0">
+                           <children>
+                              <MFXButton fx:id="saveEmployeeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="757.0" layoutY="442.0" onAction="#saveEmployees" prefHeight="30.0" prefWidth="72.0" text="Save" />
+                              <MFXButton fx:id="addForbiddenTimeButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="29.0" layoutY="442.0" onAction="#handleAddForbiddenTimeButton" prefHeight="30.0" prefWidth="67.0" text="Add" />
+                              <MFXListView fx:id="forbiddenTimesListView" layoutX="29.0" layoutY="29.0" prefHeight="387.0" prefWidth="800.0" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="employeeInfoPane" layoutX="674.0" layoutY="80.0" prefHeight="76.0" prefWidth="859.0">
+                           <children>
+                              <MFXTextField fx:id="employeeName" disable="true" floatMode="BORDER" floatingText="Name" layoutX="25.0" layoutY="17.0" prefHeight="42.0" prefWidth="140.0" />
+                              <MFXRadioButton fx:id="isOpenerButton" disable="true" gap="10.0" layoutX="266.0" layoutY="28.0" onAction="#enableSaveButton" radius="9.0" text="Opener" />
+                              <MFXRadioButton fx:id="isCloserButton" disable="true" gap="10.0" layoutX="420.0" layoutY="28.0" onAction="#enableSaveButton" radius="9.0" text="Closer" />
+                              <MFXRadioButton fx:id="isManagerButton" disable="true" gap="10.0" layoutX="560.0" layoutY="28.0" onAction="#enableSaveButton" radius="9.0" text="Manager" />
+                           </children>
+                        </Pane>
+                        <MFXListView fx:id="employeeListView" layoutX="97.0" layoutY="80.0" onMouseClicked="#loadSelectedEmployee" prefHeight="887.0" prefWidth="350.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#confirmEmployeeDeletion" text="Delete Employee" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></MFXListView>
+                        <Button fx:id="deleteEmloyeeButton" layoutX="1076.0" layoutY="653.0" mnemonicParsing="false" onMouseClicked="#confirmEmployeeDeletion" prefHeight="31.0" prefWidth="133.0" text="Delete Employee" AnchorPane.bottomAnchor="-524.0" AnchorPane.rightAnchor="-1109.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <MFXButton fx:id="addEmployeeButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="238.0" layoutY="952.0" onAction="#addEmployee" prefHeight="30.0" prefWidth="68.0" text="New" />
                      </children>
                   </AnchorPane>
             </content>
@@ -116,18 +76,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox fx:id="settingsVBox" alignment="TOP_CENTER" layoutX="419.0" layoutY="145.0" prefHeight="412.0" prefWidth="502.0" spacing="40.0" stylesheets="@css/settings.css">
+                        <VBox fx:id="settingsVBox" alignment="CENTER" layoutX="709.0" layoutY="292.0" prefHeight="412.0" prefWidth="502.0" spacing="40.0" stylesheets="@css/settings.css">
                            <children>
-                              <Label text="Number of Employees for lunch" underline="true">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="numLunchersChoiceBox" prefWidth="150.0" />
-                              <ChoiceBox fx:id="numClosersChoiceBox" prefWidth="150.0" />
-                              <Label prefHeight="17.0" prefWidth="170.0" text="Number of Employees for Night" underline="true" />
-                              <MFXTextField fx:id="managerHoursTextField" floatingText="Manager Hours" floatingTextGap="0.0" graphicTextGap="5.0" prefHeight="30.0" prefWidth="118.0" stylesheets="@css/mfx-text-field.css" />
-                              <MFXButton fx:id="saveSettingsButton" buttonType="RAISED" onAction="#handleSaveSettingsButton" rippleAnimateShadow="true" rippleColor="#a70fcd" text="Save" />
+                              <MFXComboBox fx:id="numLunchersComboBox" floatMode="BORDER" floatingText="Lunch Shifts" />
+                              <MFXComboBox fx:id="numClosersComboBox" floatMode="BORDER" floatingText="Closing Shifts" />
+                              <MFXTextField fx:id="managerHoursTextField" floatMode="BORDER" floatingText="Manager Hours" floatingTextGap="0.0" graphicTextGap="5.0" prefHeight="30.0" prefWidth="118.0" stylesheets="@css/mfx-text-field.css" />
+                              <MFXButton fx:id="saveSettingsButton" buttonType="RAISED" depthLevel="LEVEL5" onAction="#handleSaveSettingsButton" prefHeight="30.0" prefWidth="79.0" rippleAnimateShadow="true" rippleColor="#a70fcd" text="Save" />
                            </children>
                         </VBox>
                      </children></AnchorPane>

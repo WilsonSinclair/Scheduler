@@ -11,8 +11,13 @@ import java.io.IOException;
 import io.github.palexdev.materialfx.theming.JavaFXThemes;
 import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
 import io.github.palexdev.materialfx.theming.UserAgentBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main extends Application {
+
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     @Override
     public void start(Stage stage) throws IOException {
         UserAgentBuilder.builder()
@@ -24,7 +29,7 @@ public class Main extends Application {
         .setGlobal();
         
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1440, 810);
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Scheduler");
         stage.setScene(scene);
         stage.setResizable(false);

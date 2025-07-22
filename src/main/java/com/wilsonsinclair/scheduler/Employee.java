@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -184,6 +186,41 @@ public class Employee implements Serializable {
         return assignedShiftsProperty().get();
     }
 
+    public String getMondayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(mondayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getTuesdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(tuesdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getWednesdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(wednesdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getThursdayShiftAsString() {
+        Optional<Shift> shift = Optional.ofNullable(thursdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getFridayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(fridayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getSaturdayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(saturdayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
+    public String getSundayShiftAsString() {
+        Optional<Shift> shift =  Optional.ofNullable(sundayShiftProperty().get());
+        return shift.map(Shift::toString).orElse("");
+    }
+
     public void setMondayShift(Shift s) {
         mondayShiftProperty().set(s);
     }
@@ -297,6 +334,7 @@ public class Employee implements Serializable {
                 e.nameProperty(),
                 e.openerProperty(),
                 e.closerProperty(),
+                e.managerProperty()
             };
     }
 

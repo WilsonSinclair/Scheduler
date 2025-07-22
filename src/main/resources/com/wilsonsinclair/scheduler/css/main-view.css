@@ -1,0 +1,280 @@
+/* Base Backgrounds */
+.bg-dark     { -fx-background-color: #1a1820; }  /* oklch(0.1 0.025 250) */
+.bg          { -fx-background-color: #2a2831; }  /* oklch(0.15 0.025 250) */
+.bg-light    { -fx-background-color: #3b3842; }  /* oklch(0.2 0.025 250) */
+
+/* Text Colors */
+.text        { -fx-text-fill: #f6f3ff; }         /* oklch(0.96 0.05 250) */
+.text-muted  { -fx-text-fill: #c6c0d6; }         /* oklch(0.76 0.05 250) */
+
+/* Highlights and Borders */
+.highlight       { -fx-background-color: #7e7aa0; }  /* oklch(0.5 0.05 250) */
+.border          { -fx-border-color: #6c6891; }      /* oklch(0.4 0.05 250) */
+.border-muted    { -fx-border-color: #514e77; }      /* oklch(0.3 0.05 250) */
+
+/* Accent Roles */
+.primary     { -fx-background-color: #d8d1ff; }  /* oklch(0.76 0.1 250) */
+.secondary   { -fx-background-color: #d8ffd1; }  /* oklch(0.76 0.1 70) */
+.danger      { -fx-background-color: #f3c1b0; }  /* oklch(0.7 0.05 30) */
+.warning     { -fx-background-color: #f3ecb0; }  /* oklch(0.7 0.05 100) */
+.success     { -fx-background-color: #b0f3c1; }  /* oklch(0.7 0.05 160) */
+.info        { -fx-background-color: #b0c1f3; }
+
+.background-gradient {
+    -fx-background-color: linear-gradient(to bottom right, -fx-bg-dark, -fx-bg);
+}
+
+{
+    -fx-bg-dark: #1a1820;
+    -fx-bg: #2a2831;
+    -fx-bg-light: #3b3842;
+
+    -fx-text: #f6f3ff;
+    -fx-text-muted: #c6c0d6;
+
+    -fx-highlight: #7e7aa0;
+    -fx-border: #6c6891;
+    -fx-border-muted: #514e77;
+
+    -fx-primary: #d8d1ff;
+    -fx-secondary: #d8ffd1;
+    -fx-danger: #f3c1b0;
+    -fx-warning: #f3ecb0;
+    -fx-success: #b0f3c1;
+    -fx-info: #b0c1f3;
+}
+
+.root {
+    -fx-font-family: "Menlo";
+    -fx-font-size: 14px;
+    -fx-font-color: fx-text;
+}
+
+#schedulePane {
+    -fx-background-color: linear-gradient(to bottom, -fx-bg, transparent);
+    -fx-border-radius: 15px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-width: 1px;
+}
+
+.VBox {
+    -fx-background-color: -fx-bg-dark;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-border-color: #514e77;
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, transparent);
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-bg-light;
+}
+
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #d8ffd1;
+    -fx-text-fill: #f6f3ff;
+}
+
+#scheduleTable {
+    -fx-background-color:  #d8d1ff;
+    -fx-border-color: #514e77;
+}
+
+.table-cell {
+    -fx-border-color: #514e77;
+    -fx-background-color: #3b3842;
+    -fx-text-fill: #f6f3ff;
+}
+
+.TableColumn {
+    -fx-background-color: #d8d1ff;
+    -fx-color: #3b3842;
+}
+
+#scheduleTable .column-header-background {
+    -fx-background-color: #d8d1ff;
+}
+
+#generateScheduleButton {
+    -fx-background-color: -fx-success;
+    -fx-text-fill: #3b3842;
+}
+
+#generateScheduleButton:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+#deleteScheduleButton {
+    -fx-background-color: #f3c1b0;
+    -fx-text-fill: #3b3842;
+}
+
+#deleteScheduleButton:hover {
+    -fx-background-color: #f3b0b0;
+}
+
+#scheduleComboBox {
+    -fx-background-color: #d8d1ff;
+    -fx-text-fill: #3b3842;
+}
+
+#scheduleComboBox .floating-text {
+    -fx-background-color: -fx-primary;
+}
+
+#employeeListView, #forbiddenTimesListView {
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+    -fx-padding: 4px;
+    -mfx-depth: 5;
+}
+
+#employeeListView .virtual-flow, #forbiddenTimesListView .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell, #forbiddenTimesListView .virtual-flow .mfx-list-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .user-icon {
+    -mfx-color: -fx-highlight;
+}
+
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon {
+    -mfx-color: -fx-danger;
+}
+
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .delete-icon:hover {
+    -mfx-color: red;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell:hover,
+#employeeListView .virtual-flow .mfx-list-cell:selected,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell:hover,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell:selected {
+    -fx-background-color: -fx-highlight;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .data-label, #forbiddenTimesListView .virtual-flow .mfx-list-cell .data-label {
+    -fx-text-fill: -fx-text-muted;
+    -fx-font-size: 17px;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell:selected .user-icon {
+    -mfx-color: -fx-primary;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell:hover .user-icon {
+    -mfx-color: -fx-primary;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .delete-icon {
+    -mfx-color: -fx-danger;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .delete-icon:hover {
+    -mfx-color: red;
+}
+
+#employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator,
+#forbiddenTimesListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
+    mfx-auto-clip: true;
+}
+
+#addEmployeeButton {
+    -fx-background-color: -fx-success;
+}
+
+#addEmployeeButton:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+#addForbiddenTimeButton {
+    -fx-background-color: -fx-info;
+}
+
+#addForbiddenTimeButton:hover {
+    -fx-background-color: -fx-warning;
+}
+
+#saveEmployeeButton {
+    -fx-background-color: -fx-success;
+}
+
+#saveEmployeeButton:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.context-menu {
+    -fx-background-color: -fx-bg-dark;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+    -mfx-depth: 5;
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: -fx-danger;
+    -fx-text-fill: -fx-bg;
+}
+
+.context-menu .menu-item {
+    -fx-background-color: -fx-bg;
+    -fx-text-fill: -fx-text;
+}
+
+#employeeName {
+    -fx-background-color: -fx-primary;
+    -mfx-depth: 5;
+}
+
+#employeeName .floating-text {
+    -fx-background-color: -fx-primary;
+}
+
+#employeeInfoPane {
+    -fx-background-color: linear-gradient(to bottom, -fx-bg-light, -fx-bg);
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+    -fx-padding: 4px;
+    -mfx-depth: 5;
+}
+
+#isOpenerButton, #isCloserButton, #isManagerButton {
+    -fx-text-fill: -fx-text-muted;
+    -mfx-depth: 5;
+}
+
+#isOpenerButton .mfx-ripple-generator, #isCloserButton .mfx-ripple-generator, #isManagerButton .mfx-ripple-generator {
+    -mfx-ripple-color: -fx-secondary;
+}
+
+#isCloserButton .mfx-ripple-generator {
+    -mfx-ripple-color: -fx-secondary;
+}
+
+#isOpenerButton .dot, #isCloserButton .dot, #isManagerButton .dot {
+    -fx-fill: -fx-secondary;
+}
+
+#isOpenerButton:selected .radio, #isCloserButton:selected .radio, #isManagerButton:selected .radio {
+    -fx-stroke: -fx-secondary;
+}
+
+#forbiddenTimePane {
+    -fx-background-color: linear-gradient(to bottom right, -fx-bg-dark, -fx-bg);
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-border-muted;
+    -fx-border-radius: 10px;
+    -fx-padding: 4px;
+    -mfx-depth: 5
+}
