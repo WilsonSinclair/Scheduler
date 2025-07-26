@@ -9,7 +9,9 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
     This class models an actual schedule posted in a store. The underlying data is just a List of Days. Each Day

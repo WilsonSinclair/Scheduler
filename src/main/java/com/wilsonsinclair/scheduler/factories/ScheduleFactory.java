@@ -1,6 +1,7 @@
 package com.wilsonsinclair.scheduler.factories;
 
 import com.wilsonsinclair.scheduler.Employee;
+import com.wilsonsinclair.scheduler.Settings;
 import com.wilsonsinclair.scheduler.time.Day;
 import com.wilsonsinclair.scheduler.time.Schedule;
 import com.wilsonsinclair.scheduler.time.Shift;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ScheduleFactory {
@@ -24,17 +26,25 @@ public class ScheduleFactory {
         @param startDate The starting date of the schedule.
         @return The generated schedule.
     */
-    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate, int numLunchers, int numClosers) {
+    public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate, Settings settings) {
 
         Schedule schedule = new Schedule(employees, startDate);
 
-        // We use a random object to help us incorporate some pseudorandomness into the generated schedule
+        // We use a random object to help us incorporate some pseudo randomness into the generated schedule
         // when choosing a possible employee or creating a shift's start and end time.
         Random r = new Random();
 
         List<Employee> openers = employees.stream().filter(Employee::canOpen).toList();
 
         //TODO: Implement schedule generation logic here
+
+        /* Should assign the manager's shifts first as a manager has a target number of hours for each week.
+        * Then we can assign shift leads for the morning, afternoon and night shifts for each day. The manager
+        * will have already covered some of these.
+        * Finally, we can assign the remaining shifts to fill in the rest.
+        * This approach prioritizes dealing with hard constraints first, such as manager hours and needing shift
+        * leads for each part of the day.
+        */
         for (Day day : schedule.getDays()) {
             assignOpener(openers, day, r);
         }

@@ -186,7 +186,7 @@
 
 #employeeListView .virtual-flow .mfx-list-cell .mfx-ripple-generator,
 #forbiddenTimesListView .virtual-flow .mfx-list-cell .mfx-ripple-generator {
-    mfx-auto-clip: true;
+    -mfx-auto-clip: true;
 }
 
 #addEmployeeButton {
