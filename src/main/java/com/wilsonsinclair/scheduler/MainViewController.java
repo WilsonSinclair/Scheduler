@@ -211,15 +211,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-    @FXML
-    private void deleteForbiddenTime() {
-        final ForbiddenTime forbiddenTime = forbiddenTimesListView.getSelectionModel().getSelectedValue();
-        if (forbiddenTime != null) {
-            forbiddenTimesListView.getItems().remove(forbiddenTime);
-        }
-        saveEmployees();
-    }
-
     private void populateScheduleTable(Schedule s) {
         if (s == null) {
             return;
@@ -238,7 +229,6 @@ public class MainViewController implements Initializable {
                 }
             }
         }
-
         scheduleTable.getItems().setAll(s.employeeListProperty());
     }
 
@@ -273,18 +263,16 @@ public class MainViewController implements Initializable {
             //otherwise, we load the first schedule
             schedule = schedules.getFirst();
         }
-        scheduleComboBox.setOnAction(event -> {
-            populateScheduleTable(
-                scheduleComboBox.getSelectionModel().getSelectedItem()
-            );
+
+        scheduleComboBox.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            populateScheduleTable(newValue);
         });
 
         generateScheduleButton.setOnAction(event -> {
             schedule = ScheduleFactory.generateSchedule(
                 Serializer.loadEmployees(),
                 LocalDate.now(),
-                    3,
-                    2
+                Settings.getInstance()
             );
             scheduleComboBox.getItems().add(schedule);
             scheduleComboBox.getSelectionModel().selectLast();

@@ -80,7 +80,7 @@
                            <children>
                               <MFXComboBox fx:id="numLunchersComboBox" floatMode="BORDER" floatingText="Lunch Shifts" />
                               <MFXComboBox fx:id="numClosersComboBox" floatMode="BORDER" floatingText="Closing Shifts" />
-                              <MFXTextField fx:id="managerHoursTextField" floatMode="BORDER" floatingText="Manager Hours" floatingTextGap="0.0" graphicTextGap="5.0" prefHeight="30.0" prefWidth="118.0" stylesheets="@css/mfx-text-field.css" />
+                              <MFXTextField fx:id="managerHoursTextField" floatMode="BORDER" floatingText="Manager Hours" floatingTextGap="0.0" graphicTextGap="5.0" prefHeight="30.0" prefWidth="118.0" />
                               <MFXButton fx:id="saveSettingsButton" buttonType="RAISED" depthLevel="LEVEL5" onAction="#handleSaveSettingsButton" prefHeight="30.0" prefWidth="79.0" rippleAnimateShadow="true" rippleColor="#a70fcd" text="Save" />
                            </children>
                         </VBox>

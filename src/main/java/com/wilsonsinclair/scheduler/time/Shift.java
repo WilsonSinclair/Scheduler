@@ -2,6 +2,7 @@ package com.wilsonsinclair.scheduler.time;
 
 import com.wilsonsinclair.scheduler.Employee;
 import java.io.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
@@ -51,18 +52,16 @@ public class Shift implements Serializable {
 
     private transient ShiftType shiftType;
 
-    public Shift(
-        Employee employee,
-        LocalDate date,
-        LocalTime startTime,
-        LocalTime endTime
-    ) {
+    private final int duration;
+
+    public Shift(Employee employee, LocalDate date, LocalTime startTime, LocalTime endTime) {
         setStartTime(startTime);
         setEndTime(endTime);
         setEmployee(employee);
         setDate(date);
 
         shiftType = assignShiftType();
+        duration = (int) Duration.between(startTime, endTime).toMinutes();
     }
 
     public ObjectProperty<LocalDate> dateProperty() {
@@ -104,6 +103,8 @@ public class Shift implements Serializable {
     public Employee getEmployee() {
         return employeeProperty().get();
     }
+
+    public int getDuration() { return duration; }
 
     public ShiftType getType() {
         return shiftType;

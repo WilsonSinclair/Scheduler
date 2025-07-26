@@ -43,12 +43,7 @@ public class Employee implements Serializable {
     // A list of all the times an employee cannot work
     private transient ArrayList<ForbiddenTime> forbiddenTimes;
 
-    public Employee(
-        String name,
-        boolean isOpener,
-        boolean isCloser,
-        boolean isManager
-    ) {
+    public Employee(String name, boolean isOpener, boolean isCloser, boolean isManager) {
         setName(name);
         setCloser(isCloser);
         setOpener(isOpener);
@@ -287,15 +282,9 @@ public class Employee implements Serializable {
         return true;
     }
 
-    public boolean canWork(
-        LocalDate date,
-        LocalTime shiftStart,
-        LocalTime shiftEnd
-    ) {
+    public boolean canWork(LocalDate date, LocalTime shiftStart, LocalTime shiftEnd) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (
-                forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)
-            ) {
+            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
                 if (forbiddenTime.intersects(shiftStart, shiftEnd)) {
                     return false;
                 }
@@ -359,8 +348,7 @@ public class Employee implements Serializable {
     }
 
     @Serial
-    private void readObject(ObjectInputStream in)
-        throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         nameProperty().set(in.readUTF());
         openerProperty().set(in.readBoolean());
         closerProperty().set(in.readBoolean());
@@ -369,9 +357,7 @@ public class Employee implements Serializable {
 
         // reading assigned shifts
         int size = in.readInt();
-        assignedShifts = new SimpleListProperty<>(
-            FXCollections.observableArrayList()
-        );
+        assignedShifts = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (int i = 0; i < size; i++) {
             Shift shift = (Shift) in.readObject();
             assignShift(shift);
