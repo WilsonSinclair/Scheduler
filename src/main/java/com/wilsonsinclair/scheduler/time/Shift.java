@@ -52,7 +52,7 @@ public class Shift implements Serializable {
 
     private transient ShiftType shiftType;
 
-    private final int duration;
+    private final double hourDuration;
 
     public Shift(Employee employee, LocalDate date, LocalTime startTime, LocalTime endTime) {
         setStartTime(startTime);
@@ -61,7 +61,7 @@ public class Shift implements Serializable {
         setDate(date);
 
         shiftType = assignShiftType();
-        duration = (int) Duration.between(startTime, endTime).toMinutes();
+        hourDuration = Duration.between(startTime, endTime).toHours();
     }
 
     public ObjectProperty<LocalDate> dateProperty() {
@@ -104,7 +104,7 @@ public class Shift implements Serializable {
         return employeeProperty().get();
     }
 
-    public int getDuration() { return duration; }
+    public double getDuration() { return hourDuration; }
 
     public ShiftType getType() {
         return shiftType;
@@ -182,8 +182,6 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
-        return (
-            getStartTime().toString() + "\n" + getEndTime().toString() + "\n"
-        );
+        return getStartTime().toString() + " - " + getEndTime().toString();
     }
 }

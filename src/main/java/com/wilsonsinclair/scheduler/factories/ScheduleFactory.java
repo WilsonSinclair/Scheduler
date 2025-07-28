@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -27,6 +28,8 @@ public class ScheduleFactory {
         @return The generated schedule.
     */
     public static Schedule generateSchedule(List<Employee> employees, LocalDate startDate, Settings settings) {
+
+        logger.info("Generating schedule for {} through {} with {}", startDate, startDate.plusWeeks(1), settings);
 
         Schedule schedule = new Schedule(employees, startDate);
 
@@ -51,6 +54,28 @@ public class ScheduleFactory {
         return schedule;
     }
 
+    /*
+        NOTES:
+        - Manager should close two days of the week
+        - Total number of hours should be at or close to managerHours
+        - Is it feasible to do this recursively with backtracking to find a solution?
+     */
+    private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int managerHours) {
+        double currentHours = manager.getAssignedHours();
+        Iterator<Day> dayIterator = days.iterator();
+        if (dayIterator.hasNext()) {
+            assignManagerShift(manager, dayIterator.next(), r, managerHours);
+        }
+    }
+
+    private static void assignManagerShift(Employee manager, Day day, Random r, int managerHours) {
+        // Base case
+        if (!manager.canWork(day.getDate()) || Math.abs(manager.getAssignedHours() - managerHours) <= 5) {
+            return;
+        }
+
+    }
+
     private static void assignOpener(List<Employee> employees, Day day, Random r) {
         while (!day.hasOpener()) {
             Employee e = employees.get(r.nextInt(employees.size()));
@@ -66,15 +91,4 @@ public class ScheduleFactory {
             }
         }
     }
-
-    private static void assignLunchers(List<Employee> employees, Day day, Random r, int numLunchers) {
-        while (!day.hasLunchers(numLunchers)) {
-            Employee e = employees.get(r.nextInt(employees.size()));
-            if (day.hasAssigned(e)) { continue; }
-
-            // Assign a lunch shift that starts at 10:00 so that there are at least two people on shift when the store opens
-            
-        }
-    }
-
 }

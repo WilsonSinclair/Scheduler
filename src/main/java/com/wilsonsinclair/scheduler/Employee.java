@@ -28,6 +28,7 @@ public class Employee implements Serializable {
     private transient BooleanProperty isOpener;
     private transient BooleanProperty isCloser;
     private transient BooleanProperty isManager;
+    private transient DoubleProperty assignedHours;
 
     // Shifts that are assigned to the employee
     private transient ListProperty<Shift> assignedShifts;
@@ -58,6 +59,13 @@ public class Employee implements Serializable {
             );
         }
         return assignedShifts;
+    }
+
+    public final DoubleProperty assignedHoursProperty() {
+        if (assignedHours == null) {
+            assignedHours = new SimpleDoubleProperty();
+        }
+        return assignedHours;
     }
 
     public final StringProperty nameProperty() {
@@ -143,6 +151,14 @@ public class Employee implements Serializable {
 
     public ArrayList<ForbiddenTime> getForbiddenTimes() {
         return forbiddenTimes;
+    }
+
+    public double getAssignedHours() {
+        return assignedHoursProperty().get();
+    }
+
+    public void setAssignedHours(double hours) {
+        assignedHoursProperty().set(hours);
     }
 
     public String getName() {
@@ -250,6 +266,7 @@ public class Employee implements Serializable {
 
     public void assignShift(Shift s) {
         getAssignedShifts().add(s);
+        setAssignedHours(getAssignedHours() + s.getDuration());
 
         // Check if the shift has a valid date
         if (s.dateProperty().getValue() == null) {
@@ -271,11 +288,14 @@ public class Employee implements Serializable {
         }
     }
 
+    public void clearAssignedShifts() {
+        getAssignedShifts().clear();
+        setAssignedHours(0);
+    }
+
     public boolean canWork(LocalDate date) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (
-                forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)
-            ) {
+            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date) || !canWork(date.getDayOfWeek())) {
                 return false;
             }
         }
@@ -295,10 +315,7 @@ public class Employee implements Serializable {
 
     public boolean canWork(DayOfWeek dayOfWeek) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (
-                forbiddenTime.getDayOfWeek().isPresent() &&
-                forbiddenTime.isOn(dayOfWeek)
-            ) {
+            if (forbiddenTime.getDayOfWeek().isPresent() && forbiddenTime.isOn(dayOfWeek)) {
                 return false;
             }
         }
@@ -333,6 +350,7 @@ public class Employee implements Serializable {
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
         out.writeBoolean(isManager());
+        out.writeDouble(getAssignedHours());
         out.writeObject(getForbiddenTimes());
 
         // writing assigned shifts
@@ -353,6 +371,7 @@ public class Employee implements Serializable {
         openerProperty().set(in.readBoolean());
         closerProperty().set(in.readBoolean());
         managerProperty().set(in.readBoolean());
+        assignedHoursProperty().set(in.readDouble());
         forbiddenTimes = (ArrayList<ForbiddenTime>) in.readObject();
 
         // reading assigned shifts

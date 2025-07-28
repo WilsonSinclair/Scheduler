@@ -24,12 +24,12 @@
             <content>
               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="913.0" prefWidth="1679.0" stylesheets="@css/main-view.css">
                      <children>
-                        <Pane fx:id="schedulePane" layoutX="432.0" layoutY="195.0" prefHeight="661.0" prefWidth="1056.0" stylesheets="@css/main-view.css">
+                        <Pane fx:id="schedulePane" layoutX="183.0" layoutY="193.0" prefHeight="661.0" prefWidth="1555.0" stylesheets="@css/main-view.css">
                            <children>
-                              <MFXTableView fx:id="scheduleTable" layoutX="86.0" layoutY="130.0" prefHeight="402.0" prefWidth="884.0" />
-                              <MFXButton fx:id="generateScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="86.0" layoutY="579.0" prefHeight="30.0" prefWidth="134.0" text="Generate" />
-                              <MFXButton fx:id="deleteScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="866.0" layoutY="579.0" prefHeight="30.0" prefWidth="104.0" text="Delete" />
-                              <MFXComboBox fx:id="scheduleComboBox" floatingText="Selected Schedule" layoutX="347.0" layoutY="53.0" prefHeight="45.0" prefWidth="321.0" />
+                              <MFXTableView fx:id="scheduleTable" layoutX="148.0" layoutY="130.0" prefHeight="402.0" prefWidth="1259.0" />
+                              <MFXButton fx:id="generateScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="148.0" layoutY="564.0" prefHeight="30.0" prefWidth="134.0" text="Generate" />
+                              <MFXButton fx:id="deleteScheduleButton" buttonType="RAISED" depthLevel="LEVEL5" disable="true" layoutX="1303.0" layoutY="564.0" prefHeight="30.0" prefWidth="104.0" text="Delete" />
+                              <MFXComboBox fx:id="scheduleComboBox" floatingText="Selected Schedule" layoutX="617.0" layoutY="53.0" prefHeight="45.0" prefWidth="321.0" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

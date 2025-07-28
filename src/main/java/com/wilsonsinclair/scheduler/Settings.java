@@ -29,17 +29,19 @@ public final class Settings {
     private int numLunchers;
     private int numClosers;
     private int managerHours;
+    private int allowedManagerHourVariance;
 
     private static final File settingsFile = new File("settings.json");
 
-    private Settings(int numLunchers, int numClosers, int managerHours) {
+    private Settings(int numLunchers, int numClosers, int managerHours, int allowedManagerHourVariance) {
         this.numLunchers = numLunchers;
         this.numClosers = numClosers;
         this.managerHours = managerHours;
+        this.allowedManagerHourVariance = allowedManagerHourVariance;
     }
 
     private Settings() {
-        this(3, 2, 50);
+        this(3, 2, 50, 5);
     }
 
     public static synchronized Settings getInstance() {

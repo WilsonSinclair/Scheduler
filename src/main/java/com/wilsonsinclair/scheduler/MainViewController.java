@@ -59,6 +59,8 @@ public class MainViewController implements Initializable {
 
     private static Schedule schedule;
 
+    private static final int TABLE_COLUMN_WIDTH = 130;
+
     private static final Integer[] NUM_LUNCHERS_CHOICES = new Integer[]{2, 3, 4};
     private static final Integer[] NUM_CLOSERS_CHOICES = new Integer[]{2, 3};
 
@@ -216,9 +218,9 @@ public class MainViewController implements Initializable {
             return;
         }
 
-        // Clear existing employees' shift assignments
+        // Clear existing employees' shift assignments and reset their assigned hours to 0
         for (Employee emp : s.employeeListProperty()) {
-            emp.getAssignedShifts().clear();
+            emp.clearAssignedShifts();
         }
 
         // Reassign shifts from the schedule's days to employees
@@ -310,6 +312,7 @@ public class MainViewController implements Initializable {
         MFXTableColumn<Employee> fridayColumn = new MFXTableColumn<>("Friday");
         MFXTableColumn<Employee> saturdayColumn = new MFXTableColumn<>("Saturday");
         MFXTableColumn<Employee> sundayColumn = new MFXTableColumn<>("Sunday");
+        MFXTableColumn<Employee> assignedHoursColumn = new MFXTableColumn<>("Hours");
 
         employeeNameColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getName));
         mondayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getMondayShiftAsString));
@@ -319,10 +322,12 @@ public class MainViewController implements Initializable {
         fridayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getFridayShiftAsString));
         saturdayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSaturdayShiftAsString));
         sundayColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getSundayShiftAsString));
+        assignedHoursColumn.setRowCellFactory(employee -> new MFXTableRowCell<>(Employee::getAssignedHours));
 
-        scheduleTable.getTableColumns().addAll(employeeNameColumn, mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn);
+        scheduleTable.getTableColumns().addAll(employeeNameColumn, mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn, assignedHoursColumn);
 
         scheduleTable.autosizeColumnsOnInitialization();
+        scheduleTable.getTableColumns().forEach(column -> column.setMinWidth(TABLE_COLUMN_WIDTH));
 
         StringConverter<Employee> converter = FunctionalStringConverter.to(employee -> (employee == null) ? "" : employee.getName());
         employeeListView.setCellFactory(employee -> new EmployeeListCellFactory(this, employeeListView, employee));
