@@ -60,15 +60,16 @@ public class ScheduleFactory {
         - Total number of hours should be at or close to managerHours
         - Is it feasible to do this recursively with backtracking to find a solution?
      */
-    private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int managerHours) {
-        double currentHours = manager.getAssignedHours();
+    private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int targetHours) {
+        double hoursSoFar = manager.getAssignedHours();
         Iterator<Day> dayIterator = days.iterator();
+
         if (dayIterator.hasNext()) {
-            assignManagerShift(manager, dayIterator.next(), r, managerHours);
+            assignManagerShift(manager, dayIterator.next(), r, targetHours, hoursSoFar);
         }
     }
 
-    private static void assignManagerShift(Employee manager, Day day, Random r, int managerHours) {
+    private static void assignManagerShift(Employee manager, Day day, Random r, int managerHours, double hoursSoFar) {
         // Base case
         if (!manager.canWork(day.getDate()) || Math.abs(manager.getAssignedHours() - managerHours) <= 5) {
             return;

@@ -85,6 +85,10 @@ public final class Settings {
         this.managerHours = managerHours;
     }
 
+    public void setAllowedManagerHourVariance(int allowedManagerHourVariance) { this.allowedManagerHourVariance = allowedManagerHourVariance; }
+
+    public int getAllowedManagerHourVariance() { return allowedManagerHourVariance; }
+
     public void save() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer writer = new OutputStreamWriter(new FileOutputStream(settingsFile, false), StandardCharsets.UTF_8)) {
@@ -114,6 +118,7 @@ public final class Settings {
                 "numLunchers=" + numLunchers +
                 ", numClosers=" + numClosers +
                 ", managerHours=" + managerHours +
+                ", allowedManagerHourVariance=" + allowedManagerHourVariance +
                 '}';
     }
 }
