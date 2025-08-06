@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class ScheduleFactory {
 
@@ -56,25 +53,25 @@ public class ScheduleFactory {
 
     /*
         NOTES:
-        - Manager should close two days of the week
+        - Manager should try close two days of the week
         - Total number of hours should be at or close to managerHours
         - Is it feasible to do this recursively with backtracking to find a solution?
      */
     private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int targetHours) {
-        double hoursSoFar = manager.getAssignedHours();
+        assert(manager.isManager());
+
+        // Shuffle the days to help with making off days seem more random, as we are going to walk through the list of days in the order
+        // they appear.
+        Collections.shuffle(days, r);
         Iterator<Day> dayIterator = days.iterator();
 
-        if (dayIterator.hasNext()) {
-            assignManagerShift(manager, dayIterator.next(), r, targetHours, hoursSoFar);
-        }
-    }
+        while (dayIterator.hasNext() && Math.abs(manager.getAssignedHours() - targetHours) > 5) {
+            Day day = dayIterator.next();
+            if (!manager.canWork(day.getDate())) {
+                continue;
+            }
 
-    private static void assignManagerShift(Employee manager, Day day, Random r, int managerHours, double hoursSoFar) {
-        // Base case
-        if (!manager.canWork(day.getDate()) || Math.abs(manager.getAssignedHours() - managerHours) <= 5) {
-            return;
         }
-
     }
 
     private static void assignOpener(List<Employee> employees, Day day, Random r) {
