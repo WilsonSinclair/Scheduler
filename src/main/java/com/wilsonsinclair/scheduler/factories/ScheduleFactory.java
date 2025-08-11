@@ -17,8 +17,16 @@ public class ScheduleFactory {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleFactory.class);
 
     /*
-        This method takes a list of employees and a starting date as input,
-        and generates a schedule for the next week.
+         This method takes a list of employees and a starting date as input,
+         and generates a schedule for the next week.
+
+         Should assign the manager's shifts first as a manager has a target number of hours for each week.
+         Then we can assign shift leads for the morning, afternoon and night shifts for each day. The manager
+         will have already covered some of these.
+         Finally, we can assign the remaining shifts to fill in the rest.
+         This approach prioritizes dealing with hard constraints first, such as manager hours and needing shift
+         leads for each part of the day.
+
 
         @param employees The list of employees to generate the schedule for.
         @param startDate The starting date of the schedule.
@@ -34,19 +42,12 @@ public class ScheduleFactory {
         // when choosing a possible employee or creating a shift's start and end time.
         Random r = new Random();
 
-        List<Employee> openers = employees.stream().filter(Employee::canOpen).toList();
-
-        //TODO: Implement schedule generation logic here
-
-        /* Should assign the manager's shifts first as a manager has a target number of hours for each week.
-        * Then we can assign shift leads for the morning, afternoon and night shifts for each day. The manager
-        * will have already covered some of these.
-        * Finally, we can assign the remaining shifts to fill in the rest.
-        * This approach prioritizes dealing with hard constraints first, such as manager hours and needing shift
-        * leads for each part of the day.
-        */
-        for (Day day : schedule.getDays()) {
-            assignOpener(openers, day, r);
+        try {
+             Employee manager = employees.stream().filter(Employee::isManager).findFirst().orElseThrow();
+            assignManagerShifts(manager, schedule.getDays(), r, settings.getManagerHours());
+        } catch (NoSuchElementException e) {
+            logger.error("No manager found in the employee list.");
+            return null;
         }
         return schedule;
     }
@@ -71,6 +72,33 @@ public class ScheduleFactory {
                 continue;
             }
 
+            Shift s = createManagerShift(manager, day, Shift.getRandomShiftType(r));
+            if (manager.canWork(s)) {
+                manager.assignShift(s);
+                day.addShift(s);
+                return;
+            }
+        }
+    }
+
+    private static Shift createManagerShift(Employee manager, Day day, Shift.ShiftType shiftType) {
+        switch (shiftType) {
+            case OPENER -> {
+                return new Shift(manager, day.getDate(), Shift.OPENING_TIME, Shift.FOUR_PM);
+            }
+            case CLOSER -> {
+                return new Shift(manager, day.getDate(), Shift.TWO_PM, Shift.CLOSING_TIME);
+            }
+            case LUNCH -> {
+                return new Shift(manager, day.getDate(), Shift.TEN_AM, Shift.FOUR_PM);
+            }
+            case OPEN_TO_CLOSE -> {
+                return new Shift(manager, day.getDate(), Shift.OPENING_TIME, Shift.CLOSING_TIME);
+            }
+            case LUNCH_TO_CLOSE -> {
+                return new Shift(manager, day.getDate(), Shift.TEN_AM, Shift.CLOSING_TIME);
+            }
+            default -> throw new IllegalArgumentException("Invalid shift type");
         }
     }
 

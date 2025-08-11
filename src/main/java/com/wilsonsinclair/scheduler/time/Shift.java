@@ -5,8 +5,8 @@ import java.io.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -15,10 +15,13 @@ public class Shift implements Serializable {
     public static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
     public static final LocalTime CLOSING_TIME = LocalTime.of(21, 0);
 
-    private static final LocalTime TWO_PM = LocalTime.of(14, 0);
-    private static final LocalTime FOUR_PM = LocalTime.of(16, 0);
+    public static final LocalTime TEN_AM = LocalTime.of(10, 0);
+    public static final LocalTime ELEVEN_AM = LocalTime.of(11, 0);
 
-    enum ShiftType {
+    public static final LocalTime TWO_PM = LocalTime.of(14, 0);
+    public static final LocalTime FOUR_PM = LocalTime.of(16, 0);
+
+    public enum ShiftType {
         OPENER,
         CLOSER,
         LUNCH,
@@ -32,6 +35,10 @@ public class Shift implements Serializable {
     // resort to an open to close.
     public static final Set<LocalTime> OPENING_SHIFT_END_TIMES = new TreeSet<>(
         Set.of(TWO_PM, FOUR_PM, CLOSING_TIME)
+    );
+
+    public static final Set<LocalTime> LUNCH_SHIFT_START_TIMES = new TreeSet<>(
+        Set.of(TEN_AM, ELEVEN_AM)
     );
 
     // A Set of times that lunch shifts can end at. Order here is important as before.
@@ -90,6 +97,11 @@ public class Shift implements Serializable {
             employee = new SimpleObjectProperty<>();
         }
         return employee;
+    }
+
+    public static ShiftType getRandomShiftType(Random r) {
+        List<ShiftType> shiftTypes = Arrays.asList(ShiftType.values());
+        return shiftTypes.get(r.nextInt(shiftTypes.size()));
     }
 
     public LocalTime getStartTime() {
