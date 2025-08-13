@@ -97,6 +97,7 @@ public class MainViewController implements Initializable {
         e.setName(employeeName.getText());
         e.setOpener(isOpenerButton.isSelected());
         e.setCloser(isCloserButton.isSelected());
+        e.setManager(isManagerButton.isSelected());
         e.setForbiddenTimes(forbiddenTimesListView.getItems());
         Serializer.saveEmployees(
             new SerializableObservableList<>(employeeListView.getItems())

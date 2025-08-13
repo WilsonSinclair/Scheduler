@@ -44,9 +44,9 @@ public class ScheduleFactory {
 
         try {
              Employee manager = employees.stream().filter(Employee::isManager).findFirst().orElseThrow();
-            assignManagerShifts(manager, schedule.getDays(), r, settings.getManagerHours());
+             assignManagerShifts(manager, schedule.getDays(), r, settings.getManagerHours());
         } catch (NoSuchElementException e) {
-            logger.error("No manager found in the employee list.");
+            logger.error("No manager found in the employee list when generating schedule.");
             return null;
         }
         return schedule;
@@ -76,7 +76,6 @@ public class ScheduleFactory {
             if (manager.canWork(s)) {
                 manager.assignShift(s);
                 day.addShift(s);
-                return;
             }
         }
     }

@@ -194,6 +194,6 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
-        return getStartTime().toString() + " - " + getEndTime().toString();
+        return getStartTime().toString() + "-" + getEndTime().toString();
     }
 }
