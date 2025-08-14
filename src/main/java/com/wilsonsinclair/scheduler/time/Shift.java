@@ -2,9 +2,11 @@ package com.wilsonsinclair.scheduler.time;
 
 import com.wilsonsinclair.scheduler.Employee;
 import java.io.*;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import javafx.beans.property.ObjectProperty;
@@ -20,6 +22,8 @@ public class Shift implements Serializable {
 
     public static final LocalTime TWO_PM = LocalTime.of(14, 0);
     public static final LocalTime FOUR_PM = LocalTime.of(16, 0);
+
+    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mma");
 
     public enum ShiftType {
         OPENER,
@@ -194,6 +198,6 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
-        return getStartTime().toString() + "-" + getEndTime().toString();
+        return timeFormat.format(getStartTime()) + "-" + timeFormat.format(getEndTime());
     }
 }

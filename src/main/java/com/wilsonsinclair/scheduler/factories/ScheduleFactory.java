@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ScheduleFactory {
 
@@ -72,13 +73,21 @@ public class ScheduleFactory {
                 continue;
             }
 
-            Shift s = createManagerShift(manager, day, Shift.getRandomShiftType(r));
-            if (manager.canWork(s)) {
-                manager.assignShift(s);
-                day.addShift(s);
-            }
+            // Try to avoid OPEN_TO_CLOSE shifts, as they should be used as a last resort.
+            // Also avoid shorter lunch shifts as we want to prioritize longer shifts at first to get to the target hours quickly, which allows room for optimizations later.
+            List<Shift.ShiftType> allowedShiftTypes = Arrays.stream(Shift.ShiftType.values()).filter(s -> s == Shift.ShiftType.OPENER || s == Shift.ShiftType.LUNCH_TO_CLOSE).toList();
+
+            // This can theoretically infinitely loop if a shift that the manager can work is never generated.
+            // A better solution is needed here.
+            do {
+                Shift shift = createManagerShift(manager, day, allowedShiftTypes.get(r.nextInt(allowedShiftTypes.size())));
+                if (manager.canWork(shift)) {
+                    manager.assignShift(shift);
+                    day.addShift(shift);
+                }
+            } while (!day.hasAssigned(manager));
         }
-    }
+   }
 
     private static Shift createManagerShift(Employee manager, Day day, Shift.ShiftType shiftType) {
         switch (shiftType) {
@@ -98,22 +107,6 @@ public class ScheduleFactory {
                 return new Shift(manager, day.getDate(), Shift.TEN_AM, Shift.CLOSING_TIME);
             }
             default -> throw new IllegalArgumentException("Invalid shift type");
-        }
-    }
-
-    private static void assignOpener(List<Employee> employees, Day day, Random r) {
-        while (!day.hasOpener()) {
-            Employee e = employees.get(r.nextInt(employees.size()));
-            if (day.hasAssigned(e)) { continue; }
-
-            for (LocalTime time : Shift.OPENING_SHIFT_END_TIMES) {
-                Shift s = new Shift(e, day.getDate(), Shift.OPENING_TIME, time);
-                if (e.canWork(s)) {
-                    e.assignShift(s);
-                    day.addShift(s);
-                    return;
-                }
-            }
         }
     }
 }
