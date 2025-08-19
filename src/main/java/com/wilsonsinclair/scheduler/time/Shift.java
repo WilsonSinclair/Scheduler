@@ -9,17 +9,23 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class Shift implements Serializable {
 
-    public static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
+    public static final LocalTime OPENING_SHIFT_START_TIME = LocalTime.of(8, 0);
+    public static final LocalTime MANAGER_OPENING_SHIFT_START_TIME = LocalTime.of(7, 0);
+
     public static final LocalTime CLOSING_TIME = LocalTime.of(21, 0);
 
     public static final LocalTime TEN_AM = LocalTime.of(10, 0);
     public static final LocalTime ELEVEN_AM = LocalTime.of(11, 0);
+    public static final LocalTime NOON = LocalTime.of(12, 0);
 
+    public static final LocalTime ONE_PM = LocalTime.of(13, 0);
     public static final LocalTime TWO_PM = LocalTime.of(14, 0);
     public static final LocalTime FOUR_PM = LocalTime.of(16, 0);
 
@@ -30,7 +36,7 @@ public class Shift implements Serializable {
         CLOSER,
         LUNCH,
         OPEN_TO_CLOSE,
-        LUNCH_TO_CLOSE,
+        LUNCH_TO_CLOSE
     }
 
     // A Set of times that opening shifts can end at. We ideally avoid CLOSING_TIME if possible.
@@ -63,16 +69,22 @@ public class Shift implements Serializable {
 
     private transient ShiftType shiftType;
 
-    private final double hourDuration;
+    private transient DoubleProperty hourDuration;
 
     public Shift(Employee employee, LocalDate date, LocalTime startTime, LocalTime endTime) {
+
+        Objects.requireNonNull(employee);
+        Objects.requireNonNull(date);
+        Objects.requireNonNull(startTime);
+        Objects.requireNonNull(endTime);
+
         setStartTime(startTime);
         setEndTime(endTime);
         setEmployee(employee);
         setDate(date);
 
         shiftType = assignShiftType();
-        hourDuration = Duration.between(startTime, endTime).toHours();
+        setDuration(Duration.between(startTime, endTime).toHours());
     }
 
     public ObjectProperty<LocalDate> dateProperty() {
@@ -85,6 +97,12 @@ public class Shift implements Serializable {
     public ObjectProperty<LocalTime> startTimeProperty() {
         if (startTime == null) {
             startTime = new SimpleObjectProperty<>();
+            startTime.addListener((observable, oldTime, newTime) -> {
+                if (oldTime == null) {
+                    return;
+                }
+                hourDurationProperty().set(hourDurationProperty().get() + (oldTime.getHour() - newTime.getHour()));
+            });
         }
         return startTime;
     }
@@ -92,8 +110,24 @@ public class Shift implements Serializable {
     public ObjectProperty<LocalTime> endTimeProperty() {
         if (endTime == null) {
             endTime = new SimpleObjectProperty<>();
+            endTime.addListener((observable, oldTime, newTime) -> {
+                if (oldTime == null) {
+                    return;
+                }
+                hourDurationProperty().set(hourDurationProperty().get() + (newTime.getHour() - oldTime.getHour()));
+            });
         }
         return endTime;
+    }
+
+    public DoubleProperty hourDurationProperty() {
+        if (hourDuration == null) {
+            hourDuration = new SimpleDoubleProperty();
+            hourDurationProperty().addListener((observable, oldDuration, newDuration) -> {
+                employeeProperty().get().calculateAssignedHours();
+            });
+        }
+        return hourDuration;
     }
 
     public ObjectProperty<Employee> employeeProperty() {
@@ -101,11 +135,6 @@ public class Shift implements Serializable {
             employee = new SimpleObjectProperty<>();
         }
         return employee;
-    }
-
-    public static ShiftType getRandomShiftType(Random r) {
-        List<ShiftType> shiftTypes = Arrays.asList(ShiftType.values());
-        return shiftTypes.get(r.nextInt(shiftTypes.size()));
     }
 
     public LocalTime getStartTime() {
@@ -116,11 +145,12 @@ public class Shift implements Serializable {
         return endTimeProperty().get();
     }
 
+    public double getDuration() {
+        return hourDurationProperty().get(); }
+
     public Employee getEmployee() {
         return employeeProperty().get();
     }
-
-    public double getDuration() { return hourDuration; }
 
     public ShiftType getType() {
         return shiftType;
@@ -138,8 +168,26 @@ public class Shift implements Serializable {
         endTimeProperty().set(t);
     }
 
+    public void setDuration(double d) {
+        hourDurationProperty().set(d);
+    }
+
     public void setDate(LocalDate d) {
         dateProperty().set(d);
+    }
+
+    public void delayStartTime() {
+        if (getStartTime().equals(OPENING_SHIFT_START_TIME) || getStartTime().equals(CLOSING_TIME)) {
+            return;
+        }
+        setStartTime(getStartTime().plusHours(1));
+    }
+
+    public void delayEndTime() {
+        if (getEndTime().equals(CLOSING_TIME)) {
+            return;
+        }
+        setEndTime(getEndTime().plusHours(1));
     }
 
     /*
@@ -147,7 +195,7 @@ public class Shift implements Serializable {
     */
     private ShiftType assignShiftType() {
         // Opening shifts
-        if (getStartTime().equals(OPENING_TIME)) {
+        if (getStartTime().equals(OPENING_SHIFT_START_TIME) || getStartTime().equals(MANAGER_OPENING_SHIFT_START_TIME)) {
             if (getEndTime().equals(CLOSING_TIME)) {
                 return ShiftType.OPEN_TO_CLOSE;
             }
@@ -155,16 +203,13 @@ public class Shift implements Serializable {
         }
 
         // Lunch Shifts
-        if (
-            getStartTime().equals(LocalTime.of(10, 0)) ||
-            getStartTime().equals(LocalTime.of(11, 0))
-        ) {
-            if (getEndTime().equals(CLOSING_TIME)) {
+        if (getEndTime().equals(CLOSING_TIME)) {
+            if (getStartTime().isAfter(OPENING_SHIFT_START_TIME) && getStartTime().isBefore(ONE_PM)) {
                 return ShiftType.LUNCH_TO_CLOSE;
             }
-            return ShiftType.LUNCH;
+            return ShiftType.CLOSER;
         }
-        return ShiftType.CLOSER;
+        return ShiftType.LUNCH;
     }
 
     @Serial
@@ -174,6 +219,7 @@ public class Shift implements Serializable {
         out.writeObject(endTimeProperty().get());
         out.writeObject(employeeProperty().get());
         out.writeObject(dateProperty().get());
+        out.writeDouble(hourDurationProperty().get());
     }
 
     @Serial
@@ -186,11 +232,13 @@ public class Shift implements Serializable {
         endTime = new SimpleObjectProperty<>();
         employee = new SimpleObjectProperty<>();
         date = new SimpleObjectProperty<>();
+        hourDuration = new SimpleDoubleProperty();
 
         setStartTime((LocalTime) in.readObject());
         setEndTime((LocalTime) in.readObject());
         setEmployee((Employee) in.readObject());
         setDate((LocalDate) in.readObject());
+        setDuration(in.readDouble());
 
         // Reassign shift type after deserialization
         shiftType = assignShiftType();

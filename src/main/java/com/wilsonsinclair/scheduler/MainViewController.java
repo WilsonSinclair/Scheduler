@@ -219,6 +219,8 @@ public class MainViewController implements Initializable {
             return;
         }
 
+        logger.info("Populating schedule table with {}", s);
+
         // Clear existing employees' shift assignments and reset their assigned hours to 0
         for (Employee emp : s.employeeListProperty()) {
             emp.clearAssignedShifts();
@@ -302,7 +304,13 @@ public class MainViewController implements Initializable {
                         );
                     }
                 });
-            scheduleComboBox.getSelectionModel().selectLast();
+            if (!scheduleComboBox.getItems().isEmpty()) {
+                scheduleComboBox.getSelectionModel().selectLast();
+            }
+            else {
+                scheduleTable.getItems().clear();
+                scheduleComboBox.clearSelection();
+            }
         });
 
         MFXTableColumn<Employee> employeeNameColumn = new MFXTableColumn<>("Name");

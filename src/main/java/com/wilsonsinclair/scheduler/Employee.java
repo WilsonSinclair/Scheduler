@@ -157,8 +157,8 @@ public class Employee implements Serializable {
         return assignedHoursProperty().get();
     }
 
-    public void setAssignedHours(double hours) {
-        assignedHoursProperty().set(hours);
+    public void calculateAssignedHours() {
+        assignedHoursProperty().set(getAssignedShifts().stream().mapToDouble(Shift::getDuration).sum());
     }
 
     public String getName() {
@@ -266,7 +266,7 @@ public class Employee implements Serializable {
 
     public void assignShift(Shift s) {
         getAssignedShifts().add(s);
-        setAssignedHours(getAssignedHours() + s.getDuration());
+        calculateAssignedHours();
 
         // Check if the shift has a valid date
         if (s.dateProperty().getValue() == null) {
@@ -290,7 +290,7 @@ public class Employee implements Serializable {
 
     public void clearAssignedShifts() {
         getAssignedShifts().clear();
-        setAssignedHours(0);
+        assignedHoursProperty().set(0);
     }
 
     public boolean canWork(LocalDate date) {
@@ -315,7 +315,7 @@ public class Employee implements Serializable {
 
     public boolean canWork(DayOfWeek dayOfWeek) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (forbiddenTime.getDayOfWeek().isPresent() && forbiddenTime.isOn(dayOfWeek)) {
+            if (forbiddenTime.getDayOfWeek().isPresent() && forbiddenTime.getDate().isEmpty() && forbiddenTime.isOn(dayOfWeek)) {
                 return false;
             }
         }
@@ -350,7 +350,6 @@ public class Employee implements Serializable {
         out.writeBoolean(canOpen());
         out.writeBoolean(canClose());
         out.writeBoolean(isManager());
-        out.writeDouble(getAssignedHours());
         out.writeObject(getForbiddenTimes());
 
         // writing assigned shifts
@@ -371,7 +370,6 @@ public class Employee implements Serializable {
         openerProperty().set(in.readBoolean());
         closerProperty().set(in.readBoolean());
         managerProperty().set(in.readBoolean());
-        assignedHoursProperty().set(in.readDouble());
         forbiddenTimes = (ArrayList<ForbiddenTime>) in.readObject();
 
         // reading assigned shifts

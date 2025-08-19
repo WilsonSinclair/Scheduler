@@ -9,9 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ScheduleFactory {
 
@@ -46,6 +44,7 @@ public class ScheduleFactory {
         try {
              Employee manager = employees.stream().filter(Employee::isManager).findFirst().orElseThrow();
              assignManagerShifts(manager, schedule.getDays(), r, settings.getManagerHours());
+             optimizeManagerHours(manager, settings);
         } catch (NoSuchElementException e) {
             logger.error("No manager found in the employee list when generating schedule.");
             return null;
@@ -57,7 +56,7 @@ public class ScheduleFactory {
         NOTES:
         - Manager should try close two days of the week
         - Total number of hours should be at or close to managerHours
-        - Is it feasible to do this recursively with backtracking to find a solution?
+        - This is a greedy approach that assigns longer shifts first, as it will reach the target hours faster and allow room for minute optimizations later.
      */
     private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int targetHours) {
         assert(manager.isManager());
@@ -92,7 +91,7 @@ public class ScheduleFactory {
     private static Shift createManagerShift(Employee manager, Day day, Shift.ShiftType shiftType) {
         switch (shiftType) {
             case OPENER -> {
-                return new Shift(manager, day.getDate(), Shift.OPENING_TIME, Shift.FOUR_PM);
+                return new Shift(manager, day.getDate(), Shift.MANAGER_OPENING_SHIFT_START_TIME, Shift.FOUR_PM);
             }
             case CLOSER -> {
                 return new Shift(manager, day.getDate(), Shift.TWO_PM, Shift.CLOSING_TIME);
@@ -101,12 +100,42 @@ public class ScheduleFactory {
                 return new Shift(manager, day.getDate(), Shift.TEN_AM, Shift.FOUR_PM);
             }
             case OPEN_TO_CLOSE -> {
-                return new Shift(manager, day.getDate(), Shift.OPENING_TIME, Shift.CLOSING_TIME);
+                return new Shift(manager, day.getDate(), Shift.OPENING_SHIFT_START_TIME, Shift.CLOSING_TIME);
             }
             case LUNCH_TO_CLOSE -> {
-                return new Shift(manager, day.getDate(), Shift.TEN_AM, Shift.CLOSING_TIME);
+                return new Shift(manager, day.getDate(), Shift.ELEVEN_AM, Shift.CLOSING_TIME);
             }
             default -> throw new IllegalArgumentException("Invalid shift type");
+        }
+    }
+
+    /*
+        Attempt to optimize the manager's assigned shifts by fine-tuning the start and end times of the shifts
+     */
+    private static void optimizeManagerHours(Employee manager, Settings settings) {
+
+        int targetHours = settings.getManagerHours();
+
+        // If the manager has fewer than the target number of hours, but it is within the allowed variance, we do nothing.
+        if ((manager.getAssignedHours() < targetHours) && (targetHours - manager.getAssignedHours() <= settings.getAllowedManagerHourVariance()) ) {
+            return;
+        }
+        logger.info("Optimizing manager hours for {}", manager.getName());
+        for (Shift shift : manager.getAssignedShifts()) {
+            if (manager.getAssignedHours() > targetHours) {
+                // If the manager has more hours than the target, we can only reduce the shift's end time.
+                if (shift.getEndTime().equals(Shift.CLOSING_TIME) && !shift.getStartTime().equals(Shift.OPENING_SHIFT_START_TIME)) {
+                    shift.delayStartTime();
+                    if (targetHours - manager.getAssignedHours() <= settings.getAllowedManagerHourVariance()) { return; }
+                }
+            }
+            if (manager.getAssignedHours() < targetHours) {
+                // If the manager has fewer hours than the target, we can only increase the shift's start time.
+                if (!shift.getEndTime().equals(Shift.CLOSING_TIME)) {
+                    shift.delayEndTime();
+                    if (targetHours - manager.getAssignedHours() <= settings.getAllowedManagerHourVariance()) { return; }
+                }
+            }
         }
     }
 }

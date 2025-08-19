@@ -1,5 +1,6 @@
 {
   "numLunchers": 3,
   "numClosers": 2,
-  "managerHours": 50
+  "managerHours": 50,
+  "allowedManagerHourVariance": 5
 }
