@@ -57,7 +57,7 @@ public class Day implements Serializable {
     }
 
     /*
-    This method checks if a given day has an opener shift.
+    This method checks if a given day has an opening shift lead
     We only ever need one opener per day.
     */
     public boolean hasOpener() {
@@ -93,6 +93,19 @@ public class Day implements Serializable {
             }
         }
         return false;
+    }
+
+    /*
+        Checks to see if a given Day has a closing shift lead
+     */
+    public boolean hasCloser() {
+       for (Shift shift : shiftsProperty()) {
+           Shift.ShiftType shiftType = shift.getType();
+           if (shift.getEmployee().canClose() && (shiftType == Shift.ShiftType.CLOSER || shiftType == Shift.ShiftType.OPEN_TO_CLOSE || shiftType == Shift.ShiftType.LUNCH_TO_CLOSE)) {
+               return true;
+           }
+       }
+       return false;
     }
 
     /*

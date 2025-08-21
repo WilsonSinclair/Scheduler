@@ -1,0 +1,57 @@
+2025-08-18 17:09:48 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:09:53 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:09:55 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=45, allowedManagerHourVariance=5}
+2025-08-18 17:09:55 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 48.0 hours to 45 hours
+2025-08-18 17:09:55 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:10:27 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:10:30 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=45, allowedManagerHourVariance=5}
+2025-08-18 17:10:30 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:10:38 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:10:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=45, allowedManagerHourVariance=5}
+2025-08-18 17:10:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 47.0 hours to 45 hours
+2025-08-18 17:10:39 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:16:32 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:16:36 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:16:40 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:16:53 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=45, allowedManagerHourVariance=5}
+2025-08-18 17:16:53 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 47.0 hours to 45 hours
+2025-08-18 17:16:53 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:16:57 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:16:59 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:28:14 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:28:20 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Settings saved to C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:28:24 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:28:26 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 17, 2025 - Aug 24, 2025
+2025-08-18 17:28:29 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:28:29 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:28:42 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:28:42 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:28:51 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:28:51 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:29:06 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:29:06 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:29:16 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:29:16 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 64.0 hours to 70 hours
+2025-08-18 17:29:16 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:30:01 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:30:01 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:30:06 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:30:06 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 64.0 hours to 70 hours
+2025-08-18 17:30:06 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:31:54 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:32:05 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:05 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:32:11 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:11 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:32:24 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:24 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:32:28 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:28 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:32:32 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:32 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:32:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=70, allowedManagerHourVariance=5}
+2025-08-18 17:32:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson from 64.0 hours to 70 hours
+2025-08-18 17:32:39 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-18 17:33:00 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Settings saved to C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-18 17:33:02 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-18 through 2025-08-25 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-18 17:33:02 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025

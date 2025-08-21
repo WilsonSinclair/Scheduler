@@ -1,0 +1,45 @@
+2025-08-19 23:21:06 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-19 23:21:14 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-19 23:21:16 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:21:16 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:21:22 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:21:22 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:21:26 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:21:28 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 18, 2025 - Aug 25, 2025
+2025-08-19 23:39:05 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-19 23:39:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:39:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - []
+2025-08-19 23:39:09 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:40:38 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-19 23:40:40 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:40:48 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:40:48 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - [Name: StringProperty [value: David]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: , Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: ]
+2025-08-19 23:40:48 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:42:29 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-19 23:42:31 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:42:34 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:42:34 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - [Name: StringProperty [value: David]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: , Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: ]
+2025-08-19 23:42:34 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025
+2025-08-19 23:42:46 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-19 23:42:58 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-19 23:43:06 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-19 through 2025-08-26 with Settings{numLunchers=3, numClosers=2, managerHours=50, allowedManagerHourVariance=5}
+2025-08-19 23:43:06 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - [Name: StringProperty [value: David]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: , Name: StringProperty [value: Josh]
+Can Open: BooleanProperty [value: true]
+Can Close: BooleanProperty [value: true]
+Cannot Work: ]
+2025-08-19 23:43:06 [JavaFX Application Thread] INFO  c.w.scheduler.MainViewController - Populating schedule table with Aug 19, 2025 - Aug 26, 2025

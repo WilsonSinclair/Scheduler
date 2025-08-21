@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ScheduleFactory {
 
@@ -49,6 +50,10 @@ public class ScheduleFactory {
             logger.error("No manager found in the employee list when generating schedule.");
             return null;
         }
+
+        // Filter out the manager, since we already assigned them their shifts, and any employees that aren't opening or closing
+        // shift leads.
+        assignShiftLeads(schedule.getDays(), r, employees.stream().filter(e -> !e.isManager() && (e.canOpen() || e.canClose())).toList());
         return schedule;
     }
 
@@ -109,6 +114,18 @@ public class ScheduleFactory {
         }
     }
 
+    private static Shift createShiftLeadShift(Employee employee, Day day, Shift.ShiftType shiftType) {
+        switch (shiftType) {
+            case OPENER -> {
+                return new Shift(employee, day.getDate(), Shift.OPENING_SHIFT_START_TIME, Shift.TWO_PM);
+            }
+            case CLOSER -> {
+                return new Shift(employee, day.getDate(), Shift.FOUR_PM, Shift.CLOSING_TIME);
+            }
+            default -> throw new IllegalArgumentException("Invalid shift type");
+        }
+    }
+
     /*
         Attempt to optimize the manager's assigned shifts by fine-tuning the start and end times of the shifts
      */
@@ -135,6 +152,31 @@ public class ScheduleFactory {
                     shift.delayEndTime();
                     if (targetHours - manager.getAssignedHours() <= settings.getAllowedManagerHourVariance()) { return; }
                 }
+            }
+        }
+    }
+
+    private static void assignShiftLeads(List<Day> days, Random r, List<Employee> employees) {
+        List<Employee> openers = employees.stream().filter(Employee::canOpen).toList();
+        List<Employee> closers = employees.stream().filter(Employee::canClose).toList();
+        for (Day day : days) {
+            while (!day.hasOpener()) {
+                Employee opener = openers.get(r.nextInt(openers.size()));
+                Shift shift = createShiftLeadShift(opener, day, Shift.ShiftType.OPENER);
+                if (day.hasAssigned(opener) || !opener.canWork(shift)) {
+                    continue;
+                }
+                opener.assignShift(shift);
+                day.addShift(shift);
+            }
+            while (!day.hasCloser()) {
+                Employee closer = closers.get(r.nextInt(closers.size()));
+                Shift shift = createShiftLeadShift(closer, day, Shift.ShiftType.CLOSER);
+                if (day.hasAssigned(closer) || !closer.canWork(shift)) {
+                    continue;
+                }
+                closer.assignShift(shift);
+                day.addShift(shift);
             }
         }
     }

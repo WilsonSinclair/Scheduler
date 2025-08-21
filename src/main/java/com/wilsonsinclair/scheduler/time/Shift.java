@@ -84,7 +84,7 @@ public class Shift implements Serializable {
         setDate(date);
 
         shiftType = assignShiftType();
-        setDuration(Duration.between(startTime, endTime).toHours());
+        setDuration(endTime.getHour() - startTime.getHour());
     }
 
     public ObjectProperty<LocalDate> dateProperty() {
@@ -123,9 +123,6 @@ public class Shift implements Serializable {
     public DoubleProperty hourDurationProperty() {
         if (hourDuration == null) {
             hourDuration = new SimpleDoubleProperty();
-            hourDurationProperty().addListener((observable, oldDuration, newDuration) -> {
-                employeeProperty().get().calculateAssignedHours();
-            });
         }
         return hourDuration;
     }

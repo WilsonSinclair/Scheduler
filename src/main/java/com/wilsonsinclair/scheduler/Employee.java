@@ -25,7 +25,7 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private transient StringProperty name;
-    private transient BooleanProperty isOpener;
+    private transient BooleanProperty isOpener; // Note that opener and closer mean that the employee is a shift lead and can run an opening/closing shift
     private transient BooleanProperty isCloser;
     private transient BooleanProperty isManager;
     private transient DoubleProperty assignedHours;
