@@ -16,6 +16,8 @@ public class ScheduleFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduleFactory.class);
 
+    private static final int OVERTIME = 40;
+
     /*
          This method takes a list of employees and a starting date as input,
          and generates a schedule for the next week.
@@ -122,6 +124,9 @@ public class ScheduleFactory {
             case CLOSER -> {
                 return new Shift(employee, day.getDate(), Shift.FOUR_PM, Shift.CLOSING_TIME);
             }
+            case LUNCH_TO_CLOSE -> {
+                return new Shift(employee, day.getDate(), Shift.ELEVEN_AM, Shift.CLOSING_TIME);
+            }
             default -> throw new IllegalArgumentException("Invalid shift type");
         }
     }
@@ -149,7 +154,9 @@ public class ScheduleFactory {
             if (manager.getAssignedHours() < targetHours) {
                 // If the manager has fewer hours than the target, we can only increase the shift's start time.
                 if (!shift.getEndTime().equals(Shift.CLOSING_TIME)) {
-                    shift.delayEndTime();
+                    if (manager.canWork(shift.dateProperty().get(), shift.getStartTime(), shift.getEndTime().plusHours(1))) {
+                        shift.delayEndTime();
+                    }
                     if (targetHours - manager.getAssignedHours() <= settings.getAllowedManagerHourVariance()) { return; }
                 }
             }
@@ -171,7 +178,8 @@ public class ScheduleFactory {
             }
             while (!day.hasCloser()) {
                 Employee closer = closers.get(r.nextInt(closers.size()));
-                Shift shift = createShiftLeadShift(closer, day, Shift.ShiftType.CLOSER);
+                List<Shift.ShiftType> allowedShiftTypes = List.of(Shift.ShiftType.CLOSER, Shift.ShiftType.LUNCH_TO_CLOSE);
+                Shift shift = createShiftLeadShift(closer, day, allowedShiftTypes.get(r.nextInt(allowedShiftTypes.size())));
                 if (day.hasAssigned(closer) || !closer.canWork(shift)) {
                     continue;
                 }
