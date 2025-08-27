@@ -3,7 +3,6 @@ package com.wilsonsinclair.scheduler.time;
 import com.wilsonsinclair.scheduler.Employee;
 import java.io.*;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -39,22 +38,8 @@ public class Shift implements Serializable {
         LUNCH_TO_CLOSE
     }
 
-    // A Set of times that opening shifts can end at. We ideally avoid CLOSING_TIME if possible.
-    // The use of a TreeSet instead of HashSet guarantees the order of the elements as this is important.
-    // When looping through these times, we want to try to assign an open to 2 or 4 shift before we
-    // resort to an open to close.
-    public static final Set<LocalTime> OPENING_SHIFT_END_TIMES = new TreeSet<>(
-        Set.of(TWO_PM, FOUR_PM, CLOSING_TIME)
-    );
-
-    public static final Set<LocalTime> LUNCH_SHIFT_START_TIMES = new TreeSet<>(
-        Set.of(TEN_AM, ELEVEN_AM)
-    );
-
     // A Set of times that lunch shifts can end at. Order here is important as before.
-    public static final Set<LocalTime> LUNCH_SHIFT_END_TIMES = new TreeSet<>(
-        Set.of(FOUR_PM, TWO_PM, CLOSING_TIME)
-    );
+    public static final List<LocalTime> LUNCH_SHIFT_END_TIMES = List.of(FOUR_PM, TWO_PM, CLOSING_TIME);
 
     //The starting and ending times of this shift
     private transient ObjectProperty<LocalTime> startTime, endTime;
@@ -123,6 +108,12 @@ public class Shift implements Serializable {
     public DoubleProperty hourDurationProperty() {
         if (hourDuration == null) {
             hourDuration = new SimpleDoubleProperty();
+            hourDuration.addListener((observable, oldValue, newValue) -> {
+                if (oldValue == null) {
+                    return;
+                }
+                employeeProperty().get().calculateAssignedHours();
+            });
         }
         return hourDuration;
     }
@@ -187,6 +178,13 @@ public class Shift implements Serializable {
         setEndTime(getEndTime().plusHours(1));
     }
 
+    public void accelerateEndTime() {
+        if (getEndTime().equals(CLOSING_TIME)) {
+            return;
+        }
+        setEndTime(getEndTime().minusHours(1));
+    }
+
     /*
     Assigns a shift type based on the start and end times.
     */
@@ -243,6 +241,9 @@ public class Shift implements Serializable {
 
     @Override
     public String toString() {
+        if (getEndTime().equals(CLOSING_TIME)) {
+            return timeFormat.format(getStartTime()) + "-CL";
+        }
         return timeFormat.format(getStartTime()) + "-" + timeFormat.format(getEndTime());
     }
 }

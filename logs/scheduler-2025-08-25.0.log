@@ -1,0 +1,148 @@
+2025-08-25 10:33:57 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 10:35:25 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 10:35:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 10:35:39 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 11:49:32 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 11:49:38 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 11:49:38 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 11:50:23 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 11:50:25 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 11:50:25 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Employee Josh has 46.0 hours.. Cleaning up their overtime.
+2025-08-25 11:50:25 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Josh now has 41.0 hours.
+2025-08-25 11:52:10 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 11:52:13 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 11:52:13 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 11:52:13 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Employee Josh has 41.0 hours.. Cleaning up their overtime.
+2025-08-25 11:52:13 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Josh now has 40.0 hours.
+2025-08-25 11:52:13 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 11:52:13 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 11:52:13 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 11:52:13 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 11:57:54 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 11:58:00 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 11:58:00 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:23:48 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:23:53 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:23:53 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:24:06 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:24:26 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:24:26 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Josh
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Josh
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Nathan
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Josh
+2025-08-25 12:27:28 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:43 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:27:51 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:27:51 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Josh
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Josh
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee David
+2025-08-25 12:27:51 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:31:10 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:31:14 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:31:14 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:34:51 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:35:05 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:35:27 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:41:18 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:41:22 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:41:22 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:43:05 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:43:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:43:30 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:43:34 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:43:46 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:43:55 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:44:20 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:44:27 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:44:34 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:44:46 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:44:52 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:45:16 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:46:15 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
+2025-08-25 12:46:18 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Bridgette
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Bridgette
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Bridgette
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Bridgette
+2025-08-25 12:46:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:48:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:48:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:48:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Employee David has 42.0 hours.. Cleaning up their overtime.
+2025-08-25 12:48:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - David now has 40.0 hours.
+2025-08-25 12:48:09 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate
+2025-08-25 12:48:09 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:49:01 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:49:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:49:09 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:50:07 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:50:07 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:50:07 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate on MONDAY
+2025-08-25 12:50:07 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:51:18 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:51:18 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:51:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate on TUESDAY
+2025-08-25 12:51:18 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - Was not able to find any employees who could work for lunch.
+2025-08-25 12:52:58 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-25 through 2025-09-01 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day WEDNESDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day SUNDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day FRIDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate on TUESDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day TUESDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day THURSDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day SATURDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Bridgette on SATURDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day SATURDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day MONDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] ERROR c.w.s.factories.ScheduleFactory - No valid lunch shifts found for employee Kate on MONDAY
+2025-08-25 12:53:03 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - No valid lunch shifts found for day MONDAY

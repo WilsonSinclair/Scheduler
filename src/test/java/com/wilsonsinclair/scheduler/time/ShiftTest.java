@@ -134,15 +134,20 @@ public class ShiftTest {
 
     @Test
     void durationCorrectedAfterStartTimeDelay() {
+        Employee employee = new Employee("Test", true, true, true);
         Shift tenToFour = new Shift(
-                new Employee("Test", true, true, true),
+                employee,
                 LocalDate.now(),
                 Shift.TEN_AM,
                 Shift.FOUR_PM
         );
 
+        employee.assignShift(tenToFour);
+        assertEquals(6, employee.getAssignedHours());
+
         tenToFour.delayStartTime();
         assertEquals(5, tenToFour.getDuration());
+        assertEquals(5, employee.getAssignedHours());
     }
 
     @Test
@@ -156,5 +161,18 @@ public class ShiftTest {
 
         tenToFour.delayEndTime();
         assertEquals(7, tenToFour.getDuration());
+    }
+
+    @Test
+    void durationCorrectedAfterEndTimeAcceleration() {
+        Shift tenToFour = new Shift(
+                new Employee("Test", true, true, true),
+                LocalDate.now(),
+                Shift.TEN_AM,
+                Shift.FOUR_PM
+        );
+
+        tenToFour.accelerateEndTime();
+        assertEquals(5, tenToFour.getDuration());
     }
 }

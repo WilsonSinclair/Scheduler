@@ -9,8 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ScheduleFactory {
 
@@ -56,6 +57,9 @@ public class ScheduleFactory {
         // Filter out the manager, since we already assigned them their shifts, and any employees that aren't opening or closing
         // shift leads.
         assignShiftLeads(schedule.getDays(), r, employees.stream().filter(e -> !e.isManager() && (e.canOpen() || e.canClose())).toList());
+
+        fillRemainingShifts(schedule.getDays(), r, new ArrayList<>(employees.stream().filter(e -> !e.isManager() && e.getAssignedHours() < OVERTIME).toList()), settings);
+
         return schedule;
     }
 
@@ -187,5 +191,65 @@ public class ScheduleFactory {
                 day.addShift(shift);
             }
         }
+        cleanUpOvertime(Stream.concat(openers.stream(), closers.stream()).distinct().toList());
+    }
+
+    private static void cleanUpOvertime(List<Employee> employees) {
+        for (Employee e : employees) {
+            if (e.getAssignedHours() <= OVERTIME) {
+                continue;
+            }
+            logger.info("Employee {} has {} hours.. Cleaning up their overtime.", e.getName(), e.getAssignedHours());
+            for (Shift shift : e.getAssignedShifts()) {
+                if (shift.getEndTime().equals(Shift.CLOSING_TIME) && !shift.getStartTime().isBefore(Shift.TEN_AM)) {
+                    shift.delayStartTime();
+                }
+                else {
+                    shift.accelerateEndTime();
+                }
+                if (e.getAssignedHours() <= OVERTIME) {
+                    break;
+                }
+            }
+            logger.info("{} now has {} hours.", e.getName(), e.getAssignedHours());
+        }
+    }
+
+    private static void fillRemainingShifts(List<Day> days, Random r, List<Employee> employees, Settings settings) {
+        for (Day day : days) {
+
+            employees.sort(Comparator.comparing(Employee::getAssignedHours));
+
+            while (!day.hasLunchers(settings.getNumLunchers())) {
+                for (Employee luncher : employees) {
+                    if (day.hasAssigned(luncher) || !luncher.canWork(day.getDate())) {
+                        continue;
+                    }
+                    if (!day.hasShiftStartingAt(Shift.TEN_AM)) {
+                        if (createLunchShift(luncher, day, Shift.TEN_AM).isPresent()) {
+                            break;
+                        }
+                    } else {
+                        if (createLunchShift(luncher, day, Shift.ELEVEN_AM).isPresent()) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static Optional<Shift> createLunchShift(Employee employee, Day day, LocalTime startTime) {
+        for (LocalTime endTime : Shift.LUNCH_SHIFT_END_TIMES) {
+            Shift shift = new Shift(employee, day.getDate(), startTime, endTime);
+            if (!employee.canWork(shift) || employee.getAssignedHours() + shift.getDuration() > OVERTIME) {
+                continue;
+            }
+            employee.assignShift(shift);
+            day.addShift(shift);
+            return Optional.of(shift);
+        }
+        logger.error("No valid lunch shifts found for employee {} on {}", employee.getName(), day.getDate().getDayOfWeek());
+        return Optional.empty();
     }
 }

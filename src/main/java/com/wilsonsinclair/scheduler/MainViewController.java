@@ -219,8 +219,6 @@ public class MainViewController implements Initializable {
             return;
         }
 
-        logger.info("Populating schedule table with {}", s);
-
         // Clear existing employees' shift assignments and reset their assigned hours to 0
         for (Employee emp : s.employeeListProperty()) {
             emp.clearAssignedShifts();

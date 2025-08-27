@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -123,6 +124,15 @@ public class Day implements Serializable {
                 if (count >= num) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public boolean hasShiftStartingAt(LocalTime time) {
+        for (Shift shift : shiftsProperty()) {
+            if (shift.getStartTime().equals(time)) {
+                return true;
             }
         }
         return false;
