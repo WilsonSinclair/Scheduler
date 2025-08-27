@@ -54761,3 +54761,8 @@
 2025-08-26 19:51:59 [JavaFX Application Thread] INFO  c.w.scheduler.Serializer - Employees saved to C:\Users\wilso\IdeaProjects\Scheduler\employees.ser
 2025-08-26 19:52:02 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-26 through 2025-09-02 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
 2025-08-26 19:52:02 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-26 22:01:45 [JavaFX Application Thread] INFO  c.wilsonsinclair.scheduler.Settings - Reading settings from C:\Users\wilso\IdeaProjects\Scheduler\settings.json
+2025-08-26 22:01:51 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-26 through 2025-09-02 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-26 22:01:51 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson
+2025-08-26 22:06:04 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Generating schedule for 2025-08-26 through 2025-09-02 with Settings{numLunchers=3, numClosers=2, managerHours=47, allowedManagerHourVariance=5}
+2025-08-26 22:06:04 [JavaFX Application Thread] INFO  c.w.s.factories.ScheduleFactory - Optimizing manager hours for Wilson

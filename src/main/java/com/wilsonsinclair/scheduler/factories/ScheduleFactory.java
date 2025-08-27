@@ -236,6 +236,17 @@ public class ScheduleFactory {
                     }
                 }
             }
+
+            while (!day.hasClosers(settings.getNumClosers())) {
+                for (Employee closer : employees) {
+                    if (day.hasAssigned(closer) || !closer.canWork(day.getDate())) {
+                        continue;
+                    }
+                    if (createCloserShift(closer, day).isPresent()) {
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -249,7 +260,18 @@ public class ScheduleFactory {
             day.addShift(shift);
             return Optional.of(shift);
         }
-        logger.error("No valid lunch shifts found for employee {} on {}", employee.getName(), day.getDate().getDayOfWeek());
+        logger.info("No valid lunch shifts found for employee {} on {}", employee.getName(), day.getDate().getDayOfWeek());
         return Optional.empty();
+    }
+
+    private static Optional<Shift> createCloserShift(Employee employee, Day day) {
+        Shift shift = new Shift(employee, day.getDate(), Shift.FOUR_PM, Shift.CLOSING_TIME);
+        if (!employee.canWork(shift) || employee.getAssignedHours() + shift.getDuration() > OVERTIME) {
+            logger.info("No valid closer shifts found for employee {} on {}", employee.getName(), day.getDate().getDayOfWeek());
+            return Optional.empty();
+        }
+        employee.assignShift(shift);
+        day.addShift(shift);
+        return Optional.of(shift);
     }
 }
