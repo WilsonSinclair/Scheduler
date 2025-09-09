@@ -1,6 +1,7 @@
 package com.wilsonsinclair.scheduler;
 
 import com.wilsonsinclair.scheduler.time.ForbiddenTime;
+import com.wilsonsinclair.scheduler.time.Shift;
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
@@ -93,5 +94,13 @@ public class EmployeeTest {
         LocalTime shiftEnd = LocalTime.of(11, 0);
         wilson.addForbiddenTime(new ForbiddenTime(shiftDate, LocalTime.of(8, 0), LocalTime.of(12, 0)));
         assertFalse(wilson.canWork(shiftDate, shiftStart, shiftEnd));
+    }
+
+    @Test
+    void cannotWorkFourThroughCloseTest() {
+        Employee test = new Employee("Test", false, false, false);
+        test.addForbiddenTime(new ForbiddenTime(Shift.FOUR_PM, Shift.CLOSING_TIME));
+        Shift shift = new Shift(test, LocalDate.now(), Shift.FOUR_PM, Shift.CLOSING_TIME);
+        assertFalse(test.canWork(shift));
     }
 }

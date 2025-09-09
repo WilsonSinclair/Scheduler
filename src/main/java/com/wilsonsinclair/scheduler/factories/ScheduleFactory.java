@@ -70,27 +70,32 @@ public class ScheduleFactory {
         - This is a greedy approach that assigns longer shifts first, as it will reach the target hours faster and allow room for minute optimizations later.
      */
     private static void assignManagerShifts(Employee manager, List<Day> days, Random r, int targetHours) {
-        assert(manager.isManager());
+
+        int closingShiftCount = 0;
 
         // Shuffle the days to help with making off days seem more random, as we are going to walk through the list of days in the order
         // they appear.
         Collections.shuffle(days, r);
         Iterator<Day> dayIterator = days.iterator();
 
+        // Try to avoid OPEN_TO_CLOSE shifts, as they should be used as a last resort.
+        // Also avoid shorter lunch shifts as we want to prioritize longer shifts at first to get to the target hours quickly, which allows room for optimizations later.
+        List<Shift.ShiftType> allowedShiftTypes = Arrays.stream(Shift.ShiftType.values()).filter(s -> s == Shift.ShiftType.OPENER || s == Shift.ShiftType.LUNCH_TO_CLOSE).toList();
+
         while (dayIterator.hasNext() && Math.abs(manager.getAssignedHours() - targetHours) > 5) {
             Day day = dayIterator.next();
-            if (!manager.canWork(day.getDate())) {
-                continue;
-            }
-
-            // Try to avoid OPEN_TO_CLOSE shifts, as they should be used as a last resort.
-            // Also avoid shorter lunch shifts as we want to prioritize longer shifts at first to get to the target hours quickly, which allows room for optimizations later.
-            List<Shift.ShiftType> allowedShiftTypes = Arrays.stream(Shift.ShiftType.values()).filter(s -> s == Shift.ShiftType.OPENER || s == Shift.ShiftType.LUNCH_TO_CLOSE).toList();
+            Shift shift;
 
             // This can theoretically infinitely loop if a shift that the manager can work is never generated.
             // A better solution is needed here.
             do {
-                Shift shift = createManagerShift(manager, day, allowedShiftTypes.get(r.nextInt(allowedShiftTypes.size())));
+                if (closingShiftCount < 2) {
+                     shift = createManagerShift(manager, day, Shift.ShiftType.LUNCH_TO_CLOSE);
+                     closingShiftCount++;
+                }
+                else {
+                     shift = createManagerShift(manager, day, Shift.ShiftType.OPENER);
+                }
                 if (manager.canWork(shift)) {
                     manager.assignShift(shift);
                     day.addShift(shift);
@@ -168,27 +173,33 @@ public class ScheduleFactory {
     }
 
     private static void assignShiftLeads(List<Day> days, Random r, List<Employee> employees) {
-        List<Employee> openers = employees.stream().filter(Employee::canOpen).toList();
-        List<Employee> closers = employees.stream().filter(Employee::canClose).toList();
+        ArrayList<Employee> openers = new ArrayList<>(employees.stream().filter(Employee::canOpen).toList());
+        ArrayList<Employee> closers = new ArrayList<>(employees.stream().filter(Employee::canClose).toList());
         for (Day day : days) {
+            openers.sort(Comparator.comparing(Employee::getAssignedHours));
+            closers.sort(Comparator.comparing(Employee::getAssignedHours));
             while (!day.hasOpener()) {
-                Employee opener = openers.get(r.nextInt(openers.size()));
-                Shift shift = createShiftLeadShift(opener, day, Shift.ShiftType.OPENER);
-                if (day.hasAssigned(opener) || !opener.canWork(shift)) {
-                    continue;
+                for (Employee opener : openers) {
+                    Shift shift = createShiftLeadShift(opener, day, Shift.ShiftType.OPENER);
+                    if (day.hasAssigned(opener) || !opener.canWork(shift)) {
+                        continue;
+                    }
+                    opener.assignShift(shift);
+                    day.addShift(shift);
+                    break;
                 }
-                opener.assignShift(shift);
-                day.addShift(shift);
             }
             while (!day.hasCloser()) {
-                Employee closer = closers.get(r.nextInt(closers.size()));
-                List<Shift.ShiftType> allowedShiftTypes = List.of(Shift.ShiftType.CLOSER, Shift.ShiftType.LUNCH_TO_CLOSE);
-                Shift shift = createShiftLeadShift(closer, day, allowedShiftTypes.get(r.nextInt(allowedShiftTypes.size())));
-                if (day.hasAssigned(closer) || !closer.canWork(shift)) {
-                    continue;
+                for (Employee closer : closers) {
+                    List<Shift.ShiftType> allowedShiftTypes = List.of(Shift.ShiftType.CLOSER, Shift.ShiftType.LUNCH_TO_CLOSE);
+                    Shift shift = createShiftLeadShift(closer, day, allowedShiftTypes.get(r.nextInt(allowedShiftTypes.size())));
+                    if (day.hasAssigned(closer) || !closer.canWork(shift)) {
+                        continue;
+                    }
+                    closer.assignShift(shift);
+                    day.addShift(shift);
+                    break;
                 }
-                closer.assignShift(shift);
-                day.addShift(shift);
             }
         }
         cleanUpOvertime(Stream.concat(openers.stream(), closers.stream()).distinct().toList());

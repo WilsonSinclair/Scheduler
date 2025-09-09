@@ -304,10 +304,11 @@ public class Employee implements Serializable {
 
     public boolean canWork(LocalDate date, LocalTime shiftStart, LocalTime shiftEnd) {
         for (ForbiddenTime forbiddenTime : forbiddenTimes) {
-            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date)) {
-                if (forbiddenTime.intersects(shiftStart, shiftEnd)) {
-                    return false;
-                }
+            if (forbiddenTime.getDate().isPresent() && forbiddenTime.isOn(date) && forbiddenTime.intersects(shiftStart, shiftEnd)) {
+                return false;
+            }
+            if (forbiddenTime.getDate().isEmpty() && forbiddenTime.intersects(shiftStart, shiftEnd)) {
+                return false;
             }
         }
         return true;
@@ -325,11 +326,9 @@ public class Employee implements Serializable {
     public boolean canWork(Shift s) {
         // Can work on this day of the week in general
         if (canWork(s.dateProperty().get().getDayOfWeek())) {
-            return canWork(
-                s.dateProperty().get(),
-                s.getStartTime(),
-                s.getEndTime()
-            );
+            if (canWork(s.dateProperty().get())) {
+                return canWork(s.dateProperty().get(), s.getStartTime(), s.getEndTime());
+            }
         }
         return false;
     }
